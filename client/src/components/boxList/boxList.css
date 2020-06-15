@@ -1,0 +1,187 @@
+.order-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 370px;
+    min-height: 400px;
+    margin-left: 30px;
+    color: #343a40;
+}
+
+.order-list-noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.order-list-boxes {
+    width: 100%;
+}
+
+.order-list-id-container {
+    display: flex;
+
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.order-list-id-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 10px;
+    font-size: 24px;
+    color: #868e96;
+}
+
+.order-list-boxes-header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border: solid 1px #dbdbdb;
+    border-radius: 5px 5px 0 0;
+    background-color: #f5f5f5;
+}
+
+.order-list-boxes-title {
+    width: 75%;
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+.order-list-boxes-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    color: #ad8762;
+}
+
+.order-list-box {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border: solid 1px #dbdbdb;
+    border-top: 0;
+}
+
+.order-list-box:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.order-list-box-bar {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+}
+
+.order-list-box-info {
+    width: 75%;
+    padding-left: 15px;
+
+    font-size: 23px;
+}
+
+.order-list-box-btn {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+    padding-right: 10px;
+}
+
+.order-list-box-rows {
+    width: 97%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-list-box-top-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.order-list-box-details {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.grow {
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    -o-transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+    transition: height 0.5s;
+}
+
+.order-list-box-details-info {
+    width: 33%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    text-transform: uppercase;
+}
+
+.order-list-box-details-info-top {
+    font-size: 10px;
+}
+
+.order-list-box-details-info-bottom {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3f4964;
+}
+
+.order-group-toggle {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.order-list-print-btn {
+    width: 100%;
+}
+
+.order-list-add-new-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    border: solid 1px #dbdbdb;
+    border-top: 0;
+}
+
+.order-list-add-new-box-inside {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.order-list-add-new-box-btn {
+    width: 25%;
+    padding-right: 5px;
+}
+
+.order-btn-spinner {
+    margin-right: 8px;
+}

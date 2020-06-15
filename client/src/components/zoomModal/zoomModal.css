@@ -1,0 +1,74 @@
+.zoom-modal-custom {
+    position: relative;
+    z-index: 3;
+}
+
+.zoom-modal-noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.zoom-modal {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    background-color: rgba(1, 1, 1, 0.97);
+}
+
+.zoom-modal-btn {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+    border-radius: 50%;
+    -webkit-transition: background-color 150ms linear;
+    -moz-transition: background-color 150ms linear;
+    -o-transition: background-color 150ms linear;
+    -ms-transition: background-color 150ms linear;
+    transition: background-color 150ms linear;
+    z-index: 1;
+}
+
+.zoom-modal-btn-close {
+    top: 60px;
+    right: 50px;
+}
+
+.zoom-modal-btn-next {
+    top: 48%;
+    right: 50px;
+    padding-left: 4px;
+}
+
+.zoom-modal-btn-previous {
+    top: 48%;
+    left: 50px;
+    padding-right: 4px;
+}
+
+.zoom-modal-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.zoom-modal-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test2 {
+    display: inline-block;
+    background-color: #ad8762;
+    opacity: 1;
+}

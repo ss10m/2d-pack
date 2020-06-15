@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    app:
+        build: ./
+        expose:
+            - 80
+        restart: always
+        environment:
+            PORT: 8080
+            VIRTUAL_PORT: 8080
+            VIRTUAL_HOST: 2d.ssprojects.ca
+            LETSENCRYPT_HOST: 2d.ssprojects.ca
+            LETSENCRYPT_EMAIL: "fastf20@gmail.com"
+        networks:
+            - service-network
+
+networks:
+    service-network:
+        external: true
