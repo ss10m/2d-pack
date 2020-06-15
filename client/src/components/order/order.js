@@ -42,7 +42,7 @@ class Order extends React.Component {
 
     fetchBoxes = () => {
         var orderId = this.props.match.params.id;
-        fetch("http://0.0.0.0:8000/api/boxes/" + orderId)
+        fetch("http://localhost:8000/api/boxes/" + orderId)
             .then((res) => res.json())
             .then(
                 (result) => {

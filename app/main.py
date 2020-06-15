@@ -25,17 +25,17 @@ def get_order(order_id):
 
     if order_id not in id_to_order: 
         response = make_response(jsonify({'error': 'invalid order id'}))
-        response.headers['Access-Control-Allow-Origin'] = 'http://0.0.0.0:8000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8000'
         return response;
 
     boxes = packing_algo(id_to_order[order_id])
     response = make_response(jsonify(boxes))
 
     # Add Access-Control-Allow-Origin header to allow cross-site request
-    response.headers['Access-Control-Allow-Origin'] = 'http://0.0.0.0:8000'
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8000'
     #response.headers['Access-Control-Allow-Origin'] = 'http://172.24.0.3:3000'
     
- 
+    
     return response
 
 @app.route('/', defaults={'path': ''})
