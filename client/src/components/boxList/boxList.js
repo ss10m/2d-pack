@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
 import { addBox, removeBox, showToast } from "../../store/actions";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./boxList.css";
@@ -68,7 +67,7 @@ class BoxList extends React.Component {
     printLabels = () => {
         console.log(this.props.boxes);
         this.setState({ fetchingLabels: true });
-        var url = "http://localhost:5050/api/order/" + this.props.match.params.id + "/labels";
+        var url = "/api/order/" + this.props.match.params.id + "/labels";
 
         fetch(url, {
             method: "POST",
