@@ -36,7 +36,7 @@ class NavBar extends React.Component {
             <Navbar bg="dark" expand="lg" fixed="top">
                 <Navbar.Brand className="navbar-header">
                     <Link to={"/"} className="navbar-header">
-                        POSTER<b>JACK</b>
+                        <b>PJ</b>
                     </Link>
                 </Navbar.Brand>
 

@@ -7,7 +7,7 @@ class Layout extends React.Component {
     drawLayout = () => {
         const { items } = this.props;
         const canvasWidth = this.props.canvasWidth;
-        const canvasHeight = (items["box"].height / items["box"].width) * canvasWidth;
+        const canvasHeight = this.props.canvasHeight;
         const boxWidth = items["box"].width;
         const boxHeight = items["box"].height;
         const { offsetX, offsetY } = this.calculcateOffsets(items, canvasWidth, canvasHeight);
@@ -22,9 +22,10 @@ class Layout extends React.Component {
                         y={canvasHeight * (item.y / boxHeight) + offsetY}
                         width={canvasWidth * (item.width / boxWidth)}
                         height={canvasHeight * (item.height / boxHeight)}
-                        fill={item.bcolor}
+                        fill={item.color}
                         stroke="black"
                         strokeWidth={1}
+                        preventDefault={false}
                     />
                     <LayoutImage
                         src={item.url}
@@ -37,9 +38,10 @@ class Layout extends React.Component {
                     <Label
                         x={canvasWidth * (item.x / boxWidth) + offsetX + 5}
                         y={canvasHeight * (item.y / boxHeight) + offsetY + 5}
+                        preventDefault={false}
                     >
-                        <Tag fill="black" shadowColor="black" />
-                        <Text text={item.id} fontSize={16} padding={3} fill="white" />
+                        <Tag fill="black" shadowColor="black" preventDefault={false} />
+                        <Text text={item.id} fontSize={16} padding={3} fill="white" preventDefault={false} />
                     </Label>
                 </Fragment>
             );

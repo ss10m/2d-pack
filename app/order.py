@@ -2,7 +2,8 @@ import random
 
 
 order192161 = {
-    "id": 192168,
+    "id": 192161,
+    "optimize": 1,
     "products": [
         {   
             "id": 201237,
@@ -14,7 +15,8 @@ order192161 = {
 }
 
 order192162 = {
-    "id": 192168,
+    "id": 192162,
+    "optimize": 1,
     "products": [
         {   
             "id": 202379,
@@ -32,7 +34,8 @@ order192162 = {
 }
 
 order192163 = {
-    "id": 192168,
+    "id": 192163,
+    "optimize": 1,
     "products": [
         {   
             "id": 202325,
@@ -68,7 +71,8 @@ order192163 = {
 }
 
 order192164 = {
-    "id": 192168,
+    "id": 192164,
+    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -98,7 +102,8 @@ order192164 = {
 }
 
 order192165 = {
-    "id": 192168,
+    "id": 192165,
+    "optimize": 1,
     "products": [
         {   
             "id": 202325,
@@ -393,18 +398,19 @@ order192165 = {
 
 order192166 = {
     "id": 192166,
+    "optimize": 1,
     "products": [
         {   
             "id": 202391,
             "product": "canvas",
-            "width": 18,
-            "height": 12
+            "width": 24,
+            "height": 16
         },
         {   
             "id": 202392,
             "product": "hd",
-            "width": 32,
-            "height": 24
+            "width": 36,
+            "height": 12
         },
         {   
             "id": 202393,
@@ -415,14 +421,15 @@ order192166 = {
         {   
             "id": 202394,
             "product": "acrylic",
-            "width": 60,
-            "height": 15
+            "width": 36,
+            "height": 24
         }
     ]
 }
 
 order192167 = {
     "id": 192167,
+    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -480,3 +487,124 @@ order192167 = {
         }
     ]
 }
+
+order192168 = {
+    "id": 192168,
+    "optimize": 1,
+    "products": [
+        {   
+            "id": 202391,
+            "product": "canvas",
+            "width": 24,
+            "height": 24
+        },
+        {   
+            "id": 202392,
+            "product": "acrylic",
+            "width": 16,
+            "height": 16
+        },
+        {   
+            "id": 202393,
+            "product": "framed",
+            "width": 24,
+            "height": 16
+        },
+        {   
+            "id": 202394,
+            "product": "framed",
+            "width": 24,
+            "height": 19
+        },
+        {   
+            "id": 202395,
+            "product": "hd",
+            "width": 36,
+            "height": 20
+        },
+        {   
+            "id": 202396,
+            "product": "hd",
+            "width": 24,
+            "height": 24
+        },
+        {   
+            "id": 202397,
+            "product": "acrylic",
+            "width": 16,
+            "height": 16
+        },
+        {   
+            "id": 202398,
+            "product": "acrylic",
+            "width": 16,
+            "height": 16
+        },
+        {   
+            "id": 202399,
+            "product": "framed",
+            "width": 16,
+            "height": 16
+        }
+    ]
+}
+
+order192171 = {
+    "id": 192171,
+    "optimize": 1,
+    "products": [
+        {   
+            "id": 202391,
+            "product": "canvas",
+            "width": 12,
+            "height": 8
+        },
+        {   
+            "id": 202392,
+            "product": "acrylic",
+            "width": 12,
+            "height": 8
+        },
+        {   
+            "id": 202393,
+            "product": "framed",
+            "width": 12,
+            "height": 8
+        },
+        {   
+            "id": 202394,
+            "product": "framed",
+            "width": 12,
+            "height": 8
+        }
+    ]
+}
+
+orders = [
+    order192161,
+    order192162,
+    order192163,
+    order192164,
+    order192165,
+    order192166,
+    order192167,
+    order192168,
+    order192171
+]
+
+images = ["https://i.imgur.com/SeyV6fG.png",
+          "https://i.imgur.com/j9HWSmS.jpeg",
+          "https://i.imgur.com/QXhZt0t.jpg",
+          "https://i.imgur.com/1lqBCGK.jpg",
+          "https://i.imgur.com/GDAStfX.jpg",
+          "https://i.imgur.com/qnpBsNw.jpg",
+          "https://i.imgur.com/4PoTjBe.jpg",
+          "https://i.imgur.com/ZWGeI3I.jpg",
+          "https://i.imgur.com/xqWnFok.jpg",
+          "https://i.imgur.com/KfQ1qsK.png",
+          "https://i.imgur.com/FykFLSM.jpeg",
+          "https://i.imgur.com/baPqZXo.jpg"]
+
+for order in orders:
+    for item in order['products']:
+        item['url'] = random.choice(images)

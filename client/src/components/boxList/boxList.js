@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
 import { addBox, removeBox, showToast } from "../../store/actions";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./boxList.css";
@@ -36,12 +37,12 @@ class BoxList extends React.Component {
 
     confirmAddBox = () => {
         if (!this.state.boxSize || !this.state.boxQuantityField) return;
-        var last_id = 0;
+        let last_id = 0;
         if (this.props.boxes.length > 0) {
             last_id = this.props.boxes[this.props.boxes.length - 1].id + 1;
         }
 
-        var box = mapBoxNameToObject(this.state.boxSize["text"]);
+        let box = mapBoxNameToObject(this.state.boxSize["text"]);
         box["weight"] = 10;
         box["quantity"] = this.state.boxQuantityField;
         box["id"] = last_id;
@@ -60,14 +61,14 @@ class BoxList extends React.Component {
             this.setState({ showDetailsIndex: -1 });
         }
 
-        var idToBeRemoved = this.props.boxes[id]["id"];
+        let idToBeRemoved = this.props.boxes[id]["id"];
         this.props.dispatch(removeBox(idToBeRemoved));
     };
 
     printLabels = () => {
         console.log(this.props.boxes);
         this.setState({ fetchingLabels: true });
-        var url = "/api/order/" + this.props.match.params.id + "/labels";
+        let url = "/api/order/" + this.props.match.params.id + "/labels";
 
         fetch(url, {
             method: "POST",
@@ -81,7 +82,7 @@ class BoxList extends React.Component {
                 return res;
             })
             .then((res) => {
-                var toast = {
+                let toast = {
                     type: "success",
                     title: "Order " + this.props.match.params.id,
                     msg: "Printed " + res["labels"] + " labels",
@@ -171,8 +172,8 @@ class BoxList extends React.Component {
     };
 
     updateDropdown = (boxSize) => {
-        var boxSizeToQuantity = { "1": 5, "2": 5, "3": 3, "4": 2, "5": 3 };
-        var boxQuantity = 0;
+        let boxSizeToQuantity = { "1": 5, "2": 5, "3": 3, "4": 2, "5": 3 };
+        let boxQuantity = 0;
         if (boxSize["val"] === "CUSTOM") {
             boxQuantity = 2;
         } else {
@@ -182,7 +183,7 @@ class BoxList extends React.Component {
     };
 
     getAddNewBox = () => {
-        var color = this.state.boxSize ? mapBoxToColor(this.state.boxSize["text"]) : "#808080";
+        let color = this.state.boxSize ? mapBoxToColor(this.state.boxSize["text"]) : "#808080";
         return (
             <div className="order-list-add-new-box">
                 <div className="order-list-box-bar" style={{ backgroundColor: color }}>
@@ -205,7 +206,7 @@ class BoxList extends React.Component {
     };
 
     getBoxSizes = () => {
-        var boxSizes = [
+        let boxSizes = [
             { val: "1", text: "#1" },
             { val: "2", text: "#2" },
             { val: "3", text: "#3" },
@@ -216,7 +217,7 @@ class BoxList extends React.Component {
 
         return (
             <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm" className="test1111">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm">
                     {this.state.boxSize ? "Box " + this.state.boxSize["text"] : "Box Size"}
                 </Dropdown.Toggle>
 
@@ -372,7 +373,7 @@ function mapBoxToColor(boxSize) {
 }
 
 function mapBoxNameToObject(boxName) {
-    var boxObjects = {
+    let boxObjects = {
         "#1": {
             width: 18,
             height: 13,

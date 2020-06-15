@@ -42,36 +42,37 @@ class Order extends React.Component {
 
     fetchBoxes = () => {
         var orderId = this.props.match.params.id;
+
         fetch("/api/order/" + orderId)
-            .then((res) => res.json())
-            .then(
-                (result) => {
-                    if (result.error) {
-                        this.setState({ error: result.error });
-                        return;
+            .then((response) => {
+                if (!response.ok) {
+                    if (response.status === 400) {
+                        response.json().then((error) => {
+                            this.setState({ error: error.message });
+                            return;
+                        });
                     }
-                    var boxes = [];
-                    for (var obj of result.boxes) {
-                        boxes.push(obj.box);
-                    }
-                    this.props.dispatch(addBoxes(boxes));
-                    this.props.dispatch(addItems(result.boxes));
-                    this.setState({
-                        isLoaded: true,
-                    });
-                    this.cacheImages(result.boxes);
-                },
-                (error) => {
-                    this.setState({
-                        error,
-                    });
+                    throw Error(response);
                 }
-            );
+                return response.json();
+            })
+            .then((response) => {
+                console.log(response);
+                var boxes = [];
+                for (var obj of response.boxes) {
+                    boxes.push(obj.box);
+                }
+                this.props.dispatch(addBoxes(boxes));
+                this.props.dispatch(addItems(response.boxes));
+                this.setState({
+                    isLoaded: true,
+                });
+                this.cacheImages(response.boxes);
+            })
+            .catch((error) => this.setState({ error: "unknown error" }));
     };
 
     cacheImages = (boxes) => {
-        console.log("cacheImages");
-
         var imgCounter = 0;
         boxes.forEach((box) => {
             box["items"].forEach((item) => {
@@ -86,10 +87,7 @@ class Order extends React.Component {
                 const image = new window.Image();
                 image.src = item["url"];
                 image.onload = () => {
-                    console.log("downloaded");
-
                     item.img = image;
-
                     this.setState({
                         imgCount: this.state.imgCount + 1,
                     });
@@ -101,7 +99,7 @@ class Order extends React.Component {
     render() {
         const { error, isLoaded, imgCount, totalImages } = this.state;
         if (error) {
-            return <div>Error: {error}</div>;
+            return <div>{error}</div>;
         } else if (!isLoaded) {
             return (
                 <div className="order-spinner">

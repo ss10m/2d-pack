@@ -14,10 +14,10 @@ class LayoutContainer extends React.Component {
     };
 
     getBoxes = () => {
-        var canvasWidth = 450;
-        var canvasHeight = 0;
+        let canvasWidth = Math.min(450, window.innerWidth);
+        let canvasHeight = 0;
 
-        var ret = [];
+        let ret = [];
 
         this.props.items.forEach((items, i) => {
             canvasHeight = (items["box"].height / items["box"].width) * canvasWidth;
@@ -29,7 +29,12 @@ class LayoutContainer extends React.Component {
                     <div className="order-wrapper" onClick={() => this.zoomIn(i)}>
                         <Stage width={canvasWidth} height={canvasHeight}>
                             <Layer>
-                                <Layout items={items} canvasWidth={450} zoomEnabled={true} />
+                                <Layout
+                                    items={items}
+                                    canvasWidth={canvasWidth}
+                                    canvasHeight={canvasHeight}
+                                    zoomEnabled={true}
+                                />
                             </Layer>
                         </Stage>
                     </div>

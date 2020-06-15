@@ -113,7 +113,7 @@ class ZoomModal extends React.Component {
                         <div className="test2">
                             <Stage width={canvasWidth} height={canvasHeight}>
                                 <Layer>
-                                    <Layout items={items} canvasWidth={canvasWidth} />
+                                    <Layout items={items} canvasWidth={canvasWidth} canvasHeight={canvasHeight} />
                                 </Layer>
                             </Stage>
                         </div>

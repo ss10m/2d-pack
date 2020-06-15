@@ -15,7 +15,24 @@ services:
             LETSENCRYPT_EMAIL: "fastf20@gmail.com"
         networks:
             - service-network
+            - ship-network
+        depends_on:
+            - db
+    db:
+        image: postgres:11.2-alpine
+        ports:
+            - "5433:5432"
+        environment:
+            POSTGRES_PASSWORD: pgpw
+            POSTGRES_DB: mydb
+        volumes:
+            - ~/dbShip:/var/lib/postgresql/data
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+            - ship-network
 
 networks:
     service-network:
         external: true
+    ship-network:
+        driver: bridge
