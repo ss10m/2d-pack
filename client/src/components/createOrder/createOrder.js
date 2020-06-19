@@ -409,6 +409,9 @@ class CreateOrder extends React.Component {
 
         fetch("/api/order/create", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({ order }),
         })
             .then((res) => res.json())

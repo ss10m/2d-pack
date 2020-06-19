@@ -6,7 +6,7 @@ import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__, static_folder="./build/static", template_folder="./build")
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pgpw@db:5432/mydb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -136,7 +136,7 @@ def get_order(order_id):
 @app.route('/api/order/<int:order_id>/labels', methods=['POST'])
 def print_labels(order_id):
     print("/api/order/<int:order_id>/labels", flush=True)
-    boxes = request.get_json(force=True)
+    boxes = request.json
     labels = {'labels': len(boxes['boxes'])}
     response = jsonify(labels)
     sleep(1)
@@ -160,18 +160,10 @@ def get_orders():
 @app.route('/api/order/create', methods=['POST'])
 def create_order():
     print("/api/order/create", flush=True)
-    order = request.get_json(force=True)
-    print(order['order'])
-
+    
+    order = request.json
     Orders.create_order(order['order'])
 
-    status = {'status': 'ok'}
-    response = jsonify(status)
-    return response
-
-@app.route('/favicon.ico') 
-def favicon(): 
-    print('/favicon.ico', flush=True)
     status = {'status': 'ok'}
     response = jsonify(status)
     return response

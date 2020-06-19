@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "./app.css";
+import "./App.css";
 
 import NavBar from "./components/navbar/navbar.js";
 import ToastCustom from "./components/toast/toast.js";

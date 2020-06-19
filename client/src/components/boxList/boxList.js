@@ -72,6 +72,9 @@ class BoxList extends React.Component {
 
         fetch(url, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({ boxes: this.props.boxes }),
         })
             .then((res) => res.json())

@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./store/reducers.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./app";
+import * as serviceWorker from "./serviceWorker";
+import App from "./App";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -20,8 +21,6 @@ import {
     faFileAlt,
     faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
-
-//mport { faFile } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
     faTimes,
@@ -46,3 +45,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
+
+serviceWorker.unregister();

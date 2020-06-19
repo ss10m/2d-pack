@@ -1,5 +1,5 @@
 # Client
-FROM node:14.1.0-alpine as client
+FROM node:14.4.0-alpine as client
 
 WORKDIR /usr/app/client/
 
@@ -13,7 +13,7 @@ RUN npm run build
 
 
 # Server
-FROM tiangolo/meinheld-gunicorn-flask:python3.7
+FROM tiangolo/meinheld-gunicorn-flask:python3.8
 
 COPY ./app /app
 
