@@ -98,6 +98,7 @@ def date_difference(then, now):
 
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
+    print("handle_invalid_usage", flush=True)
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
@@ -120,6 +121,7 @@ def index_order():
 
 @app.route('/api/order/<int:order_id>', methods=['GET'])
 def get_order(order_id):
+    print("/api/order/<int:order_id>", flush=True)
 
     order = Orders.get_order(order_id)
     if(not order):
@@ -133,6 +135,7 @@ def get_order(order_id):
 
 @app.route('/api/order/<int:order_id>/labels', methods=['POST'])
 def print_labels(order_id):
+    print("/api/order/<int:order_id>/labels", flush=True)
     boxes = request.get_json(force=True)
     labels = {'labels': len(boxes['boxes'])}
     response = jsonify(labels)
@@ -142,6 +145,7 @@ def print_labels(order_id):
 
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
+    print("/api/orders", flush=True)
 
     orders = {'recent_orders': Orders.get_recent_orders()}
 
@@ -155,7 +159,7 @@ def get_orders():
 
 @app.route('/api/order/create', methods=['POST'])
 def create_order():
-
+    print("/api/order/create", flush=True)
     order = request.get_json(force=True)
     print(order['order'])
 
@@ -165,7 +169,15 @@ def create_order():
     response = jsonify(status)
     return response
 
+@app.route('/favicon.ico') 
+def favicon(): 
+    print('/favicon.ico', flush=True)
+    status = {'status': 'ok'}
+    response = jsonify(status)
+    return response
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index_orderr(path):
+    print("sending static files to " + path, flush=True)
     return render_template('index.html')
