@@ -3,7 +3,6 @@ import random
 
 order192161 = {
     "id": 192161,
-    "optimize": 1,
     "products": [
         {   
             "id": 201237,
@@ -16,7 +15,6 @@ order192161 = {
 
 order192162 = {
     "id": 192162,
-    "optimize": 1,
     "products": [
         {   
             "id": 202379,
@@ -35,7 +33,6 @@ order192162 = {
 
 order192163 = {
     "id": 192163,
-    "optimize": 1,
     "products": [
         {   
             "id": 202325,
@@ -72,7 +69,6 @@ order192163 = {
 
 order192164 = {
     "id": 192164,
-    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -103,7 +99,6 @@ order192164 = {
 
 order192165 = {
     "id": 192165,
-    "optimize": 1,
     "products": [
         {   
             "id": 202325,
@@ -398,7 +393,6 @@ order192165 = {
 
 order192166 = {
     "id": 192166,
-    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -429,7 +423,6 @@ order192166 = {
 
 order192167 = {
     "id": 192167,
-    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -490,7 +483,6 @@ order192167 = {
 
 order192168 = {
     "id": 192168,
-    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -551,7 +543,6 @@ order192168 = {
 
 order192171 = {
     "id": 192171,
-    "optimize": 1,
     "products": [
         {   
             "id": 202391,
@@ -605,6 +596,16 @@ images = ["https://i.imgur.com/SeyV6fG.png",
           "https://i.imgur.com/FykFLSM.jpeg",
           "https://i.imgur.com/baPqZXo.jpg"]
 
+boxes = [{"name": "Box #1", "width": 18, "height": 13, "weight": 2}, 
+         {"name": "Box #2", "width": 25, "height": 19, "weight": 4}, 
+         {"name": "Box #3", "width": 37, "height": 25, "weight": 6}, 
+         {"name": "Box #4", "width": 47, "height": 34, "weight": 8}, 
+         {"name": "Box #5", "width": 52, "height": 42, "weight": 10}]
+
+colors = ["red", "yellow", "blue", "purple", "green"]
+
 for order in orders:
+    order['boxes'] = boxes
     for item in order['products']:
         item['url'] = random.choice(images)
+        item['color'] = random.choice(colors)

@@ -16,22 +16,14 @@ from bin_packing.rectpack.skyline import SkylineMwflWm
 from bin_packing.boxes import boxes as pj_boxes, larger_boxes, custom_box
 from bin_packing.index import productToColor
 
-#order 99 --- 24x16 placed in box 3 instead of box 2
-#         --- after getting result, get all box 4 (where all items fit into box 3) and box 3 and try fitting into boxes 3 
-
 def packing_algo(order):
-    #filter products that arent supposed be here (posters etc)
     id_to_product = {product['id']: product for product in order['products']}
     
-    if order['optimize']:
-        order['boxes'] = deepcopy(pj_boxes)
+
+    print(order, flush=True)
+    print("test19", flush=True)
 
     sorted_boxes = parse_boxes(order['boxes'])
-    #print(sorted_boxes)
-
-    func_map = { 0: parse_default, 1: parse_optimized }
-    print(func_map[order["optimize"]])
-    parse_order = func_map[order["optimize"]]
     oversized_products, large_products, normal_products = parse_order(order, sorted_boxes)
 
     if(len(large_products) + len(normal_products) > 20):
@@ -48,7 +40,7 @@ def packing_algo(order):
             shuffle(normal_products)
 
         products = large_products + normal_products
-        boxes = pack(order['id'], order['optimize'], products, sorted_boxes)
+        boxes = pack(order['id'], products, sorted_boxes)
         
         '''
         boxes_count = {}
@@ -75,10 +67,10 @@ def packing_algo(order):
             best_count = total_boxes
             best_score = score
 
-    if(order['optimize']):
-       handle_oversized_products(oversized_products, best_count + 1, best_boxes)
+    #if(order['optimize']):
+    #   handle_oversized_products(oversized_products, best_count + 1, best_boxes)
 
-    json_output = generate_JSON(order['id'], order['optimize'], best_boxes, id_to_product)
+    json_output = generate_JSON(order['id'], best_boxes, id_to_product)
     return json_output
 
 def parse_boxes(boxes):
@@ -100,19 +92,19 @@ def parse_optimized(order, boxes):
 
     return oversized, sorted_box_5, sorted_box_4
     
-def parse_default(order, boxes):
+def parse_order(order, boxes):
     sorted_products = sorted(order['products'], reverse=True, key=lambda item: item['width'] * item['height'])
     products, oversized = filter_oversized_items(sorted_products, boxes)
 
     return oversized, [], products 
 
-def pack(order_id, order_optimize, products, boxes):
+def pack(order_id, products, boxes):
     output = []
     start = time.time()
     bin_counter = 0;
     
     while(len(products) > 0):
-        box_index = get_initial_box_size(order_optimize, products, boxes)
+        box_index = get_initial_box_size(products, boxes)
         bins = get_first_bins(products, boxes[box_index])
 
         if len(bins) < 2 or (len(bins) == 2 and (not bins[0] or not bins[1])):
@@ -185,17 +177,8 @@ def get_first_bins(products, box):
 
     return bins
 
-def get_initial_box_size(optimize, products, boxes):
-    if not optimize: return len(boxes) - 1
-
-    for product in products:
-        if(product['width'] == 48 or product['height'] == 48):
-            return 4
-
-        if(product['width'] > 34 and product['height'] >= 34):
-            return 4
-
-    return 3
+def get_initial_box_size(products, boxes):
+    return len(boxes) - 1
 
 def filter_oversized_items(items, boxes):
     fits = []
@@ -265,7 +248,7 @@ def get_oversized_box(item):
             return box
     return None
 
-def generate_JSON(order_id, order_optimize, boxes, id_to_item):
+def generate_JSON(order_id, boxes, id_to_item):
     json_file = {
         'id': order_id,
         'number_of_boxes': len(boxes)
@@ -277,10 +260,8 @@ def generate_JSON(order_id, order_optimize, boxes, id_to_item):
         for item in box_data['bin']:
             b, x, y, w, h, rid = item
             original_item = id_to_item[rid]
-            if(order_optimize and original_item['product'] in productToColor):
-                color = productToColor[original_item['product']]
-            else:
-                color = original_item['color']
+            print(original_item, flush=True)
+            color = original_item['color']
             item_json = {
                 "id": rid,
                 "product": original_item['product'],

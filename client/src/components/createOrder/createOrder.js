@@ -2,7 +2,13 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { InputGroup, FormControl, Button, Spinner, Dropdown } from "react-bootstrap";
+import {
+    InputGroup,
+    FormControl,
+    Button,
+    Spinner,
+    Dropdown,
+} from "react-bootstrap";
 
 import "./createOrder.scss";
 
@@ -95,7 +101,10 @@ class CreateOrder extends React.Component {
     getItems = () => {
         let { items, showAddItems } = this.state;
 
-        if ((items === undefined || items.length === 0) && showAddItems === false) {
+        if (
+            (items === undefined || items.length === 0) &&
+            showAddItems === false
+        ) {
             return (
                 <div className="empty-items">
                     <FontAwesomeIcon
@@ -144,31 +153,44 @@ class CreateOrder extends React.Component {
             <div className="add-item" key="addBox">
                 <InputGroup size="sm">
                     <InputGroup.Prepend>
-                        <InputGroup.Text className="bg-secondary text-white">Image URL</InputGroup.Text>
+                        <InputGroup.Text className="bg-secondary text-white">
+                            Image URL
+                        </InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl placeholder="(leave blank for random image)" ref={this.itemUrl} />
+                    <FormControl
+                        placeholder="(leave blank for random image)"
+                        ref={this.itemUrl}
+                    />
                 </InputGroup>
 
                 <div className="input-fields">
                     <div>
                         <InputGroup size="sm">
                             <InputGroup.Prepend>
-                                <InputGroup.Text className="bg-secondary text-white text-field">Width</InputGroup.Text>
+                                <InputGroup.Text className="bg-secondary text-white text-field">
+                                    Width
+                                </InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl ref={this.itemWidth} />
                             <InputGroup.Append>
-                                <InputGroup.Text className="bg-white">in</InputGroup.Text>
+                                <InputGroup.Text className="bg-white">
+                                    in
+                                </InputGroup.Text>
                             </InputGroup.Append>
                         </InputGroup>
                     </div>
                     <div>
                         <InputGroup size="sm">
                             <InputGroup.Prepend>
-                                <InputGroup.Text className="bg-secondary text-white text-field">Height</InputGroup.Text>
+                                <InputGroup.Text className="bg-secondary text-white text-field">
+                                    Height
+                                </InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl ref={this.itemHeight} />
                             <InputGroup.Append>
-                                <InputGroup.Text className="bg-white">in</InputGroup.Text>
+                                <InputGroup.Text className="bg-white">
+                                    in
+                                </InputGroup.Text>
                             </InputGroup.Append>
                         </InputGroup>
                     </div>
@@ -187,13 +209,27 @@ class CreateOrder extends React.Component {
                     </div>
                     <div>
                         <Dropdown>
-                            <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm" block>
-                                {this.state.outlineColor ? this.state.outlineColor : "Outline Color"}
+                            <Dropdown.Toggle
+                                variant="secondary"
+                                id="dropdown-basic"
+                                size="sm"
+                                block
+                            >
+                                {this.state.outlineColor
+                                    ? this.state.outlineColor
+                                    : "Outline Color"}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
                                 {this.state.colors.map((color, i) => (
-                                    <Dropdown.Item key={i} onClick={() => this.setState({ outlineColor: color })}>
+                                    <Dropdown.Item
+                                        key={i}
+                                        onClick={() =>
+                                            this.setState({
+                                                outlineColor: color,
+                                            })
+                                        }
+                                    >
                                         {color}
                                     </Dropdown.Item>
                                 ))}
@@ -203,7 +239,11 @@ class CreateOrder extends React.Component {
                 </div>
 
                 <div className="control-btns">
-                    <button type="button" className="btn btn-success btn-sm" onClick={this.confirmAddItem}>
+                    <button
+                        type="button"
+                        className="btn btn-success btn-sm"
+                        onClick={this.confirmAddItem}
+                    >
                         Confirm
                     </button>
                     <button
@@ -235,7 +275,7 @@ class CreateOrder extends React.Component {
             height: parseInt(height),
             id: id,
             product: "",
-            color: outlineColor,
+            color: outlineColor.toLowerCase(),
         };
 
         console.log(newItem);
@@ -253,7 +293,10 @@ class CreateOrder extends React.Component {
     getBoxes = () => {
         let { boxes, showAddBoxes } = this.state;
 
-        if ((boxes === undefined || boxes.length === 0) && showAddBoxes === false) {
+        if (
+            (boxes === undefined || boxes.length === 0) &&
+            showAddBoxes === false
+        ) {
             return (
                 <div className="empty-boxes">
                     <FontAwesomeIcon
@@ -280,7 +323,11 @@ class CreateOrder extends React.Component {
                             <div>{box.height + " IN"}</div>
                         </div>
                         <div className="remove-btn">
-                            <button type="button" className="btn btn-danger btn-sm" onClick={() => this.removeBox(box)}>
+                            <button
+                                type="button"
+                                className="btn btn-danger btn-sm"
+                                onClick={() => this.removeBox(box)}
+                            >
                                 Remove
                             </button>
                         </div>
@@ -297,7 +344,9 @@ class CreateOrder extends React.Component {
             <div className="add-box" key="addBox">
                 <InputGroup size="sm">
                     <InputGroup.Prepend>
-                        <InputGroup.Text className="bg-secondary text-white">Box Name</InputGroup.Text>
+                        <InputGroup.Text className="bg-secondary text-white">
+                            Box Name
+                        </InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl ref={this.boxName} />
                 </InputGroup>
@@ -306,29 +355,45 @@ class CreateOrder extends React.Component {
                     <div>
                         <InputGroup size="sm" className="width">
                             <InputGroup.Prepend>
-                                <InputGroup.Text className="bg-secondary text-white text-field">Width</InputGroup.Text>
+                                <InputGroup.Text className="bg-secondary text-white text-field">
+                                    Width
+                                </InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl ref={this.boxWidth} />
                             <InputGroup.Append>
-                                <InputGroup.Text className="bg-white">in</InputGroup.Text>
+                                <InputGroup.Text className="bg-white">
+                                    in
+                                </InputGroup.Text>
                             </InputGroup.Append>
                         </InputGroup>
                     </div>
                     <div>
-                        <InputGroup size="sm" className="width" style={{ float: "right" }}>
+                        <InputGroup
+                            size="sm"
+                            className="width"
+                            style={{ float: "right" }}
+                        >
                             <InputGroup.Prepend>
-                                <InputGroup.Text className="bg-secondary text-white text-field">Height</InputGroup.Text>
+                                <InputGroup.Text className="bg-secondary text-white text-field">
+                                    Height
+                                </InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl ref={this.boxHeight} />
                             <InputGroup.Append>
-                                <InputGroup.Text className="bg-white">in</InputGroup.Text>
+                                <InputGroup.Text className="bg-white">
+                                    in
+                                </InputGroup.Text>
                             </InputGroup.Append>
                         </InputGroup>
                     </div>
                 </div>
 
                 <div className="control-btns">
-                    <button type="button" className="btn btn-success btn-sm" onClick={this.confirmAddBox}>
+                    <button
+                        type="button"
+                        className="btn btn-success btn-sm"
+                        onClick={this.confirmAddBox}
+                    >
                         Confirm
                     </button>
                     <button
@@ -352,7 +417,11 @@ class CreateOrder extends React.Component {
         if (!isNumeric(width)) return;
         if (!isNumeric(height)) return;
 
-        let newBox = { name: boxName, width: parseInt(width), height: parseInt(height) };
+        let newBox = {
+            name: boxName,
+            width: parseInt(width),
+            height: parseInt(height),
+        };
         const boxes = [...this.state.boxes, newBox];
 
         this.setState({ showAddBoxes: false, boxes });
@@ -369,18 +438,28 @@ class CreateOrder extends React.Component {
         if (recentOrders === null) {
             return (
                 <div className="empty-orders">
-                    <Spinner animation="border" role="status" variant="secondary">
+                    <Spinner
+                        animation="border"
+                        role="status"
+                        variant="secondary"
+                    >
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 </div>
             );
         } else if (Array.isArray(recentOrders) && recentOrders.length === 0) {
-            return <div className="empty-orders">Nothing appears to be here.</div>;
+            return (
+                <div className="empty-orders">Nothing appears to be here.</div>
+            );
         } else {
             let ret = [];
             recentOrders.forEach((order) => {
                 ret.push(
-                    <div className="recent-order" key={order.id} onClick={() => this.viewOrder(order.id)}>
+                    <div
+                        className="recent-order"
+                        key={order.id}
+                        onClick={() => this.viewOrder(order.id)}
+                    >
                         <div className="id">{order.id}</div>
                         <div className="date">{order.created_at}</div>
                     </div>
@@ -405,7 +484,6 @@ class CreateOrder extends React.Component {
 
         let order = {
             id: parseInt(orderId),
-            optimize: 1,
             products: items,
             boxes: boxes,
         };
@@ -431,7 +509,10 @@ class CreateOrder extends React.Component {
                     <div className="order-id">
                         <InputGroup size="lg">
                             <InputGroup.Prepend>
-                                <InputGroup.Text id="inputGroup-sizing-lg" className="bg-secondary text-white">
+                                <InputGroup.Text
+                                    id="inputGroup-sizing-lg"
+                                    className="bg-secondary text-white"
+                                >
                                     Order #
                                 </InputGroup.Text>
                             </InputGroup.Prepend>
@@ -444,7 +525,12 @@ class CreateOrder extends React.Component {
                         </InputGroup>
                     </div>
                     <div className="order-btn">
-                        <Button variant="secondary" size="lg" onClick={this.createOrder} block>
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                            onClick={this.createOrder}
+                            block
+                        >
                             Create
                         </Button>
                     </div>
@@ -452,11 +538,19 @@ class CreateOrder extends React.Component {
                 <div className="create-order-items">
                     <div
                         className="create-order-header"
-                        style={this.state.showAddItems ? { borderBottomColor: "#f5f5f5" } : {}}
+                        style={
+                            this.state.showAddItems
+                                ? { borderBottomColor: "#f5f5f5" }
+                                : {}
+                        }
                     >
                         <div className="header-title">
                             <div>
-                                <FontAwesomeIcon icon="clipboard-list" size="sm" className="icon-color" />
+                                <FontAwesomeIcon
+                                    icon="clipboard-list"
+                                    size="sm"
+                                    className="icon-color"
+                                />
                             </div>
                             <span>Items</span>
                         </div>
@@ -464,7 +558,9 @@ class CreateOrder extends React.Component {
                             <button
                                 type="button"
                                 className="btn btn-secondary btn-sm"
-                                onClick={() => this.setState({ showAddItems: true })}
+                                onClick={() =>
+                                    this.setState({ showAddItems: true })
+                                }
                             >
                                 Add Item
                             </button>
@@ -475,11 +571,19 @@ class CreateOrder extends React.Component {
                 <div className="create-order-boxes">
                     <div
                         className="create-order-header"
-                        style={this.state.showAddBoxes ? { borderBottomColor: "#f5f5f5" } : {}}
+                        style={
+                            this.state.showAddBoxes
+                                ? { borderBottomColor: "#f5f5f5" }
+                                : {}
+                        }
                     >
                         <div className="header-title">
                             <div>
-                                <FontAwesomeIcon icon="box" size="sm" className="icon-color" />
+                                <FontAwesomeIcon
+                                    icon="box"
+                                    size="sm"
+                                    className="icon-color"
+                                />
                             </div>
                             <span>Boxes</span>
                         </div>
@@ -487,7 +591,9 @@ class CreateOrder extends React.Component {
                             <button
                                 type="button"
                                 className="btn btn-secondary btn-sm"
-                                onClick={() => this.setState({ showAddBoxes: true })}
+                                onClick={() =>
+                                    this.setState({ showAddBoxes: true })
+                                }
                             >
                                 Add Box
                             </button>
@@ -499,7 +605,11 @@ class CreateOrder extends React.Component {
                     <div className="create-order-header">
                         <div className="header-title">
                             <div>
-                                <FontAwesomeIcon icon="check-square" size="sm" className="icon-color" />
+                                <FontAwesomeIcon
+                                    icon="check-square"
+                                    size="sm"
+                                    className="icon-color"
+                                />
                             </div>
                             <span>Recent Orders</span>
                         </div>

@@ -46,7 +46,7 @@ class Orders(db.Model):
         return [{"id": order.id, "created_at": order.created_at} for order in orders]
     
     def remove_all_orders():
-        Orders.query.add().delete()
+        Orders.query.delete()
         db.session.commit()
 
     def __repr__(self):
@@ -107,12 +107,13 @@ def handle_invalid_usage(error):
 @app.route('/api/getallorders')
 def index_order():
     
-    #Orders.remove_all_orders()
+    Orders.remove_all_orders()
 
     orders = Orders.get_all_orders()
     orders_json = {'orders': orders}
 
     print(orders_json, flush=True)
+
 
     for order in id_to_order:
         Orders.create_order(id_to_order[order])
@@ -122,6 +123,7 @@ def index_order():
 @app.route('/api/order/<int:order_id>', methods=['GET'])
 def get_order(order_id):
     print("/api/order/<int:order_id>", flush=True)
+    print("test12", flush=True)
 
     order = Orders.get_order(order_id)
     if(not order):
@@ -163,6 +165,7 @@ def create_order():
     
     order = request.json
     Orders.create_order(order['order'])
+    print(order['order']["boxes"], flush=True)
 
     status = {'status': 'ok'}
     response = jsonify(status)
