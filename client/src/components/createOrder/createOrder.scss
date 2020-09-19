@@ -1,5 +1,6 @@
 .create-order-grid {
     display: grid;
+    padding: 10px;
     grid-gap: 10px;
     margin: 30px 0;
     grid-template:
@@ -7,23 +8,29 @@
         "items boxes"
         "items orders";
     grid-template-columns: minmax(300px, 400px) minmax(300px, 400px);
-    grid-template-rows: 50px minmax(min-content, 250px) minmax(min-content, 250px);
+    grid-template-rows:
+        50px
+        minmax(min-content, 250px)
+        minmax(min-content, 290px);
     justify-content: center;
 
     @media only screen and (max-width: 630px) {
         grid-template: "id" "items" "boxes" "orders";
         grid-template-columns: minmax(300px, 400px);
-        grid-template-rows: 50px minmax(min-content, 400px) minmax(min-content, 200px) minmax(min-content, 200px);
+        grid-template-rows:
+            50px minmax(min-content, 400px)
+            minmax(min-content, 200px)
+            minmax(min-content, 290px);
     }
 }
 
 .create-order-no-select {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .create-order-id {
@@ -56,7 +63,7 @@
     .header-title {
         width: 200px;
         font-size: 24px;
-        font-weight: 100;
+        font-weight: 300;
         color: #343a40;
 
         span {
@@ -88,6 +95,7 @@
     grid-area: items;
     border-radius: 5pt;
     border: 1px solid #dbdbdb;
+    box-shadow: 0px 0px 2px 1px #80808030;
 
     display: flex;
     flex-direction: column;
@@ -198,6 +206,7 @@
     grid-area: boxes;
     border-radius: 5pt;
     border: 1px solid #dbdbdb;
+    box-shadow: 0px 0px 2px 1px #80808030;
 
     display: flex;
     flex-direction: column;
@@ -302,6 +311,7 @@
     grid-area: orders;
     border-radius: 5pt;
     border: 1px solid #dbdbdb;
+    box-shadow: 0px 0px 2px 1px #80808030;
     display: flex;
     flex-direction: column;
 
@@ -343,7 +353,8 @@
             .date {
                 color: grey;
                 height: 30%;
-                font-weight: 100;
+                font-size: 15px;
+                font-weight: 300;
             }
         }
     }

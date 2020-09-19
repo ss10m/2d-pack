@@ -1,0 +1,143 @@
+.navbar {
+    height: 56px;
+    transition: height 0.5s ease-in;
+    box-shadow: 0px 0px 2px 1px #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+    background-color: #2a2a2a;
+    padding: 0;
+    margin: 0;
+
+    &.navExpanded {
+        height: 120px;
+        z-index: 1;
+        transition: height 0.5s ease-in;
+    }
+
+    .top {
+        height: 56px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 0 10px;
+        justify-content: space-between;
+
+        .left {
+            display: flex;
+            height: 100%;
+
+            flex-direction: row;
+
+            .title {
+                padding: 0 20px;
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 56px;
+                text-decoration: none;
+                color: whitesmoke;
+
+                &:hover {
+                    color: whitesmoke;
+                }
+            }
+        }
+
+        .right {
+            height: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+            display: flex;
+        }
+    }
+
+    .bottom {
+        height: auto;
+        width: 100%;
+        flex: 1;
+        padding: 5px 0 0 20px;
+    }
+}
+
+.navbar-toggle-btn {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .bars {
+        padding: 2px 7px;
+        height: 40px;
+        width: 40px;
+        border-radius: 8px;
+        position: relative;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #505050;
+        }
+    }
+}
+
+.search-input {
+    height: 39px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+        height: 100%;
+        box-sizing: border-box;
+        border-radius: 7px 0 0 7px;
+        font-size: 24px;
+        color: #cecece;
+        width: 45px;
+        background-color: #383838;
+        text-align: center;
+        line-height: 40px;
+    }
+
+    input {
+        height: 100%;
+        width: 140px;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        border-radius: 0 7px 7px 0;
+        border-left: none;
+        font-size: 18px;
+        color: whitesmoke;
+        background: transparent;
+        padding: 0 5px 0 5px;
+        color: whitesmoke;
+
+        background-color: #505050;
+
+        &::placeholder {
+            color: #cecece;
+        }
+
+        :-ms-input-placeholder {
+            color: #cecece;
+        }
+
+        ::-ms-input-placeholder {
+            color: #cecece;
+        }
+    }
+
+    button {
+        background-color: #505050;
+        outline: none;
+        border: none;
+        color: whitesmoke;
+        border-radius: 7px;
+        padding: 0 10px;
+        margin-left: 5px;
+
+        &:hover {
+            background-color: #5f5e5e;
+        }
+    }
+}

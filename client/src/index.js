@@ -20,6 +20,8 @@ import {
     faCheckSquare,
     faFileAlt,
     faPlusCircle,
+    faBars,
+    faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -32,7 +34,9 @@ library.add(
     faBox,
     faCheckSquare,
     faFileAlt,
-    faPlusCircle
+    faPlusCircle,
+    faBars,
+    faSearch
 );
 
 const store = createStore(reducers);

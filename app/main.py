@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, make_response, render_template
 from bin_packing.packing import packing_algo
-from order import *
+
 from time import sleep
 import psycopg2
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from helpers import parseInt, id_to_order, date_difference
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 
@@ -13,17 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 db = SQLAlchemy(app)
 
-id_to_order = {
-    192161: order192161,
-    192162: order192162,
-    192163: order192163,
-    192164: order192164,
-    192165: order192165,
-    192166: order192166,
-    192167: order192167,
-    192168: order192168,
-    192171: order192171
-}
 
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,7 +40,7 @@ class Orders(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return '<User %r>' % self.id
+        return '<Order %r>' % self.id
 
 class InvalidUsage(Exception):
     status_code = 400
@@ -67,35 +57,6 @@ class InvalidUsage(Exception):
         rv['message'] = self.message
         return rv
 
-def date_difference(then, now):
-    dt = now - then
-    offset = dt.seconds + (dt.days * 60*60*24)
-
-    delta_s = int(offset % 60)
-    offset /= 60
-    delta_m = int(offset % 60)
-    offset /= 60
-    delta_h = int(offset % 24)
-    offset /= 24
-    delta_d = int(offset)
-
-    if(delta_d > 365):
-        years = int(delta_d / 365)
-        return "{} year{} ago".format(years, "s" if years > 1 else "")
-    if(delta_d > 30):
-        months = int(delta_d / 30)
-        return "{} month{} ago".format(months, "s" if months > 1 else "")
-    if(delta_d > 0):
-        return "{} day{} ago".format(delta_d, "s" if delta_d > 1 else "")
-    if delta_h > 0:
-        return "{} hour{} ago".format(delta_h, "s" if delta_h > 1 else "")
-    if delta_m > 0:
-        return "{} minute{} ago".format(delta_m, "s" if delta_m > 1 else "")
-    if delta_s > 30:
-        return "{} seconds ago".format(delta_s)
-    else:
-        return "just now"
-
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
     print("handle_invalid_usage", flush=True)
@@ -106,33 +67,29 @@ def handle_invalid_usage(error):
 
 @app.route('/api/getallorders')
 def index_order():
-    
     Orders.remove_all_orders()
-
     orders = Orders.get_all_orders()
     orders_json = {'orders': orders}
-
-    print(orders_json, flush=True)
-
 
     for order in id_to_order:
         Orders.create_order(id_to_order[order])
 
     return jsonify(orders_json)
 
-@app.route('/api/order/<int:order_id>', methods=['GET'])
-def get_order(order_id):
-    print("/api/order/<int:order_id>", flush=True)
-    print("test12", flush=True)
+@app.route('/api/order/<id>', methods=['GET'])
+def get_order(id):
+    print("/api/order/<id>", flush=True)
 
+    order_id = parseInt(id)
+    if(not order_id):
+        raise InvalidUsage('{} is not a valid order number'.format(id), status_code=400)
+    
     order = Orders.get_order(order_id)
     if(not order):
-        raise InvalidUsage('Order {} not found'.format(order_id), status_code=400)
+        raise InvalidUsage('Order {} not found'.format(id), status_code=400)
 
     boxes = packing_algo(order.data)
     response = jsonify(boxes)
-
-    sleep(1)
     return response
 
 @app.route('/api/order/<int:order_id>/labels', methods=['POST'])

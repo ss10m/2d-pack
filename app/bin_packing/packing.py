@@ -18,11 +18,6 @@ from bin_packing.index import productToColor
 
 def packing_algo(order):
     id_to_product = {product['id']: product for product in order['products']}
-    
-
-    print(order, flush=True)
-    print("test19", flush=True)
-
     sorted_boxes = parse_boxes(order['boxes'])
     oversized_products, large_products, normal_products = parse_order(order, sorted_boxes)
 
@@ -42,20 +37,6 @@ def packing_algo(order):
         products = large_products + normal_products
         boxes = pack(order['id'], products, sorted_boxes)
         
-        '''
-        boxes_count = {}
-        total_boxes = 0;
-        for box in boxes:
-            
-            name = box['box']['name']
-            if name in boxes_count:
-                boxes_count[name] = boxes_count[name] + 1
-            else:
-                boxes_count[name] = 1
-            total_boxes += 1
-        print(boxes_count)
-        '''
-
         score = 0
         total_boxes = 0
         for box in boxes:
@@ -66,9 +47,6 @@ def packing_algo(order):
             best_boxes = boxes
             best_count = total_boxes
             best_score = score
-
-    #if(order['optimize']):
-    #   handle_oversized_products(oversized_products, best_count + 1, best_boxes)
 
     json_output = generate_JSON(order['id'], best_boxes, id_to_product)
     return json_output
@@ -81,16 +59,6 @@ def parse_boxes(boxes):
         box_id += 1;
     
     return sorted_boxes
-
-def parse_optimized(order, boxes):
-    order_products = deepcopy(order['products'])
-    oversized, default_products = filter_by_box_size(order_products, boxes[4])
-    products_fit_box_5, products_fit_box_4 = filter_by_box_size(default_products, boxes[3])
-
-    sorted_box_5 = sorted(products_fit_box_5, reverse=True, key=lambda item: item['width'] * item['height'])
-    sorted_box_4 = sorted(products_fit_box_4, reverse=True, key=lambda item: (max(item['width'], item['height']), min(item['width'], item['height'])))
-
-    return oversized, sorted_box_5, sorted_box_4
     
 def parse_order(order, boxes):
     sorted_products = sorted(order['products'], reverse=True, key=lambda item: item['width'] * item['height'])
@@ -203,50 +171,6 @@ def filter_oversized_items(items, boxes):
             oversized.append(item)
 
     return fits, oversized
-
-def filter_by_box_size(products, box):
-
-    #SORT_AREA  = lambda rectlist: sorted(rectlist, reverse=True, key=lambda r: r[0]*r[1])
-    oversized = []
-    default_size = []
-    for item in products:
-        item_fits = False
-        if (item['width'] <= box['width'] and item['height'] <= box['height']):
-            item_fits = True
-        if (item['height'] <= box['width'] and item['width'] <= box['height']):
-            item_fits = True
-        if item_fits:
-            default_size.append(item)
-        else:
-            oversized.append(item)
-
-    return oversized, default_size
-
-def handle_oversized_products(oversized_products, bin_counter, boxes):
-    for item in oversized_products:
-        if item['width'] < item['height']:
-            item['width'], item['height'] = item['height'], item['width']
-        item_tuple = (0, 0, 0, item['width'], item['height'], item['id'])
-        box = get_oversized_box(item)
-        if not box:
-            box = deepcopy(custom_box)
-            box['width'], box['height'] = item['width'], item['height']
-        bin = [item_tuple]
-        boxes.append({"box": box, "box_number": bin_counter, "bin": bin})
-        bin_counter += 1
-        
-def get_oversized_box(item):
-
-    for box_index in larger_boxes:
-        box = larger_boxes[box_index]
-        item_fits = False
-        if (item['width'] <= box['width'] and item['height'] <= box['height']):
-            item_fits = True
-        if (item['height'] <= box['width'] and item['width'] <= box['height']):
-            item_fits = True
-        if item_fits:
-            return box
-    return None
 
 def generate_JSON(order_id, boxes, id_to_item):
     json_file = {

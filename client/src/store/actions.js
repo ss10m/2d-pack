@@ -1,3 +1,18 @@
+// Window Size Actions
+export const updateWindowSize = (width) => ({
+    type: "UPDATE_WINDOW_SIZE",
+    width,
+});
+
+export const setNavbar = (state) => ({
+    type: "SET_NAVBAR",
+    state,
+});
+
+export const toggleNavbar = () => ({
+    type: "TOGGLE_NAVBAR",
+});
+
 export const addBox = (box) => ({
     type: "ADD_BOX",
     box,

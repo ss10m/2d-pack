@@ -1,8 +1,14 @@
 import React from "react";
-import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import { withRouter, Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-import "./navbar.css";
+import classNames from "classnames";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { connect } from "react-redux";
+import { setNavbar, toggleNavbar } from "../../store/actions";
+
+import "./navbar.scss";
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -12,54 +18,123 @@ class NavBar extends React.Component {
         };
     }
 
+    componentDidUpdate() {
+        let { navbarExpanded, windowSize } = this.props;
+        if (navbarExpanded && windowSize >= 500) {
+            console.log("2135213523");
+            this.props.setNavbar(false);
+        }
+    }
+
     handleSubmit = (event) => {
+        console.log("handleSubmit");
         event.preventDefault();
-
-        var orderId = this.state.orderId;
-        var intOnly = /^\d+$/.test(orderId);
-        var intLen = orderId.toString().length;
-
-        if (!intOnly || intLen !== 6) return;
-        this.props.setOrderId(orderId);
+        let orderId = this.state.orderId;
+        let intOnly = /^\d+$/.test(orderId);
+        let intLen = orderId.toString().length;
+        if (!intOnly || !intLen) return;
         this.setState({ orderId: "" });
         this.props.history.push("/order/" + orderId);
     };
 
+    onKeyPress = (event) => {
+        if (event.key === "Enter") {
+            this.handleSubmit(event);
+        }
+    };
+
     handleInputChange = (event) => {
         event.preventDefault();
-
         this.setState({ orderId: event.target.value });
     };
 
-    render() {
-        return (
-            <Navbar bg="dark" expand="lg" fixed="top">
-                <Navbar.Brand className="navbar-header">
-                    <Link to={"/"} className="navbar-header">
-                        <b>2D-SHIP</b>
-                    </Link>
-                </Navbar.Brand>
+    toggleNavbar = (event) => {
+        event.preventDefault();
+        this.props.toggleNavbar();
+    };
 
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto"></Nav>
-                    <Form onSubmit={this.handleSubmit} inline>
-                        <FormControl
-                            type="text"
-                            placeholder="Order #"
-                            className="mr-sm-2"
-                            value={this.state.orderId}
-                            onChange={this.handleInputChange}
-                            required
-                        />
-                        <Button variant="outline-light" type="submit">
-                            Search
-                        </Button>
-                    </Form>
-                </Navbar.Collapse>
-            </Navbar>
+    render() {
+        let { windowSize, navbarExpanded } = this.props;
+
+        let expanded = navbarExpanded && windowSize < 500;
+
+        let searchField = (
+            <SearchField
+                value={this.state.orderId}
+                handleInputChange={this.handleInputChange}
+                onKeyPress={this.onKeyPress}
+                submit={this.handleSubmit}
+            />
+        );
+
+        return (
+            <div
+                className={classNames("navbar", {
+                    navExpanded: expanded,
+                })}
+            >
+                <div className="top">
+                    <div className="left">
+                        {windowSize < 500 && (
+                            <div className="navbar-toggle-btn">
+                                <FontAwesomeIcon
+                                    icon="bars"
+                                    size="2x"
+                                    className="bars"
+                                    onClick={this.toggleNavbar}
+                                />
+                            </div>
+                        )}
+                        <Link to="/" className="title">
+                            2D-PACK
+                        </Link>
+                    </div>
+                    <div className="right">
+                        {windowSize >= 500 && searchField}
+                    </div>
+                </div>
+
+                {expanded && <div className="bottom">{searchField}</div>}
+            </div>
         );
     }
 }
 
-export default withRouter(NavBar);
+const mapStateToProps = (state) => {
+    return {
+        navbarExpanded: state.navbarExpanded,
+        windowSize: state.windowSize,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    setNavbar: (state) => {
+        dispatch(setNavbar(state));
+    },
+    toggleNavbar: () => {
+        dispatch(toggleNavbar());
+    },
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
+
+const SearchField = ({ handleInputChange, value, onKeyPress, submit }) => {
+    return (
+        <div className="search-input">
+            <div className="icon">
+                <FontAwesomeIcon icon="search" size="1x" />
+            </div>
+            <input
+                type="text"
+                spellCheck={false}
+                value={value}
+                placeholder="Order #"
+                autoComplete="off"
+                onChange={handleInputChange}
+                onKeyPress={onKeyPress}
+                autoFocus
+            />
+            <button onClick={submit}>Search</button>
+        </div>
+    );
+};

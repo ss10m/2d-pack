@@ -1,7 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+
 import { connect } from "react-redux";
+
+import { setNavbar } from "./store/actions";
 
 import "./App.css";
 
@@ -10,6 +12,7 @@ import ToastCustom from "./components/toast/toast.js";
 import ZoomModal from "./components/zoomModal/zoomModal.js";
 import Order from "./components/order/order.js";
 import CreateOrder from "./components/createOrder/createOrder.js";
+import WindowSize from "./components/WindowSize/WindowSize.js";
 
 class App extends React.Component {
     constructor(props) {
@@ -21,6 +24,11 @@ class App extends React.Component {
             toasts: [],
         };
     }
+
+    hideNavbar = (event) => {
+        event.preventDefault();
+        if (this.props.navbarExpanded) this.props.setNavbar(false);
+    };
 
     btnClick = () => {
         console.log("btn was clicked");
@@ -39,10 +47,11 @@ class App extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <div className="App">
+                <div className="app">
+                    <WindowSize />
                     <NavBar setOrderId={this.setOrderId} />
 
-                    <div className="body">
+                    <div className="body" onClick={this.hideNavbar}>
                         <ToastCustom />
                         {this.props.zoomIn != null && <ZoomModal />}
 
@@ -62,10 +71,17 @@ class App extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         zoomIn: state.zoomIn,
+        navbarExpanded: state.navbarExpanded,
     };
-}
+};
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = (dispatch) => ({
+    setNavbar: (state) => {
+        dispatch(setNavbar(state));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,10 +1,32 @@
 import { combineReducers } from "redux";
 
+const UPDATE_WINDOW_SIZE = "UPDATE_WINDOW_SIZE";
+const windowSizeReducer = (state = 0, action) => {
+    switch (action.type) {
+        case UPDATE_WINDOW_SIZE:
+            return action.width;
+        default:
+            return state;
+    }
+};
+
+const SET_NAVBAR = "SET_NAVBAR";
+const TOGGLE_NAVBAR = "TOGGLE_NAVBAR";
+const navbarReducer = (state = false, action) => {
+    switch (action.type) {
+        case SET_NAVBAR:
+            return action.state;
+        case TOGGLE_NAVBAR:
+            return !state;
+        default:
+            return state;
+    }
+};
+
 const ADD_BOX = "ADD_BOX";
 const ADD_BOXES = "ADD_BOXES";
 const CLEAR_BOXES = "CLEAR_BOXES";
 const REMOVE_BOX = "REMOVE_BOX";
-
 const boxesReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_BOX:
@@ -25,7 +47,6 @@ const boxesReducer = (state = [], action) => {
 
 const ADD_ITEMS = "ADD_ITEMS";
 const CLEAR_ITEMS = "CLEAR_ITEMS";
-
 const itemsReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_ITEMS:
@@ -39,13 +60,14 @@ const itemsReducer = (state = [], action) => {
 
 const ADD_TOAST = "ADD_TOAST";
 const REMOVE_TOAST = "REMOVE_TOAST";
-
 const toastsReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_TOAST:
             return [...state, action.toast];
         case REMOVE_TOAST:
-            return state.filter((currentToast) => currentToast !== action.toast);
+            return state.filter(
+                (currentToast) => currentToast !== action.toast
+            );
         default:
             return state;
     }
@@ -53,7 +75,6 @@ const toastsReducer = (state = [], action) => {
 
 const SHOW_ZOOM = "SHOW_ZOOM";
 const HIDE_ZOOM = "HIDE_ZOOM";
-
 const zoomInReducer = (state = null, action) => {
     switch (action.type) {
         case SHOW_ZOOM:
@@ -66,6 +87,8 @@ const zoomInReducer = (state = null, action) => {
 };
 
 export default combineReducers({
+    windowSize: windowSizeReducer,
+    navbarExpanded: navbarReducer,
     boxes: boxesReducer,
     items: itemsReducer,
     toasts: toastsReducer,
