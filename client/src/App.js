@@ -7,7 +7,7 @@ import { setNavbar } from "./store/actions";
 
 import "./App.css";
 
-import NavBar from "./components/navbar/navbar.js";
+import NavBar from "./components/NavBar/NavBarContainer.js";
 import ToastCustom from "./components/toast/toast.js";
 import ZoomModal from "./components/zoomModal/zoomModal.js";
 import Order from "./components/order/order.js";

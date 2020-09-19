@@ -3,7 +3,12 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "react-bootstrap";
 
-import { addBoxes, clearBoxes, addItems, clearItems } from "../../store/actions";
+import {
+    addBoxes,
+    clearBoxes,
+    addItems,
+    clearItems,
+} from "../../store/actions";
 
 import BoxList from "../boxList/boxList.js";
 import LayoutContainer from "../layoutContainer/layoutContainer.js";
@@ -41,7 +46,9 @@ class Order extends React.Component {
     }
 
     fetchBoxes = () => {
-        var orderId = this.props.match.params.id;
+        let orderId = this.props.match.params.id;
+
+        console.log("FETCHING: " + orderId);
 
         fetch("/api/order/" + orderId)
             .then((response) => {
@@ -57,9 +64,9 @@ class Order extends React.Component {
                 return response.json();
             })
             .then((response) => {
-                console.log(response);
-                var boxes = [];
-                for (var obj of response.boxes) {
+                if (this.props.match.params.id !== orderId) return;
+                let boxes = [];
+                for (let obj of response.boxes) {
                     boxes.push(obj.box);
                 }
                 this.props.dispatch(addBoxes(boxes));
@@ -73,7 +80,7 @@ class Order extends React.Component {
     };
 
     cacheImages = (boxes) => {
-        var imgCounter = 0;
+        let imgCounter = 0;
         boxes.forEach((box) => {
             box["items"].forEach((item) => {
                 imgCounter++;
@@ -103,7 +110,12 @@ class Order extends React.Component {
         } else if (!isLoaded) {
             return (
                 <div className="order-spinner">
-                    <Spinner animation="border" role="status" size="xl" variant="secondary">
+                    <Spinner
+                        animation="border"
+                        role="status"
+                        size="xl"
+                        variant="secondary"
+                    >
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 </div>
