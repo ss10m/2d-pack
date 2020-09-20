@@ -1,20 +1,16 @@
 .order-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 370px;
-    min-height: 400px;
-    margin-left: 30px;
+    margin-bottom: 30px;
     color: #343a40;
 }
 
 .order-list-noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .order-list-boxes {
@@ -183,5 +179,7 @@
 }
 
 .order-btn-spinner {
-    margin-right: 8px;
+    margin: 0 7px 3px 0;
+
+    color: whitesmoke;
 }

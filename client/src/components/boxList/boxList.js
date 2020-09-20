@@ -32,7 +32,12 @@ class BoxList extends React.Component {
 
     hideAddBox = () => {
         console.log("hideAddBox");
-        this.setState({ showAddBox: false, boxSize: null, boxQuantity: null, boxQuantityField: null });
+        this.setState({
+            showAddBox: false,
+            boxSize: null,
+            boxQuantity: null,
+            boxQuantityField: null,
+        });
     };
 
     confirmAddBox = () => {
@@ -56,17 +61,17 @@ class BoxList extends React.Component {
         if (id < 0 || id >= this.props.boxes.length) return;
 
         if (id < this.state.showDetailsIndex) {
-            this.setState({ showDetailsIndex: this.state.showDetailsIndex - 1 });
+            this.setState({
+                showDetailsIndex: this.state.showDetailsIndex - 1,
+            });
         } else if (id === this.state.showDetailsIndex) {
             this.setState({ showDetailsIndex: -1 });
         }
 
-        let idToBeRemoved = this.props.boxes[id]["id"];
-        this.props.dispatch(removeBox(idToBeRemoved));
+        this.props.dispatch(removeBox(id));
     };
 
     printLabels = () => {
-        console.log(this.props.boxes);
         this.setState({ fetchingLabels: true });
         let url = "/api/order/" + this.props.match.params.id + "/labels";
 
@@ -102,7 +107,6 @@ class BoxList extends React.Component {
     };
 
     showBoxDetails = (index) => {
-        console.log(index);
         if (this.state.showDetailsIndex === index) {
             this.setState({ showDetailsIndex: -1 });
             return;
@@ -117,22 +121,43 @@ class BoxList extends React.Component {
                     <div
                         key={index}
                         className="order-list-box grow"
-                        style={{ height: this.state.showDetailsIndex === index ? "120px" : "50px" }}
+                        style={{
+                            height:
+                                this.state.showDetailsIndex === index
+                                    ? "120px"
+                                    : "50px",
+                        }}
                         onClick={() => this.showBoxDetails(index)}
                     >
-                        <div className="order-list-box-bar" style={{ backgroundColor: mapBoxToColor(box["name"]) }}>
+                        <div
+                            className="order-list-box-bar"
+                            style={{
+                                backgroundColor: mapBoxToColor(box["name"]),
+                            }}
+                        >
                             {index + 1}
                         </div>
 
                         <div className="order-list-box-rows ">
                             <div
                                 className="order-list-box-top-row"
-                                style={{ height: this.state.showDetailsIndex !== index ? "100%" : "50%" }}
+                                style={{
+                                    height:
+                                        this.state.showDetailsIndex !== index
+                                            ? "100%"
+                                            : "50%",
+                                }}
                             >
                                 <div className="order-list-box-info">
                                     {"BOX " + box.name}
                                     {box.quantity > 1 && (
-                                        <span style={{ color: "red", marginLeft: "15px", fontWeight: "500" }}>
+                                        <span
+                                            style={{
+                                                color: "red",
+                                                marginLeft: "15px",
+                                                fontWeight: "500",
+                                            }}
+                                        >
                                             {"x" + box.quantity}
                                         </span>
                                     )}
@@ -141,26 +166,39 @@ class BoxList extends React.Component {
                                     <button
                                         type="button"
                                         className="btn btn-danger btn-sm"
-                                        onClick={(e) => this.removeBox(e, index)}
+                                        onClick={(e) =>
+                                            this.removeBox(e, index)
+                                        }
                                     >
-                                        <FontAwesomeIcon icon="times" size="lg" />
+                                        <FontAwesomeIcon
+                                            icon="times"
+                                            size="lg"
+                                        />
                                     </button>
                                 </div>
                             </div>
                             {this.state.showDetailsIndex === index && (
                                 <div className="order-list-box-details ">
                                     <div className="order-list-box-details-info">
-                                        <div className="order-list-box-details-info-top">Width</div>
-                                        <div className="order-list-box-details-info-bottom">{box["width"] + " in"}</div>
+                                        <div className="order-list-box-details-info-top">
+                                            Width
+                                        </div>
+                                        <div className="order-list-box-details-info-bottom">
+                                            {box["width"] + " in"}
+                                        </div>
                                     </div>
                                     <div className="order-list-box-details-info">
-                                        <div className="order-list-box-details-info-top">Height</div>
+                                        <div className="order-list-box-details-info-top">
+                                            Height
+                                        </div>
                                         <div className="order-list-box-details-info-bottom">
                                             {box["height"] + " in"}
                                         </div>
                                     </div>
                                     <div className="order-list-box-details-info">
-                                        <div className="order-list-box-details-info-top">Weight</div>
+                                        <div className="order-list-box-details-info-top">
+                                            Weight
+                                        </div>
                                         <div className="order-list-box-details-info-bottom">
                                             {box["weight"] + " lb"}
                                         </div>
@@ -175,21 +213,30 @@ class BoxList extends React.Component {
     };
 
     updateDropdown = (boxSize) => {
-        let boxSizeToQuantity = { "1": 5, "2": 5, "3": 3, "4": 2, "5": 3 };
+        let boxSizeToQuantity = { 1: 5, 2: 5, 3: 3, 4: 2, 5: 3 };
         let boxQuantity = 0;
         if (boxSize["val"] === "CUSTOM") {
             boxQuantity = 2;
         } else {
             boxQuantity = boxSizeToQuantity[boxSize["val"]];
         }
-        this.setState({ boxSize: boxSize, boxQuantity: boxQuantity, boxQuantityField: null });
+        this.setState({
+            boxSize: boxSize,
+            boxQuantity: boxQuantity,
+            boxQuantityField: null,
+        });
     };
 
     getAddNewBox = () => {
-        let color = this.state.boxSize ? mapBoxToColor(this.state.boxSize["text"]) : "#808080";
+        let color = this.state.boxSize
+            ? mapBoxToColor(this.state.boxSize["text"])
+            : "#808080";
         return (
             <div className="order-list-add-new-box">
-                <div className="order-list-box-bar" style={{ backgroundColor: color }}>
+                <div
+                    className="order-list-box-bar"
+                    style={{ backgroundColor: color }}
+                >
                     {this.props.boxes.length + 1}
                 </div>
                 <div className="order-list-add-new-box-inside">
@@ -197,10 +244,18 @@ class BoxList extends React.Component {
                     {this.getBoxQuantity()}
                 </div>
                 <div className="order-list-add-new-box-btn">
-                    <button type="button" className="btn btn-success btn-sm btn-block" onClick={this.confirmAddBox}>
+                    <button
+                        type="button"
+                        className="btn btn-success btn-sm btn-block"
+                        onClick={this.confirmAddBox}
+                    >
                         Confirm
                     </button>
-                    <button type="button" className="btn btn-danger btn-sm btn-block" onClick={() => this.hideAddBox()}>
+                    <button
+                        type="button"
+                        className="btn btn-danger btn-sm btn-block"
+                        onClick={() => this.hideAddBox()}
+                    >
                         Cancel
                     </button>
                 </div>
@@ -220,13 +275,22 @@ class BoxList extends React.Component {
 
         return (
             <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm">
-                    {this.state.boxSize ? "Box " + this.state.boxSize["text"] : "Box Size"}
+                <Dropdown.Toggle
+                    variant="secondary"
+                    id="dropdown-basic"
+                    size="sm"
+                >
+                    {this.state.boxSize
+                        ? "Box " + this.state.boxSize["text"]
+                        : "Box Size"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
                     {boxSizes.map((boxSize, i) => (
-                        <Dropdown.Item key={i} onClick={() => this.updateDropdown(boxSize)}>
+                        <Dropdown.Item
+                            key={i}
+                            onClick={() => this.updateDropdown(boxSize)}
+                        >
                             {"Box " + boxSize["text"]}
                         </Dropdown.Item>
                     ))}
@@ -238,14 +302,24 @@ class BoxList extends React.Component {
     getBoxQuantity = () => {
         return (
             <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm" className="test1111">
-                    {this.state.boxQuantityField ? "Quantity " + this.state.boxQuantityField : "Box Quantity"}
+                <Dropdown.Toggle
+                    variant="secondary"
+                    id="dropdown-basic"
+                    size="sm"
+                    className="test1111"
+                >
+                    {this.state.boxQuantityField
+                        ? "Quantity " + this.state.boxQuantityField
+                        : "Box Quantity"}
                 </Dropdown.Toggle>
 
                 {this.state.boxQuantity && (
                     <Dropdown.Menu>
                         {[...Array(this.state.boxQuantity).keys()].map((i) => (
-                            <Dropdown.Item key={i} onClick={() => this.updateBoxQuantity(i + 1)}>
+                            <Dropdown.Item
+                                key={i}
+                                onClick={() => this.updateBoxQuantity(i + 1)}
+                            >
                                 {"Quantity " + (i + 1)}
                             </Dropdown.Item>
                         ))}
@@ -285,7 +359,9 @@ class BoxList extends React.Component {
                             <button
                                 type="button"
                                 className="btn btn-secondary btn-sm btn-block"
-                                onClick={() => this.setState({ showAddBox: true })}
+                                onClick={() =>
+                                    this.setState({ showAddBox: true })
+                                }
                             >
                                 Add Box
                             </button>
@@ -335,7 +411,12 @@ class BoxList extends React.Component {
                 </ButtonGroup>
 
                 <div className="order-list-print-btn">
-                    <Button variant="secondary" onClick={this.printLabels} block>
+                    <Button
+                        variant="secondary"
+                        onClick={this.printLabels}
+                        disabled={this.state.fetchingLabels}
+                        block
+                    >
                         {this.state.fetchingLabels && (
                             <Spinner
                                 as="span"

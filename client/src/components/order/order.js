@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Spinner } from "react-bootstrap";
 
 import {
     addBoxes,
@@ -13,7 +12,9 @@ import {
 import BoxList from "../boxList/boxList.js";
 import LayoutContainer from "../layoutContainer/layoutContainer.js";
 
-import "./order.css";
+import Spinner from "../Spinner/Spinner.js";
+
+import "./order.scss";
 
 class Order extends React.Component {
     constructor(props) {
@@ -64,6 +65,7 @@ class Order extends React.Component {
                 return response.json();
             })
             .then((response) => {
+                console.log(response);
                 if (this.props.match.params.id !== orderId) return;
                 let boxes = [];
                 for (let obj of response.boxes) {

@@ -89,6 +89,7 @@ def get_order(id):
         raise InvalidUsage('Order {} not found'.format(id), status_code=400)
 
     boxes = packing_algo(order.data)
+    boxes["original"] = order.data["boxes"]
     response = jsonify(boxes)
     return response
 
@@ -122,7 +123,6 @@ def create_order():
     
     order = request.json
     Orders.create_order(order['order'])
-    print(order['order']["boxes"], flush=True)
 
     status = {'status': 'ok'}
     response = jsonify(status)

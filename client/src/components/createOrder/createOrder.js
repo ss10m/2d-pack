@@ -10,6 +10,8 @@ import {
     Dropdown,
 } from "react-bootstrap";
 
+import { boxColors, items, boxes } from "../../helpers";
+
 import "./createOrder.scss";
 
 class CreateOrder extends React.Component {
@@ -17,40 +19,8 @@ class CreateOrder extends React.Component {
         super(props);
 
         this.state = {
-            items3: [],
-            items: [
-                {
-                    url: "https://i.imgur.com/j9HWSmS.jpeg",
-                    width: 24,
-                    height: 16,
-                    id: 200458,
-                    color: "red",
-                    product: "",
-                },
-                {
-                    url: "https://i.imgur.com/ZWGeI3I.jpg",
-                    width: 36,
-                    height: 12,
-                    id: 200457,
-                    color: "blue",
-                    product: "",
-                },
-                {
-                    url: "https://i.imgur.com/4PoTjBe.jpg",
-                    width: 12,
-                    height: 8,
-                    id: 200456,
-                    color: "yellow",
-                    product: "",
-                },
-            ],
-            boxes: [
-                { name: "Box #1", width: 18, height: 13, weight: 2 },
-                { name: "Box #2", width: 25, height: 19, weight: 4 },
-                { name: "Box #3", width: 37, height: 25, weight: 6 },
-                { name: "Box #4", width: 47, height: 34, weight: 8 },
-                { name: "Box #5", width: 52, height: 42, weight: 10 },
-            ],
+            items,
+            boxes,
             recentOrders: null,
             showAddItems: false,
             showAddBoxes: false,
@@ -313,6 +283,10 @@ class CreateOrder extends React.Component {
             boxes.forEach((box, index) => {
                 ret.push(
                     <div className="box" key={index}>
+                        <div
+                            className="indicator"
+                            style={{ backgroundColor: box.color }}
+                        />
                         <div className="name">{box.name}</div>
                         <div className="dimensions">
                             <div>WIDTH</div>
@@ -340,6 +314,7 @@ class CreateOrder extends React.Component {
     };
 
     getBoxesAddBox = () => {
+        if (this.state.boxes.length >= 7) return;
         return (
             <div className="add-box" key="addBox">
                 <InputGroup size="sm">
@@ -421,10 +396,18 @@ class CreateOrder extends React.Component {
             name: boxName,
             width: parseInt(width),
             height: parseInt(height),
+            color: this.getUniqueBoxColor(),
         };
         const boxes = [...this.state.boxes, newBox];
 
         this.setState({ showAddBoxes: false, boxes });
+    };
+
+    getUniqueBoxColor = () => {
+        let current = new Set();
+        this.state.boxes.forEach((box) => current.add(box.color));
+        let unique = boxColors.filter((color) => !current.has(color));
+        return unique[Math.floor(Math.random() * unique.length)];
     };
 
     removeBox = (box) => {
@@ -438,11 +421,7 @@ class CreateOrder extends React.Component {
         if (recentOrders === null) {
             return (
                 <div className="empty-orders">
-                    <Spinner
-                        animation="border"
-                        role="status"
-                        variant="secondary"
-                    >
+                    <Spinner animation="border" role="status" variant="dark">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 </div>

@@ -35,9 +35,11 @@ const boxesReducer = (state = [], action) => {
         case ADD_BOXES:
             return [...action.boxes];
         case REMOVE_BOX:
-            var a = state.filter((box) => box.id !== action.id);
-            console.log(a);
-            return a;
+            let index = action.id;
+            console.log("INDEX1: " + index);
+            if (index < 0 || index >= state.length) return state;
+            console.log("INDEX2: " + index);
+            return [...state.slice(0, index), ...state.slice(index + 1)];
         case CLEAR_BOXES:
             return [];
         default:

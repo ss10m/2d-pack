@@ -184,7 +184,6 @@ def generate_JSON(order_id, boxes, id_to_item):
         for item in box_data['bin']:
             b, x, y, w, h, rid = item
             original_item = id_to_item[rid]
-            print(original_item, flush=True)
             color = original_item['color']
             item_json = {
                 "id": rid,

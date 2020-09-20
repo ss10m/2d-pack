@@ -37,7 +37,14 @@ const NavBar = (props) => {
                             />
                         </div>
                     )}
+
                     <Link to="/" className="title">
+                        <FontAwesomeIcon
+                            icon="cubes"
+                            size="1x"
+                            className="cubes"
+                            onClick={props.toggleNavbar}
+                        />
                         2D-PACK
                     </Link>
                 </div>

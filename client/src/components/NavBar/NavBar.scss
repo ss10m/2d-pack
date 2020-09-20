@@ -39,6 +39,10 @@
                 &:hover {
                     color: whitesmoke;
                 }
+
+                .cubes {
+                    margin-right: 5px;
+                }
             }
         }
 
@@ -89,7 +93,7 @@
         height: 100%;
         box-sizing: border-box;
         border-radius: 7px 0 0 7px;
-        font-size: 24px;
+        font-size: 22px;
         color: #cecece;
         width: 45px;
         background-color: #505050;

@@ -230,13 +230,17 @@
     .box {
         height: 60px;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         border-bottom: 1px solid #f1f1f1;
 
         div {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .indicator {
+            width: 10px;
         }
 
         .name {
@@ -263,6 +267,7 @@
 
         .remove-btn {
             width: 70px;
+            margin-right: 15px;
 
             button {
                 border: none;
