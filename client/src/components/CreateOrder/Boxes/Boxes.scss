@@ -1,0 +1,156 @@
+.create-order-boxes {
+    grid-area: boxes;
+    border-radius: 5pt;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 0px 2px 1px #80808030;
+
+    display: flex;
+    flex-direction: column;
+
+    .icon-color {
+        color: #ad8762;
+    }
+
+    .empty-boxes {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon-color {
+            color: #6b767c;
+            &:hover {
+                cursor: pointer;
+                color: #5a6268;
+            }
+        }
+    }
+
+    .box {
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #f1f1f1;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .indicator {
+            width: 10px;
+        }
+
+        .name {
+            width: 80px;
+            overflow: hidden;
+            font-size: 20px;
+        }
+
+        .dimensions {
+            width: 65px;
+            display: flex;
+            flex-direction: column;
+
+            div:first-child {
+                font-size: 12px;
+            }
+
+            div:nth-child(2) {
+                font-size: 16px;
+                font-weight: bold;
+                color: #3f4964;
+            }
+        }
+
+        .remove-btn {
+            width: 70px;
+            margin-right: 15px;
+
+            button {
+                border: none;
+                padding: 2px 5px;
+                border-radius: 5pt;
+            }
+        }
+    }
+
+    .add-box {
+        height: 150px;
+        padding: 0 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #dbdbdb;
+
+        .input-fields {
+            display: flex;
+            justify-content: space-between;
+
+            > div {
+                flex: 0 1 47%;
+            }
+
+            .text-field {
+                width: 58px;
+            }
+        }
+
+        .control-btns {
+            display: flex;
+            justify-content: center;
+
+            button {
+                margin: 0 5px;
+                width: 65px;
+                border-radius: 5pt;
+            }
+        }
+    }
+}
+
+.create-order-header {
+    height: 47px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 5pt 5pt 0 0;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-title {
+        width: 200px;
+        font-size: 24px;
+        font-weight: 300;
+        color: #343a40;
+
+        span {
+            padding-left: 10px;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 20px;
+        }
+    }
+
+    .opt-btn {
+        width: 100px;
+        position: relative;
+
+        button {
+            float: right;
+            position: absolute;
+            right: 15px;
+        }
+    }
+}

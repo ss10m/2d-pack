@@ -21,11 +21,14 @@ class LayoutContainer extends React.Component {
         this.props.items.forEach((items, i) => {
             canvasHeight =
                 (items["box"].height / items["box"].width) * canvasWidth;
+            let name = items["box"]["name"];
+            let height = items["box"]["height"];
+            let width = items["box"]["width"];
+
             ret.push(
                 <div className="order-box" key={items["box_index"]}>
                     <div className="order-box-title">
-                        Box {items["box"]["name"]} [{items["box"]["width"]} in x{" "}
-                        {items["box"]["height"]} in] 1 of 1
+                        {`${name} [${width} in x ${height} in] 1 of 1`}
                     </div>
                     <div
                         className="order-wrapper"

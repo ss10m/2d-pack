@@ -11,7 +11,7 @@ import NavBar from "./components/NavBar/NavBarContainer.js";
 import ToastCustom from "./components/toast/toast.js";
 import ZoomModal from "./components/zoomModal/zoomModal.js";
 import Order from "./components/order/order.js";
-import CreateOrder from "./components/createOrder/createOrder.js";
+import CreateOrder from "./components/CreateOrder/CreateOrderContainer";
 import WindowSize from "./components/WindowSize/WindowSize.js";
 
 class App extends React.Component {

@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import missingImg from "./missingImg.jpeg";
+
 import {
     addBoxes,
     clearBoxes,
@@ -24,6 +26,7 @@ class Order extends React.Component {
             isLoaded: false,
             imgCount: 0,
             totalImages: 0,
+            availableBoxes: [],
         };
     }
 
@@ -41,6 +44,7 @@ class Order extends React.Component {
                 isLoaded: false,
                 imgCount: 0,
                 totalImages: 0,
+                availableBoxes: [],
             });
             this.fetchBoxes();
         }
@@ -75,6 +79,7 @@ class Order extends React.Component {
                 this.props.dispatch(addItems(response.boxes));
                 this.setState({
                     isLoaded: true,
+                    availableBoxes: response.original,
                 });
                 this.cacheImages(response.boxes);
             })
@@ -95,18 +100,30 @@ class Order extends React.Component {
             box["items"].forEach((item) => {
                 const image = new window.Image();
                 image.src = item["url"];
+                //if (Math.random() < 0.2) image.src = "35252";
                 image.onload = () => {
+                    console.log("LOADED");
                     item.img = image;
                     this.setState({
                         imgCount: this.state.imgCount + 1,
                     });
+                };
+                image.onerror = () => {
+                    console.log("ERROR");
+                    image.src = missingImg;
                 };
             });
         });
     };
 
     render() {
-        const { error, isLoaded, imgCount, totalImages } = this.state;
+        const {
+            error,
+            isLoaded,
+            imgCount,
+            totalImages,
+            availableBoxes,
+        } = this.state;
         if (error) {
             return <div>{error}</div>;
         } else if (!isLoaded) {
@@ -128,7 +145,7 @@ class Order extends React.Component {
             return (
                 <div className="order-container">
                     <div className="order">
-                        <BoxList />
+                        <BoxList availableBoxes={availableBoxes} />
                         <LayoutContainer />
                     </div>
                 </div>

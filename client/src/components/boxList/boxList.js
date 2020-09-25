@@ -17,7 +17,6 @@ class BoxList extends React.Component {
             showAddBox: false,
             boxSize: null,
             boxQuantity: null,
-            boxQuantityField: null,
             showDetailsIndex: -1,
             fetchingLabels: false,
         };
@@ -36,21 +35,22 @@ class BoxList extends React.Component {
             showAddBox: false,
             boxSize: null,
             boxQuantity: null,
-            boxQuantityField: null,
         });
     };
 
     confirmAddBox = () => {
-        if (!this.state.boxSize || !this.state.boxQuantityField) return;
+        if (!this.state.boxSize || !this.state.boxQuantity) return;
         let last_id = 0;
         if (this.props.boxes.length > 0) {
             last_id = this.props.boxes[this.props.boxes.length - 1].id + 1;
         }
 
-        let box = mapBoxNameToObject(this.state.boxSize["text"]);
+        let box = this.state.boxSize;
         box["weight"] = 10;
-        box["quantity"] = this.state.boxQuantityField;
+        box["quantity"] = this.state.boxQuantity;
         box["id"] = last_id;
+
+        console.log(box);
 
         this.props.dispatch(addBox(box));
         this.hideAddBox();
@@ -132,7 +132,7 @@ class BoxList extends React.Component {
                         <div
                             className="order-list-box-bar"
                             style={{
-                                backgroundColor: mapBoxToColor(box["name"]),
+                                backgroundColor: box.color,
                             }}
                         >
                             {index + 1}
@@ -149,7 +149,7 @@ class BoxList extends React.Component {
                                 }}
                             >
                                 <div className="order-list-box-info">
-                                    {"BOX " + box.name}
+                                    {box.name}
                                     {box.quantity > 1 && (
                                         <span
                                             style={{
@@ -213,24 +213,14 @@ class BoxList extends React.Component {
     };
 
     updateDropdown = (boxSize) => {
-        let boxSizeToQuantity = { 1: 5, 2: 5, 3: 3, 4: 2, 5: 3 };
-        let boxQuantity = 0;
-        if (boxSize["val"] === "CUSTOM") {
-            boxQuantity = 2;
-        } else {
-            boxQuantity = boxSizeToQuantity[boxSize["val"]];
-        }
         this.setState({
-            boxSize: boxSize,
-            boxQuantity: boxQuantity,
-            boxQuantityField: null,
+            boxSize,
         });
     };
 
     getAddNewBox = () => {
-        let color = this.state.boxSize
-            ? mapBoxToColor(this.state.boxSize["text"])
-            : "#808080";
+        console.log(this.state.boxSize);
+        let color = this.state.boxSize ? this.state.boxSize.color : "#808080";
         return (
             <div className="order-list-add-new-box">
                 <div
@@ -254,7 +244,7 @@ class BoxList extends React.Component {
                     <button
                         type="button"
                         className="btn btn-danger btn-sm btn-block"
-                        onClick={() => this.hideAddBox()}
+                        onClick={this.hideAddBox}
                     >
                         Cancel
                     </button>
@@ -264,15 +254,7 @@ class BoxList extends React.Component {
     };
 
     getBoxSizes = () => {
-        let boxSizes = [
-            { val: "1", text: "#1" },
-            { val: "2", text: "#2" },
-            { val: "3", text: "#3" },
-            { val: "4", text: "#4" },
-            { val: "5", text: "#5" },
-            { val: "CUSTOM", text: "CUSTOM" },
-        ];
-
+        let { availableBoxes } = this.props;
         return (
             <Dropdown>
                 <Dropdown.Toggle
@@ -280,18 +262,16 @@ class BoxList extends React.Component {
                     id="dropdown-basic"
                     size="sm"
                 >
-                    {this.state.boxSize
-                        ? "Box " + this.state.boxSize["text"]
-                        : "Box Size"}
+                    {this.state.boxSize ? this.state.boxSize.name : "Box Size"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {boxSizes.map((boxSize, i) => (
+                    {availableBoxes.map((boxSize, i) => (
                         <Dropdown.Item
                             key={i}
                             onClick={() => this.updateDropdown(boxSize)}
                         >
-                            {"Box " + boxSize["text"]}
+                            {boxSize.name}
                         </Dropdown.Item>
                     ))}
                 </Dropdown.Menu>
@@ -308,29 +288,26 @@ class BoxList extends React.Component {
                     size="sm"
                     className="test1111"
                 >
-                    {this.state.boxQuantityField
-                        ? "Quantity " + this.state.boxQuantityField
+                    {this.state.boxQuantity
+                        ? "Quantity " + this.state.boxQuantity
                         : "Box Quantity"}
                 </Dropdown.Toggle>
-
-                {this.state.boxQuantity && (
-                    <Dropdown.Menu>
-                        {[...Array(this.state.boxQuantity).keys()].map((i) => (
-                            <Dropdown.Item
-                                key={i}
-                                onClick={() => this.updateBoxQuantity(i + 1)}
-                            >
-                                {"Quantity " + (i + 1)}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                )}
+                <Dropdown.Menu>
+                    {[...Array(10).keys()].map((i) => (
+                        <Dropdown.Item
+                            key={i + 1}
+                            onClick={() => this.updateBoxQuantity(i + 1)}
+                        >
+                            {"Quantity " + (i + 1)}
+                        </Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
             </Dropdown>
         );
     };
 
     updateBoxQuantity = (boxQuantity) => {
-        this.setState({ boxQuantityField: boxQuantity });
+        this.setState({ boxQuantity: boxQuantity });
     };
 
     onCarrierChange = (option) => {
@@ -435,78 +412,10 @@ class BoxList extends React.Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(BoxList));
-
-function mapBoxToColor(boxSize) {
-    switch (boxSize) {
-        case "#1":
-            return "#ffff00";
-        case "#2":
-            return "#ff0000"; //red
-        case "#3":
-            return "#0000ff"; //blue
-        case "#4":
-            return "#008000"; //green
-        case "#5":
-            return "#eb4596"; //purple
-        case "CUSTOM":
-            return "orange"; //orange
-        default:
-            return "#808080"; //grey
-    }
-}
-
-function mapBoxNameToObject(boxName) {
-    let boxObjects = {
-        "#1": {
-            width: 18,
-            height: 13,
-            name: "#1",
-            quantity: 1,
-            weight: 0,
-        },
-        "#2": {
-            width: 25,
-            height: 19,
-            name: "#2",
-            quantity: 1,
-            weight: 0,
-        },
-        "#3": {
-            width: 37,
-            height: 25,
-            name: "#3",
-            quantity: 1,
-            weight: 0,
-        },
-        "#4": {
-            width: 47,
-            height: 34,
-            name: "#4",
-            quantity: 1,
-            weight: 0,
-        },
-        "#5": {
-            width: 52,
-            height: 42,
-            name: "#5",
-            quantity: 1,
-            weight: 0,
-        },
-        CUSTOM: {
-            width: 0,
-            height: 0,
-            name: "CUSTOM",
-            quantity: 1,
-            weight: 0,
-        },
-    };
-
-    return boxObjects[boxName];
-}
-
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         boxes: state.boxes,
     };
-}
+};
+
+export default withRouter(connect(mapStateToProps)(BoxList));

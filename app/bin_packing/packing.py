@@ -187,7 +187,6 @@ def generate_JSON(order_id, boxes, id_to_item):
             color = original_item['color']
             item_json = {
                 "id": rid,
-                "product": original_item['product'],
                 "width": w,
                 "height": h,
                 "x": x,
