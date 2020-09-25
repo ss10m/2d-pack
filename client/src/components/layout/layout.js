@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Rect, Text, Label, Tag } from "react-konva";
 
-import LayoutImage from "../layoutImage/layoutImage.js";
+import LayoutImage from "components/layoutImage/layoutImage.js";
 
 class Layout extends React.Component {
     drawLayout = () => {
@@ -10,7 +10,11 @@ class Layout extends React.Component {
         const canvasHeight = this.props.canvasHeight;
         const boxWidth = items["box"].width;
         const boxHeight = items["box"].height;
-        const { offsetX, offsetY } = this.calculcateOffsets(items, canvasWidth, canvasHeight);
+        const { offsetX, offsetY } = this.calculcateOffsets(
+            items,
+            canvasWidth,
+            canvasHeight
+        );
 
         let ret = [];
         for (let item of items["items"]) {
@@ -40,8 +44,18 @@ class Layout extends React.Component {
                         y={canvasHeight * (item.y / boxHeight) + offsetY + 5}
                         preventDefault={false}
                     >
-                        <Tag fill="black" shadowColor="black" preventDefault={false} />
-                        <Text text={item.id} fontSize={16} padding={3} fill="white" preventDefault={false} />
+                        <Tag
+                            fill="black"
+                            shadowColor="black"
+                            preventDefault={false}
+                        />
+                        <Text
+                            text={item.id}
+                            fontSize={16}
+                            padding={3}
+                            fill="white"
+                            preventDefault={false}
+                        />
                     </Label>
                 </Fragment>
             );
@@ -58,8 +72,16 @@ class Layout extends React.Component {
             if (item.y + item.height > maxPosY) maxPosY = item.y + item.height;
         });
 
-        let offsetX = Math.round((((currentBox.box.width - maxPosX) / currentBox.box.width) * canvasWidth) / 2);
-        let offsetY = Math.round((((currentBox.box.height - maxPosY) / currentBox.box.height) * canvasHeight) / 2);
+        let offsetX = Math.round(
+            (((currentBox.box.width - maxPosX) / currentBox.box.width) *
+                canvasWidth) /
+                2
+        );
+        let offsetY = Math.round(
+            (((currentBox.box.height - maxPosY) / currentBox.box.height) *
+                canvasHeight) /
+                2
+        );
 
         return { offsetX: offsetX, offsetY: offsetY };
     };

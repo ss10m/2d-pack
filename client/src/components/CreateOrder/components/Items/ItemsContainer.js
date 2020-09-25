@@ -2,7 +2,7 @@ import React from "react";
 
 import Items from "./Items";
 
-import { itemOutlineColors, isNumeric, getRandomImg } from "../../../helpers";
+import { itemOutlineColors, isNumeric, getRandomImg } from "helpers";
 
 class ItemsContainer extends React.Component {
     constructor(props) {

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
-import { setNavbar, toggleNavbar } from "../../store/actions";
+import { setNavbar, toggleNavbar } from "store/actions";
 
 // Components
 import NavBar from "./NavBar.js";

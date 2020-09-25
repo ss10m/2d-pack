@@ -4,17 +4,12 @@ import { connect } from "react-redux";
 
 import missingImg from "./missingImg.jpeg";
 
-import {
-    addBoxes,
-    clearBoxes,
-    addItems,
-    clearItems,
-} from "../../store/actions";
+import { addBoxes, clearBoxes, addItems, clearItems } from "store/actions";
 
-import BoxList from "../boxList/boxList.js";
-import LayoutContainer from "../layoutContainer/layoutContainer.js";
+import BoxList from "components/boxList/boxList.js";
+import LayoutContainer from "components/layoutContainer/layoutContainer.js";
 
-import Spinner from "../Spinner/Spinner.js";
+import Spinner from "components/Spinner/Spinner.js";
 
 import "./order.scss";
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import Boxes from "./Boxes.js";
 
-import { boxColors, isNumeric } from "../../../helpers";
+import { boxColors, isNumeric } from "helpers";
 
 class BoxesContainer extends React.Component {
     constructor(props) {

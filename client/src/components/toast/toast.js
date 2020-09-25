@@ -3,7 +3,7 @@ import { Toast } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { removeToast } from "../../store/actions";
+import { removeToast } from "store/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,9 +16,17 @@ class ToastCustom extends React.Component {
 
     getToasts = () => {
         var toasts = this.props.toasts.map((toast, index) => (
-            <Toast key={index} onClose={() => this.removeToast(toast)} className="toastAnimation">
+            <Toast
+                key={index}
+                onClose={() => this.removeToast(toast)}
+                className="toastAnimation"
+            >
                 <Toast.Header>
-                    <div className={"toast-box rounded mr-2 toast-box-" + toast.type} />
+                    <div
+                        className={
+                            "toast-box rounded mr-2 toast-box-" + toast.type
+                        }
+                    />
                     <strong className="mr-auto">{toast.title}</strong>
                 </Toast.Header>
                 <Toast.Body>{toast.msg}</Toast.Body>

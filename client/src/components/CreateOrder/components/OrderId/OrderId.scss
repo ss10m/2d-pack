@@ -1,0 +1,13 @@
+.create-order-id {
+    grid-area: id;
+    display: flex;
+    justify-content: space-between;
+
+    .order-id {
+        width: 67%;
+    }
+
+    .order-btn {
+        width: 30%;
+    }
+}

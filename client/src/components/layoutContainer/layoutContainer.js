@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import { Stage, Layer } from "react-konva";
 import { connect } from "react-redux";
 
-import { showZoom } from "../../store/actions";
+import { showZoom } from "store/actions";
 
-import Layout from "../layout/layout.js";
+import Layout from "components/layout/layout.js";
 import "./layoutContainer.css";
 
 class LayoutContainer extends React.Component {

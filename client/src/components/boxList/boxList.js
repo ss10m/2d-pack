@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
-import { addBox, removeBox, showToast } from "../../store/actions";
+import { addBox, removeBox, showToast } from "store/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

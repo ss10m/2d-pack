@@ -3,7 +3,7 @@ import { Component } from "react";
 
 // Redux
 import { connect } from "react-redux";
-import { updateWindowSize } from "../../store/actions.js";
+import { updateWindowSize } from "store/actions.js";
 
 class WindowSize extends Component {
     componentDidMount() {
