@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { nanoid } from "nanoid";
 
 const UPDATE_WINDOW_SIZE = "UPDATE_WINDOW_SIZE";
 const windowSizeReducer = (state = 0, action) => {
@@ -60,16 +61,15 @@ const itemsReducer = (state = [], action) => {
     }
 };
 
-const ADD_TOAST = "ADD_TOAST";
-const REMOVE_TOAST = "REMOVE_TOAST";
-const toastsReducer = (state = [], action) => {
+const ADD_NOTIFICATION = "ADD_NOTIFICATION";
+const REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION";
+const notificationsReducer = (state = [], action) => {
     switch (action.type) {
-        case ADD_TOAST:
-            return [...state, action.toast];
-        case REMOVE_TOAST:
-            return state.filter(
-                (currentToast) => currentToast !== action.toast
-            );
+        case ADD_NOTIFICATION:
+            let notification = { id: nanoid(7), ...action.notification };
+            return [notification, ...state];
+        case REMOVE_NOTIFICATION:
+            return state.filter((notification) => notification.id !== action.id);
         default:
             return state;
     }
@@ -93,6 +93,6 @@ export default combineReducers({
     navbarExpanded: navbarReducer,
     boxes: boxesReducer,
     items: itemsReducer,
-    toasts: toastsReducer,
+    notifications: notificationsReducer,
     zoomIn: zoomInReducer,
 });

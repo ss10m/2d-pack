@@ -12,6 +12,7 @@
         "bootstrap": "^4.5.0",
         "classnames": "^2.2.6",
         "konva": "^6.0.0",
+        "nanoid": "^3.1.12",
         "node-sass": "^4.14.1",
         "react": "^16.13.1",
         "react-bootstrap": "^1.0.1",

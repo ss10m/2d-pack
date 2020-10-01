@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import missingImg from "./missingImg.jpeg";
 
-import { addBoxes, clearBoxes, addItems, clearItems } from "store/actions";
+import { addBoxes, clearBoxes, addItems, clearItems, addNotification } from "store/actions";
 
 import BoxList from "components/boxList/boxList.js";
 import LayoutContainer from "components/layoutContainer/layoutContainer.js";
@@ -17,7 +17,6 @@ class Order extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
             isLoaded: false,
             imgCount: 0,
             totalImages: 0,
@@ -35,7 +34,6 @@ class Order extends React.Component {
             this.props.dispatch(clearBoxes());
             this.props.dispatch(clearItems());
             this.setState({
-                error: null,
                 isLoaded: false,
                 imgCount: 0,
                 totalImages: 0,
@@ -55,8 +53,16 @@ class Order extends React.Component {
                 if (!response.ok) {
                     if (response.status === 400) {
                         response.json().then((error) => {
-                            this.setState({ error: error.message });
-                            return;
+                            let toast = {
+                                type: "error",
+                                title: "Error",
+                                message: error.message,
+                                duration: 5000,
+                            };
+
+                            // TODO NOTIFICATION
+                            this.props.dispatch(addNotification(toast));
+                            this.props.history.push("/");
                         });
                     }
                     throw Error(response);
@@ -78,7 +84,7 @@ class Order extends React.Component {
                 });
                 this.cacheImages(response.boxes);
             })
-            .catch((error) => this.setState({ error: "unknown error" }));
+            .catch((error) => console.log(error));
     };
 
     cacheImages = (boxes) => {
@@ -99,9 +105,9 @@ class Order extends React.Component {
                 image.onload = () => {
                     console.log("LOADED");
                     item.img = image;
-                    this.setState({
-                        imgCount: this.state.imgCount + 1,
-                    });
+                    this.setState((prevState) => ({
+                        imgCount: prevState.imgCount + 1,
+                    }));
                 };
                 image.onerror = () => {
                     console.log("ERROR");
@@ -112,30 +118,16 @@ class Order extends React.Component {
     };
 
     render() {
-        const {
-            error,
-            isLoaded,
-            imgCount,
-            totalImages,
-            availableBoxes,
-        } = this.state;
-        if (error) {
-            return <div>{error}</div>;
-        } else if (!isLoaded) {
+        const { isLoaded, imgCount, totalImages, availableBoxes } = this.state;
+
+        if (!isLoaded || imgCount !== totalImages) {
             return (
                 <div className="order-spinner">
-                    <Spinner
-                        animation="border"
-                        role="status"
-                        size="xl"
-                        variant="secondary"
-                    >
+                    <Spinner animation="border" role="status" size="xl" variant="secondary">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
                 </div>
             );
-        } else if (imgCount !== totalImages) {
-            return <div>Loading... 2</div>;
         } else {
             return (
                 <div className="order-container">

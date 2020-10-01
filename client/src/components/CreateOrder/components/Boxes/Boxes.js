@@ -84,13 +84,9 @@ const Box = ({ box, index, removeBox }) => {
                 <div>{box.height + " IN"}</div>
             </div>
             <div className="remove-btn">
-                <button
-                    type="button"
-                    className="btn btn-danger btn-sm"
-                    onClick={() => removeBox(box)}
-                >
-                    Remove
-                </button>
+                <div className="icon" onClick={() => removeBox(box)}>
+                    <FontAwesomeIcon icon="times" size="2x" />
+                </div>
             </div>
         </div>
     );

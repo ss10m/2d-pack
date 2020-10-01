@@ -48,9 +48,7 @@ const NavBar = (props) => {
                         2D-PACK
                     </Link>
                 </div>
-                <div className="right">
-                    {props.windowSize >= 500 && searchField}
-                </div>
+                <div className="right">{props.windowSize >= 500 && searchField}</div>
             </div>
             {props.expanded && <div className="bottom">{searchField}</div>}
         </div>
@@ -71,7 +69,6 @@ const SearchInput = ({ handleInputChange, value, onKeyPress, submit }) => {
                 autoComplete="off"
                 onChange={handleInputChange}
                 onKeyPress={onKeyPress}
-                autoFocus
             />
             <button onClick={submit}>Search</button>
         </div>

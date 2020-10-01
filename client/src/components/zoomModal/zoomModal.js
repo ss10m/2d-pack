@@ -87,7 +87,7 @@ class ZoomModal extends React.Component {
         const showArrows = this.props.items.length > 1;
 
         return (
-            <div className="zoom-modal-custom zoom-modal-noselect">
+            <div className="zoom-modal-custom">
                 <div className="zoom-modal" onClick={this.onOutsideClick}>
                     <div
                         className="zoom-modal-btn zoom-modal-btn-close"

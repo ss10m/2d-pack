@@ -23,6 +23,9 @@ import {
     faBars,
     faSearch,
     faCubes,
+    faTimesCircle,
+    faCheckCircle,
+    faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -38,7 +41,10 @@ library.add(
     faPlusCircle,
     faBars,
     faSearch,
-    faCubes
+    faCubes,
+    faTimesCircle,
+    faCheckCircle,
+    faExclamationCircle
 );
 
 const store = createStore(reducers);

@@ -51,17 +51,15 @@ export const removeToast = (toast) => ({
     toast,
 });
 
-export const showToast = (dispatch, toast) => {
-    // Assigning IDs to notifications lets reducer ignore HIDE_NOTIFICATION
-    // for the notification that is not currently visible.
-    // Alternatively, we could store the timeout ID and call
-    // clearTimeout(), but we’d still want to do it in a single place.
-    dispatch(addToast(toast));
+export const addNotification = (notification) => ({
+    type: "ADD_NOTIFICATION",
+    notification,
+});
 
-    setTimeout(() => {
-        dispatch(removeToast(toast));
-    }, toast["timeout"]);
-};
+export const removeNotification = (id) => ({
+    type: "REMOVE_NOTIFICATION",
+    id,
+});
 
 export const showZoom = (index) => ({
     type: "SHOW_ZOOM",

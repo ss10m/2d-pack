@@ -52,11 +52,7 @@ class LayoutContainer extends React.Component {
     };
 
     render() {
-        return (
-            <div className="order-boxes  order-no-select">
-                {this.getBoxes()}
-            </div>
-        );
+        return <div className="order-boxes">{this.getBoxes()}</div>;
     }
 }
 

@@ -7,12 +7,14 @@ import { setNavbar } from "./store/actions";
 
 import "./App.css";
 
+import "animate.css";
+
 import NavBar from "./components/NavBar/NavBarContainer.js";
-import ToastCustom from "./components/toast/toast.js";
 import ZoomModal from "./components/zoomModal/zoomModal.js";
 import Order from "./components/order/order.js";
 import CreateOrder from "./components/CreateOrder/CreateOrderContainer";
 import WindowSize from "./components/WindowSize/WindowSize.js";
+import Notificatons from "./components/Notification/NotificationsContainer";
 
 class App extends React.Component {
     constructor(props) {
@@ -47,12 +49,12 @@ class App extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <div className="app">
+                <div className="app no-select">
                     <WindowSize />
                     <NavBar setOrderId={this.setOrderId} />
 
                     <div className="body" onClick={this.hideNavbar}>
-                        <ToastCustom />
+                        <Notificatons />
                         {this.props.zoomIn != null && <ZoomModal />}
 
                         <Switch>

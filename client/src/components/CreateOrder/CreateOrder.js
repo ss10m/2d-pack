@@ -7,7 +7,7 @@ import RecentOrders from "./components/RecentOrders/RecentOrdersContainer";
 
 const CreateOrder = (props) => {
     return (
-        <div className="create-order-grid create-order-no-select">
+        <div className="create-order-grid">
             <OrderID
                 orderId={props.orderId}
                 updateOrderId={props.updateOrderId}

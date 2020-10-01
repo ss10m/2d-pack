@@ -1,16 +1,8 @@
-const boxColors = [
-    "red",
-    "yellow",
-    "blue",
-    "purple",
-    "green",
-    "orange",
-    "grey",
-];
+export const boxColors = ["red", "yellow", "blue", "purple", "green", "orange", "grey"];
 
-const itemOutlineColors = ["Red", "Yellow", "Blue", "Purple", "Green"];
+export const itemOutlineColors = ["Red", "Yellow", "Blue", "Purple", "Green"];
 
-const items = [
+export const items = [
     {
         url: "https://i.imgur.com/j9HWSmS.jpeg",
         width: 24,
@@ -37,7 +29,7 @@ const items = [
     },
 ];
 
-const boxes = [
+export const boxes = [
     { width: 18, height: 13, weight: 2, color: "red" },
     { width: 25, height: 19, weight: 4, color: "orange" },
     { width: 37, height: 25, weight: 6, color: "blue" },
@@ -45,11 +37,11 @@ const boxes = [
     { width: 52, height: 42, weight: 10, color: "grey" },
 ];
 
-const isNumeric = (n) => {
+export const isNumeric = (n) => {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-const getRandomImg = () => {
+export const getRandomImg = () => {
     let images = [
         "https://i.imgur.com/SeyV6fG.png",
         "https://i.imgur.com/j9HWSmS.jpeg",
@@ -67,4 +59,13 @@ const getRandomImg = () => {
     return images[Math.floor(Math.random() * images.length)];
 };
 
-export { boxColors, items, boxes, itemOutlineColors, isNumeric, getRandomImg };
+export const notificationTypeToIcon = (icon) => {
+    switch (icon) {
+        case "success":
+            return "check-circle";
+        case "error":
+            return "exclamation-circle";
+        default:
+            return null;
+    }
+};

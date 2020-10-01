@@ -23,6 +23,8 @@ class CreateOrderContainer extends React.Component {
 
     updateOrderId = (event) => {
         let value = event.target.value;
+        if (value < 0 || value > 9999999) return;
+        if (value) value = parseInt(value);
         this.setState({ orderId: value });
     };
 
