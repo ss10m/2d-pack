@@ -69,3 +69,22 @@ export const notificationTypeToIcon = (icon) => {
             return null;
     }
 };
+
+export function calculcateOffsets(currentBox, canvasWidth, canvasHeight) {
+    let maxPosX = 0;
+    let maxPosY = 0;
+
+    currentBox["items"].forEach((item) => {
+        if (item.x + item.width > maxPosX) maxPosX = item.x + item.width;
+        if (item.y + item.height > maxPosY) maxPosY = item.y + item.height;
+    });
+
+    let offsetX = Math.round(
+        (((currentBox.box.width - maxPosX) / currentBox.box.width) * canvasWidth) / 2
+    );
+    let offsetY = Math.round(
+        (((currentBox.box.height - maxPosY) / currentBox.box.height) * canvasHeight) / 2
+    );
+
+    return { offsetX: offsetX, offsetY: offsetY };
+}

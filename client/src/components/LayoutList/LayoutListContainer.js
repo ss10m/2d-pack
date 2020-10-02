@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 
 import { showZoom } from "store/actions";
 
-import Layout from "components/layout/layout.js";
-import "./layoutContainer.css";
+import Layout from "components/Layout/Layout";
+import "./LayoutList.css";
 
 class LayoutContainer extends React.Component {
     zoomIn = (index) => {
@@ -19,8 +19,7 @@ class LayoutContainer extends React.Component {
         let ret = [];
 
         this.props.items.forEach((items, i) => {
-            canvasHeight =
-                (items["box"].height / items["box"].width) * canvasWidth;
+            canvasHeight = (items["box"].height / items["box"].width) * canvasWidth;
             let name = items["box"]["name"];
             let height = items["box"]["height"];
             let width = items["box"]["width"];
@@ -30,10 +29,7 @@ class LayoutContainer extends React.Component {
                     <div className="order-box-title">
                         {`${name} [${width} in x ${height} in] 1 of 1`}
                     </div>
-                    <div
-                        className="order-wrapper"
-                        onClick={() => this.zoomIn(i)}
-                    >
+                    <div className="order-wrapper" onClick={() => this.zoomIn(i)}>
                         <Stage width={canvasWidth} height={canvasHeight}>
                             <Layer>
                                 <Layout

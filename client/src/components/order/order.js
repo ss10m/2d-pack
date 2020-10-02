@@ -7,7 +7,7 @@ import missingImg from "./missingImg.jpeg";
 import { addBoxes, clearBoxes, addItems, clearItems, addNotification } from "store/actions";
 
 import BoxList from "components/boxList/boxList.js";
-import LayoutContainer from "components/layoutContainer/layoutContainer.js";
+import LayoutContainer from "components/LayoutList/LayoutListContainer";
 
 import Spinner from "components/Spinner/Spinner.js";
 

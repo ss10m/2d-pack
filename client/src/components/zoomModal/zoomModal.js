@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { hideZoom, showZoom } from "store/actions";
 import { Stage, Layer } from "react-konva";
 
-import Layout from "components/layout/layout.js";
+import Layout from "components/Layout/Layout";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -75,13 +75,11 @@ class ZoomModal extends React.Component {
         const items = this.props.items[index];
 
         let canvasWidth = Math.min(window.innerWidth, 800);
-        let canvasHeight =
-            (items["box"].height / items["box"].width) * canvasWidth;
+        let canvasHeight = (items["box"].height / items["box"].width) * canvasWidth;
 
         if (window.innerHeight - 100 < canvasHeight) {
             canvasHeight = window.innerHeight - 100;
-            canvasWidth =
-                (items["box"].width / items["box"].height) * canvasHeight;
+            canvasWidth = (items["box"].width / items["box"].height) * canvasHeight;
         }
 
         const showArrows = this.props.items.length > 1;
@@ -102,20 +100,14 @@ class ZoomModal extends React.Component {
                                 className="zoom-modal-btn zoom-modal-btn-next"
                                 onClick={() => this.changeItems(NEXT_BOX)}
                             >
-                                <FontAwesomeIcon
-                                    icon="chevron-right"
-                                    size="2x"
-                                />
+                                <FontAwesomeIcon icon="chevron-right" size="2x" />
                             </div>
 
                             <div
                                 className="zoom-modal-btn zoom-modal-btn-previous"
                                 onClick={() => this.changeItems(PREV_BOX)}
                             >
-                                <FontAwesomeIcon
-                                    icon="chevron-left"
-                                    size="2x"
-                                />
+                                <FontAwesomeIcon icon="chevron-left" size="2x" />
                             </div>
                         </>
                     )}
@@ -161,6 +153,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(mapStateToProps, mapDispatchToProps)(ZoomModal)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ZoomModal));
