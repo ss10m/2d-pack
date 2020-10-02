@@ -37,11 +37,11 @@ export const boxes = [
     { width: 52, height: 42, weight: 10, color: "grey" },
 ];
 
-export const isNumeric = (n) => {
+export function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
-};
+}
 
-export const getRandomImg = () => {
+export function getRandomImg() {
     let images = [
         "https://i.imgur.com/SeyV6fG.png",
         "https://i.imgur.com/j9HWSmS.jpeg",
@@ -57,9 +57,9 @@ export const getRandomImg = () => {
         "https://i.imgur.com/baPqZXo.jpg",
     ];
     return images[Math.floor(Math.random() * images.length)];
-};
+}
 
-export const notificationTypeToIcon = (icon) => {
+export function notificationTypeToIcon(icon) {
     switch (icon) {
         case "success":
             return "check-circle";
@@ -68,23 +68,26 @@ export const notificationTypeToIcon = (icon) => {
         default:
             return null;
     }
-};
+}
 
-export function calculcateOffsets(currentBox, canvasWidth, canvasHeight) {
+export function calculcateOffsets(items, box, canvasWidth, canvasHeight) {
     let maxPosX = 0;
     let maxPosY = 0;
 
-    currentBox["items"].forEach((item) => {
+    items.forEach((item) => {
         if (item.x + item.width > maxPosX) maxPosX = item.x + item.width;
         if (item.y + item.height > maxPosY) maxPosY = item.y + item.height;
     });
 
-    let offsetX = Math.round(
-        (((currentBox.box.width - maxPosX) / currentBox.box.width) * canvasWidth) / 2
-    );
-    let offsetY = Math.round(
-        (((currentBox.box.height - maxPosY) / currentBox.box.height) * canvasHeight) / 2
-    );
+    let offsetX = Math.round((((box.width - maxPosX) / box.width) * canvasWidth) / 2);
+    let offsetY = Math.round((((box.height - maxPosY) / box.height) * canvasHeight) / 2);
 
     return { offsetX: offsetX, offsetY: offsetY };
+}
+
+export function parseBoxInfo({ box }) {
+    let name = box.name;
+    let height = box.height;
+    let width = box.width;
+    return `${name} [${width} in x ${height} in] 1 of 1`;
 }

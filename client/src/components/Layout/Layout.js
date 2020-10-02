@@ -1,20 +1,27 @@
+// Libraries & utils
 import React, { Fragment } from "react";
 import { Rect, Image, Text, Label, Tag } from "react-konva";
 
+// Helpers
 import { calculcateOffsets } from "helpers";
 
 function Layout(props) {
-    const { items, canvasWidth, canvasHeight } = props;
-    const boxWidth = items["box"].width;
-    const boxHeight = items["box"].height;
-    const { offsetX, offsetY } = calculcateOffsets(items, canvasWidth, canvasHeight);
+    const {
+        items: { items, box },
+        canvasWidth,
+        canvasHeight,
+    } = props;
+    const boxWidth = box.width;
+    const boxHeight = box.height;
+    const { offsetX, offsetY } = calculcateOffsets(items, box, canvasWidth, canvasHeight);
+    const centerOffset = 5;
+    const sizeOffset = 10;
 
     let ret = [];
-    items.items.forEach((item) => {
+    items.forEach((item) => {
         ret.push(
             <Fragment key={item.id}>
                 <Rect
-                    name="rectange2"
                     x={canvasWidth * (item.x / boxWidth) + offsetX}
                     y={canvasHeight * (item.y / boxHeight) + offsetY}
                     width={canvasWidth * (item.width / boxWidth)}
@@ -27,14 +34,14 @@ function Layout(props) {
                 <Preview
                     src={item.url}
                     img={item.img}
-                    x={canvasWidth * (item.x / boxWidth) + offsetX + 5}
-                    y={canvasHeight * (item.y / boxHeight) + offsetY + 5}
-                    width={canvasWidth * (item.width / boxWidth) - 10}
-                    height={canvasHeight * (item.height / boxHeight) - 10}
+                    x={canvasWidth * (item.x / boxWidth) + offsetX + centerOffset}
+                    y={canvasHeight * (item.y / boxHeight) + offsetY + centerOffset}
+                    width={canvasWidth * (item.width / boxWidth) - sizeOffset}
+                    height={canvasHeight * (item.height / boxHeight) - sizeOffset}
                 />
                 <Label
-                    x={canvasWidth * (item.x / boxWidth) + offsetX + 5}
-                    y={canvasHeight * (item.y / boxHeight) + offsetY + 5}
+                    x={canvasWidth * (item.x / boxWidth) + offsetX + centerOffset}
+                    y={canvasHeight * (item.y / boxHeight) + offsetY + centerOffset}
                     preventDefault={false}
                 >
                     <Tag fill="black" shadowColor="black" preventDefault={false} />

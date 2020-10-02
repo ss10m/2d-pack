@@ -1,0 +1,39 @@
+.order-layouts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 65%;
+    max-width: 1200px;
+    margin-left: 30px;
+
+    @media only screen and (max-width: 992px) {
+        justify-content: center;
+        margin-left: 0;
+    }
+}
+.layout {
+    flex: 0 0 34%;
+    max-width: 700px;
+    margin: 10px;
+    border-radius: 5px;
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        border: 1px solid #dbdbdb;
+        border-bottom: none;
+        border-radius: 3px 3px 0 0;
+        background-color: #f5f5f5;
+    }
+
+    .stage {
+        background-color: #dbdbdb;
+        margin: 0px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

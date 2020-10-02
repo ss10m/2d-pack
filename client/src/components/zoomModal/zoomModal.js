@@ -74,7 +74,7 @@ class ZoomModal extends React.Component {
         const index = this.props.zoomIn;
         const items = this.props.items[index];
 
-        let canvasWidth = Math.min(window.innerWidth, 800);
+        let canvasWidth = Math.min(this.props.windowSize - 50, 800);
         let canvasHeight = (items["box"].height / items["box"].width) * canvasWidth;
 
         if (window.innerHeight - 100 < canvasHeight) {
@@ -112,7 +112,7 @@ class ZoomModal extends React.Component {
                         </>
                     )}
 
-                    <div className="order-box-title">
+                    <div className="zoom-modal-title">
                         Box {items["box"]["name"]} [{items["box"]["width"]} in x{" "}
                         {items["box"]["height"]} in] 1 of 1
                     </div>
@@ -137,6 +137,7 @@ class ZoomModal extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        windowSize: state.windowSize,
         zoomIn: state.zoomIn,
         items: state.items,
     };
