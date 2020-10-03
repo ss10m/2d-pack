@@ -7,7 +7,7 @@ import { addBox, removeBox, addNotification } from "store/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./boxList.css";
+import "./boxList.scss";
 
 class BoxList extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class BoxList extends React.Component {
 
         console.log(box);
 
-        this.props.dispatch(addBox(box));
+        this.props.addBox(box);
         this.hideAddBox();
     };
 
@@ -68,7 +68,7 @@ class BoxList extends React.Component {
             this.setState({ showDetailsIndex: -1 });
         }
 
-        this.props.dispatch(removeBox(id));
+        this.props.removeBox(id);
     };
 
     printLabels = () => {
@@ -138,7 +138,8 @@ class BoxList extends React.Component {
                             <div
                                 className="order-list-box-top-row"
                                 style={{
-                                    height: this.state.showDetailsIndex !== index ? "100%" : "50%",
+                                    height:
+                                        this.state.showDetailsIndex !== index ? "100%" : "50%",
                                 }}
                             >
                                 <div className="order-list-box-info">
@@ -168,7 +169,9 @@ class BoxList extends React.Component {
                             {this.state.showDetailsIndex === index && (
                                 <div className="order-list-box-details ">
                                     <div className="order-list-box-details-info">
-                                        <div className="order-list-box-details-info-top">Width</div>
+                                        <div className="order-list-box-details-info-top">
+                                            Width
+                                        </div>
                                         <div className="order-list-box-details-info-bottom">
                                             {box["width"] + " in"}
                                         </div>
@@ -264,11 +267,16 @@ class BoxList extends React.Component {
                     size="sm"
                     className="test1111"
                 >
-                    {this.state.boxQuantity ? "Quantity " + this.state.boxQuantity : "Box Quantity"}
+                    {this.state.boxQuantity
+                        ? "Quantity " + this.state.boxQuantity
+                        : "Box Quantity"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     {[...Array(10).keys()].map((i) => (
-                        <Dropdown.Item key={i + 1} onClick={() => this.updateBoxQuantity(i + 1)}>
+                        <Dropdown.Item
+                            key={i + 1}
+                            onClick={() => this.updateBoxQuantity(i + 1)}
+                        >
                             {"Quantity " + (i + 1)}
                         </Dropdown.Item>
                     ))}
@@ -297,24 +305,30 @@ class BoxList extends React.Component {
                         </div>
                         {"Order #" + this.props.match.params.id}
                     </div>
-
-                    <div className="order-list-boxes-header">
-                        <div className="order-list-boxes-header-icon">
-                            <FontAwesomeIcon icon="box" size="sm" />
+                    <div
+                        style={{
+                            boxShadow: "0px 0px 2px 1px #80808030",
+                            borderRadius: "5px 5px 0 0",
+                        }}
+                    >
+                        <div className="order-list-boxes-header">
+                            <div className="order-list-boxes-header-icon">
+                                <FontAwesomeIcon icon="box" size="sm" />
+                            </div>
+                            <div className="order-list-boxes-title">Boxes</div>
+                            <div className="order-list-box-btn">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary btn-sm btn-block"
+                                    onClick={() => this.setState({ showAddBox: true })}
+                                >
+                                    Add Box
+                                </button>
+                            </div>
                         </div>
-                        <div className="order-list-boxes-title">Boxes</div>
-                        <div className="order-list-box-btn">
-                            <button
-                                type="button"
-                                className="btn btn-secondary btn-sm btn-block"
-                                onClick={() => this.setState({ showAddBox: true })}
-                            >
-                                Add Box
-                            </button>
-                        </div>
+                        {this.getBoxes()}
+                        {this.state.showAddBox && this.getAddNewBox()}
                     </div>
-                    {this.getBoxes()}
-                    {this.state.showAddBox && this.getAddNewBox()}
                 </div>
 
                 <ButtonGroup className="order-group-toggle">
@@ -390,6 +404,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     addNotification: (notification) => {
         dispatch(addNotification(notification));
+    },
+    addBox: (box) => {
+        dispatch(addBox(box));
+    },
+    removeBox: (id) => {
+        dispatch(removeBox(id));
     },
 });
 

@@ -11,11 +11,14 @@
         margin-left: 0;
     }
 }
-.layout {
+
+.order-layouts .layout {
     flex: 0 0 34%;
     max-width: 700px;
     margin: 10px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 
     .header {
         display: flex;
@@ -26,11 +29,15 @@
         border-bottom: none;
         border-radius: 3px 3px 0 0;
         background-color: #f5f5f5;
+        box-shadow: 0px 0px 2px 1px #80808030;
+        z-index: 1;
     }
 
     .stage {
         background-color: #dbdbdb;
-        margin: 0px;
+        border: 1px solid #cccccc;
+        border-top: none;
+        box-shadow: 0px 0px 2px 1px #80808030;
 
         &:hover {
             cursor: pointer;

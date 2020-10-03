@@ -10,7 +10,7 @@ import "./App.css";
 import "animate.css";
 
 import NavBar from "./components/NavBar/NavBarContainer.js";
-import ZoomModal from "./components/zoomModal/zoomModal.js";
+import ZoomInModal from "./components/ZoomInModal/ZoomInModalContainer";
 import Order from "./components/order/order.js";
 import CreateOrder from "./components/CreateOrder/CreateOrderContainer";
 import WindowSize from "./components/WindowSize/WindowSize.js";
@@ -32,11 +32,6 @@ class App extends React.Component {
         if (this.props.navbarExpanded) this.props.setNavbar(false);
     };
 
-    btnClick = () => {
-        console.log("btn was clicked");
-        console.log(this.props.zoomIn);
-    };
-
     setOrderId = (orderId) => {
         console.log("in main " + orderId);
     };
@@ -55,7 +50,7 @@ class App extends React.Component {
 
                     <div className="body" onClick={this.hideNavbar}>
                         <Notificatons />
-                        {this.props.zoomIn != null && <ZoomModal />}
+                        {this.props.zoomIn != null && <ZoomInModal />}
 
                         <Switch>
                             <Route exact path="/">

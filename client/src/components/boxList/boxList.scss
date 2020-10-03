@@ -52,7 +52,6 @@
 .order-list-box {
     display: flex;
     align-items: center;
-    height: 40px;
     border: solid 1px #dbdbdb;
     border-top: 0;
 }
@@ -110,6 +109,20 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    animation: hide 0.5s;
+
+    @keyframes hide {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }
 
 .grow {

@@ -12,11 +12,14 @@ function LayoutList(props) {
     let { items, canvasWidth, zoomIn } = props;
     let canvasHeight = 0;
     let layouts = [];
+    let totalLayouts = items.length;
     items.forEach((items, i) => {
         canvasHeight = (items.box.height / items.box.width) * canvasWidth;
         layouts.push(
-            <div className="layout" key={items["box_index"]}>
-                <div className="header">{props.parseBoxInfo(items)}</div>
+            <div className="layout" key={i}>
+                <div className="header">
+                    {props.parseBoxInfo(items.box, i + 1, totalLayouts)}
+                </div>
                 <div className="stage" onClick={() => zoomIn(i)}>
                     <Stage width={canvasWidth} height={canvasHeight}>
                         <Layer>

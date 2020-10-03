@@ -81,13 +81,12 @@ export function calculcateOffsets(items, box, canvasWidth, canvasHeight) {
 
     let offsetX = Math.round((((box.width - maxPosX) / box.width) * canvasWidth) / 2);
     let offsetY = Math.round((((box.height - maxPosY) / box.height) * canvasHeight) / 2);
-
-    return { offsetX: offsetX, offsetY: offsetY };
+    return { offsetX, offsetY };
 }
 
-export function parseBoxInfo({ box }) {
+export function parseBoxInfo(box, currentLayout, totalLayouts) {
     let name = box.name;
     let height = box.height;
     let width = box.width;
-    return `${name} [${width} in x ${height} in] 1 of 1`;
+    return `${name} [${width} in x ${height} in] - ${currentLayout} of ${totalLayouts}`;
 }
