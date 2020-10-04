@@ -41,8 +41,9 @@ class BoxList extends React.Component {
     confirmAddBox = () => {
         if (!this.state.boxSize || !this.state.boxQuantity) return;
         let last_id = 0;
-        if (this.props.boxes.length > 0) {
-            last_id = this.props.boxes[this.props.boxes.length - 1].id + 1;
+        let boxes = this.props.boxes.current;
+        if (boxes.length > 0) {
+            last_id = boxes[boxes.length - 1].id + 1;
         }
 
         let box = this.state.boxSize;
@@ -58,7 +59,7 @@ class BoxList extends React.Component {
 
     removeBox = (event, id) => {
         event.stopPropagation();
-        if (id < 0 || id >= this.props.boxes.length) return;
+        if (id < 0 || id >= this.props.boxes.current.length) return;
 
         if (id < this.state.showDetailsIndex) {
             this.setState({
@@ -79,7 +80,7 @@ class BoxList extends React.Component {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ boxes: this.props.boxes }),
+            body: JSON.stringify({ boxes: this.props.boxes.current }),
         })
             .then((res) => res.json())
             .then((res) => {
@@ -116,7 +117,7 @@ class BoxList extends React.Component {
     getBoxes = () => {
         return (
             <div>
-                {this.props.boxes.map((box, index) => (
+                {this.props.boxes.current.map((box, index) => (
                     <div
                         key={index}
                         className="order-list-box grow"
@@ -139,7 +140,9 @@ class BoxList extends React.Component {
                                 className="order-list-box-top-row"
                                 style={{
                                     height:
-                                        this.state.showDetailsIndex !== index ? "100%" : "50%",
+                                        this.state.showDetailsIndex !== index
+                                            ? "100%"
+                                            : "50%",
                                 }}
                             >
                                 <div className="order-list-box-info">
@@ -213,7 +216,7 @@ class BoxList extends React.Component {
         return (
             <div className="order-list-add-new-box">
                 <div className="order-list-box-bar" style={{ backgroundColor: color }}>
-                    {this.props.boxes.length + 1}
+                    {this.props.boxes.current.length + 1}
                 </div>
                 <div className="order-list-add-new-box-inside">
                     {this.getBoxSizes()}
@@ -240,7 +243,7 @@ class BoxList extends React.Component {
     };
 
     getBoxSizes = () => {
-        let { availableBoxes } = this.props;
+        let { choices } = this.props.boxes;
         return (
             <Dropdown>
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm">
@@ -248,7 +251,7 @@ class BoxList extends React.Component {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {availableBoxes.map((boxSize, i) => (
+                    {choices.map((boxSize, i) => (
                         <Dropdown.Item key={i} onClick={() => this.updateDropdown(boxSize)}>
                             {boxSize.name}
                         </Dropdown.Item>

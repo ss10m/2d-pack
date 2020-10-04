@@ -1,4 +1,21 @@
-// Window Size Actions
+import { batch } from "react-redux";
+
+export const setOrder = (order) => (dispatch) => {
+    let boxes = [];
+    order.boxes.forEach((layout) => boxes.push(layout.box));
+    batch(() => {
+        dispatch(addBoxes(boxes, order.original));
+        dispatch(addItems(order.boxes));
+    });
+};
+
+export const clearOrder = () => (dispatch) => {
+    batch(() => {
+        dispatch(clearBoxes());
+        dispatch(clearItems());
+    });
+};
+
 export const updateWindowSize = (width) => ({
     type: "UPDATE_WINDOW_SIZE",
     width,
@@ -18,9 +35,10 @@ export const addBox = (box) => ({
     box,
 });
 
-export const addBoxes = (boxes) => ({
+export const addBoxes = (boxes, choices) => ({
     type: "ADD_BOXES",
     boxes,
+    choices,
 });
 
 export const removeBox = (id) => ({

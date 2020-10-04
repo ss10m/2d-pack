@@ -11,10 +11,10 @@ import "animate.css";
 
 import NavBar from "./components/NavBar/NavBarContainer.js";
 import ZoomInModal from "./components/ZoomInModal/ZoomInModalContainer";
-import Order from "./components/order/order.js";
+import Order from "./components/Order/OrderContainer.js";
 import CreateOrder from "./components/CreateOrder/CreateOrderContainer";
 import WindowSize from "./components/WindowSize/WindowSize.js";
-import Notificatons from "./components/Notification/NotificationsContainer";
+import Notificatons from "./components/Notifications/NotificationsContainer";
 
 class App extends React.Component {
     constructor(props) {

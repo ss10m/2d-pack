@@ -28,21 +28,20 @@ const ADD_BOX = "ADD_BOX";
 const ADD_BOXES = "ADD_BOXES";
 const CLEAR_BOXES = "CLEAR_BOXES";
 const REMOVE_BOX = "REMOVE_BOX";
-const boxesReducer = (state = [], action) => {
+const boxesReducer = (state = { boxes: [], choices: [] }, action) => {
     switch (action.type) {
         case ADD_BOX:
-            console.log("ADD_BOX");
-            return [...state, action.box];
+            return { ...state, current: [...state.current, action.box] };
         case ADD_BOXES:
-            return [...action.boxes];
+            return { current: action.boxes, choices: action.choices };
         case REMOVE_BOX:
             let index = action.id;
-            console.log("INDEX1: " + index);
-            if (index < 0 || index >= state.length) return state;
-            console.log("INDEX2: " + index);
-            return [...state.slice(0, index), ...state.slice(index + 1)];
+            let boxes = state.current;
+            if (index < 0 || index >= boxes.length) return state;
+            let updatedBoxes = [...boxes.slice(0, index), ...boxes.slice(index + 1)];
+            return { ...state, current: updatedBoxes };
         case CLEAR_BOXES:
-            return [];
+            return { current: [], choices: [] };
         default:
             return state;
     }

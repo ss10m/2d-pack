@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import thunk from "redux-thunk";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import reducers from "./store/reducers.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
@@ -47,7 +48,7 @@ library.add(
     faExclamationCircle
 );
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>
