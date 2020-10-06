@@ -11,10 +11,7 @@ const RecentOrders = (props) => {
     return (
         <div className="create-order-recent-orders">
             <RecentOrdersHeader refreshRecentOrders={refreshRecentOrders} />
-            <RecentOrderList
-                recentOrders={recentOrders}
-                viewOrder={viewOrder}
-            />
+            <RecentOrderList recentOrders={recentOrders} viewOrder={viewOrder} />
         </div>
     );
 };
@@ -24,11 +21,7 @@ const RecentOrdersHeader = ({ refreshRecentOrders }) => {
         <div className="create-order-header">
             <div className="header-title">
                 <div>
-                    <FontAwesomeIcon
-                        icon="check-square"
-                        size="sm"
-                        className="icon-color"
-                    />
+                    <FontAwesomeIcon icon="check-square" size="sm" className="icon-color" />
                 </div>
                 <span>Recent Orders</span>
             </div>
@@ -58,8 +51,8 @@ const RecentOrderList = ({ recentOrders, viewOrder }) => {
         return <div className="empty-orders">Nothing appears to be here.</div>;
     } else {
         let ret = [];
-        recentOrders.forEach((order) => {
-            ret.push(<RecentOrder order={order} viewOrder={viewOrder} />);
+        recentOrders.forEach((order, index) => {
+            ret.push(<RecentOrder key={index} order={order} viewOrder={viewOrder} />);
         });
         return <div className="orders">{ret}</div>;
     }
@@ -67,11 +60,7 @@ const RecentOrderList = ({ recentOrders, viewOrder }) => {
 
 const RecentOrder = ({ order, viewOrder }) => {
     return (
-        <div
-            className="recent-order"
-            key={order.id}
-            onClick={() => viewOrder(order.id)}
-        >
+        <div className="recent-order" key={order.id} onClick={() => viewOrder(order.id)}>
             <div className="id">{order.id}</div>
             <div className="date">{order.created_at}</div>
         </div>

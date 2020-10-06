@@ -23,11 +23,7 @@ const BoxesHeader = ({ showAddBox, updateState }) => {
         >
             <div className="header-title">
                 <div>
-                    <FontAwesomeIcon
-                        icon="box"
-                        size="sm"
-                        className="icon-color"
-                    />
+                    <FontAwesomeIcon icon="box" size="sm" className="icon-color" />
                 </div>
                 <span>Boxes</span>
             </div>
@@ -59,11 +55,9 @@ const BoxList = (props) => {
         );
     } else {
         let ret = [];
-        if (showAddBox) ret.push(<AddBox {...props} />);
+        if (showAddBox) ret.push(<AddBox key="addBox" {...props} />);
         boxes.forEach((box, index) => {
-            ret.push(
-                <Box box={box} index={index} removeBox={props.removeBox} />
-            );
+            ret.push(<Box box={box} key={index} index={index} removeBox={props.removeBox} />);
         });
 
         return ret;
@@ -103,10 +97,7 @@ const AddBox = (props) => {
                         Box Name
                     </InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl
-                    placeholder={`Box #${boxes.length + 1}`}
-                    disabled
-                />
+                <FormControl placeholder={`Box #${boxes.length + 1}`} disabled />
             </InputGroup>
 
             <div className="input-fields">
@@ -123,18 +114,12 @@ const AddBox = (props) => {
                             type={"number"}
                         />
                         <InputGroup.Append>
-                            <InputGroup.Text className="bg-white">
-                                in
-                            </InputGroup.Text>
+                            <InputGroup.Text className="bg-white">in</InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>
                 </div>
                 <div>
-                    <InputGroup
-                        size="sm"
-                        className="width"
-                        style={{ float: "right" }}
-                    >
+                    <InputGroup size="sm" className="width" style={{ float: "right" }}>
                         <InputGroup.Prepend>
                             <InputGroup.Text className="bg-secondary text-white text-field">
                                 Height
@@ -146,9 +131,7 @@ const AddBox = (props) => {
                             type={"number"}
                         />
                         <InputGroup.Append>
-                            <InputGroup.Text className="bg-white">
-                                in
-                            </InputGroup.Text>
+                            <InputGroup.Text className="bg-white">in</InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>
                 </div>

@@ -2,7 +2,7 @@
 import React from "react";
 
 // Components
-import BoxList from "./components/boxList/boxList";
+import BoxList from "./components/BoxList/BoxListContainer";
 import LayoutList from "./components/LayoutList/LayoutListContainer";
 import Spinner from "components/Spinner/Spinner.js";
 

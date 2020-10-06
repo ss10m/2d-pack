@@ -22,11 +22,7 @@ const ItemsHeader = ({ showAddItem, updateState }) => {
         >
             <div className="header-title">
                 <div>
-                    <FontAwesomeIcon
-                        icon="clipboard-list"
-                        size="sm"
-                        className="icon-color"
-                    />
+                    <FontAwesomeIcon icon="clipboard-list" size="sm" className="icon-color" />
                 </div>
                 <span>Items</span>
             </div>
@@ -58,10 +54,10 @@ const ItemsList = (props) => {
         );
     } else {
         let ret = [];
-        if (showAddItem) ret.push(<AddItem {...props} />);
+        if (showAddItem) ret.push(<AddItem key="addItem" {...props} />);
         items.forEach((item, index) => {
             ret.push(
-                <Item item={item} index={index} removeItem={props.removeItem} />
+                <Item key={index} index={index} item={item} removeItem={props.removeItem} />
             );
         });
         return ret;
@@ -121,9 +117,7 @@ const AddItem = (props) => {
                             type={"number"}
                         />
                         <InputGroup.Append>
-                            <InputGroup.Text className="bg-white">
-                                in
-                            </InputGroup.Text>
+                            <InputGroup.Text className="bg-white">in</InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>
                 </div>
@@ -140,9 +134,7 @@ const AddItem = (props) => {
                             type={"number"}
                         />
                         <InputGroup.Append>
-                            <InputGroup.Text className="bg-white">
-                                in
-                            </InputGroup.Text>
+                            <InputGroup.Text className="bg-white">in</InputGroup.Text>
                         </InputGroup.Append>
                     </InputGroup>
                 </div>
@@ -181,10 +173,7 @@ const AddItem = (props) => {
                                 <Dropdown.Item
                                     key={i}
                                     onClick={() =>
-                                        props.updateState(
-                                            "itemOutlineColor",
-                                            color
-                                        )
+                                        props.updateState("itemOutlineColor", color)
                                     }
                                 >
                                     {color}

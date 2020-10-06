@@ -1,19 +1,21 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
 import { addBox, removeBox, addNotification } from "store/actions";
+import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./boxList.scss";
+import BoxList from "./BoxList";
 
-class BoxList extends React.Component {
+import "./BoxList.scss";
+
+class BoxListContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            carrier: "auto",
+            carrier: "Auto",
             showAddBox: false,
             boxSize: null,
             boxQuantity: null,
@@ -30,7 +32,6 @@ class BoxList extends React.Component {
     }
 
     hideAddBox = () => {
-        console.log("hideAddBox");
         this.setState({
             showAddBox: false,
             boxSize: null,
@@ -93,7 +94,9 @@ class BoxList extends React.Component {
                 let toast = {
                     type: "success",
                     title: "Order " + this.props.match.params.id,
-                    message: `Printed ${res["labels"]} label${res["labels"] > 1 ? "s" : ""}`,
+                    message: `Printed ${res["labels"]} ${this.state.carrier} label${
+                        res["labels"] > 1 ? "s" : ""
+                    }`,
                     duration: 5000,
                 };
 
@@ -298,102 +301,24 @@ class BoxList extends React.Component {
         });
     };
 
+    updateState = (state) => {
+        this.setState(state);
+    };
+
     render() {
         return (
-            <div className="order-list">
-                <div className="order-list-boxes">
-                    <div className="order-list-id-container">
-                        <div className="order-list-id-icon">
-                            <FontAwesomeIcon icon="file-alt" size="sm" />
-                        </div>
-                        {"Order #" + this.props.match.params.id}
-                    </div>
-                    <div
-                        style={{
-                            boxShadow: "0px 0px 2px 1px #80808030",
-                            borderRadius: "5px 5px 0 0",
-                        }}
-                    >
-                        <div className="order-list-boxes-header">
-                            <div className="order-list-boxes-header-icon">
-                                <FontAwesomeIcon icon="box" size="sm" />
-                            </div>
-                            <div className="order-list-boxes-title">Boxes</div>
-                            <div className="order-list-box-btn">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary btn-sm btn-block"
-                                    onClick={() => this.setState({ showAddBox: true })}
-                                >
-                                    Add Box
-                                </button>
-                            </div>
-                        </div>
-                        {this.getBoxes()}
-                        {this.state.showAddBox && this.getAddNewBox()}
-                    </div>
-                </div>
-
-                <ButtonGroup className="order-group-toggle">
-                    <Button
-                        variant="secondary"
-                        onClick={() => {
-                            this.onCarrierChange("auto");
-                        }}
-                        active={this.state.carrier === "auto"}
-                    >
-                        Auto
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => {
-                            this.onCarrierChange("purolator");
-                        }}
-                        active={this.state.carrier === "purolator"}
-                    >
-                        Purolator
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => {
-                            this.onCarrierChange("fedEx");
-                        }}
-                        active={this.state.carrier === "fedEx"}
-                    >
-                        FedEx
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => {
-                            this.onCarrierChange("canadapost");
-                        }}
-                        active={this.state.carrier === "canadapost"}
-                    >
-                        Canada Post
-                    </Button>
-                </ButtonGroup>
-
-                <div className="order-list-print-btn">
-                    <Button
-                        variant="secondary"
-                        onClick={this.printLabels}
-                        disabled={this.state.fetchingLabels}
-                        block
-                    >
-                        {this.state.fetchingLabels && (
-                            <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                                className="order-btn-spinner"
-                            />
-                        )}
-                        {this.state.fetchingLabels ? "Loading" : "Print Labels"}
-                    </Button>
-                </div>
-            </div>
+            <BoxList
+                {...this.state}
+                boxes={this.props.boxes.current}
+                choices={this.props.boxes.choices}
+                updateState={this.updateState}
+                orderId={this.props.match.params.id}
+                showBoxDetails={this.showBoxDetails}
+                removeBox={this.removeBox}
+                printLabels={this.printLabels}
+                confirmAddBox={this.confirmAddBox}
+                hideAddBox={this.hideAddBox}
+            />
         );
     }
 }
@@ -416,4 +341,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BoxList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BoxListContainer));
