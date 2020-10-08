@@ -1,7 +1,10 @@
+// Libraries & utils
 import React from "react";
 
+// Components
 import Items from "./Items";
 
+// Helpers
 import { itemOutlineColors, isNumeric, getRandomImg } from "helpers";
 
 class ItemsContainer extends React.Component {
@@ -22,10 +25,7 @@ class ItemsContainer extends React.Component {
         return (event) => {
             let value = event.target.value;
             if (key === "itemId" && (value < 0 || value > 999999)) return;
-            if (
-                (key === "itemWidth" || key === "itemHeight") &&
-                (value < 0 || value > 999)
-            )
+            if ((key === "itemWidth" || key === "itemHeight") && (value < 0 || value > 999))
                 return;
             this.updateState(key, value);
         };
@@ -37,13 +37,7 @@ class ItemsContainer extends React.Component {
 
     addItem = () => {
         console.log("ADDING ITEM");
-        let {
-            itemUrl,
-            itemWidth,
-            itemHeight,
-            itemId,
-            itemOutlineColor,
-        } = this.state;
+        let { itemUrl, itemWidth, itemHeight, itemId, itemOutlineColor } = this.state;
 
         if (!itemWidth || !itemHeight || !itemId || !itemOutlineColor) return;
         if (!isNumeric(itemWidth)) return;

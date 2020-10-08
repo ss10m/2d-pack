@@ -1,10 +1,8 @@
 // Libraries & utils
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { Stage, Layer } from "react-konva";
-
-// Icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // SCSS
 import "./ZoomInModal.scss";

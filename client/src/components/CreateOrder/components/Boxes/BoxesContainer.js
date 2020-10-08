@@ -1,7 +1,10 @@
+// Libraries & utils
 import React from "react";
 
+// Componenets
 import Boxes from "./Boxes.js";
 
+// Helpers
 import { boxColors, isNumeric } from "helpers";
 
 class BoxesContainer extends React.Component {

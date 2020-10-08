@@ -1,11 +1,12 @@
+// Libraries & utils
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import { items, boxes, isNumeric } from "helpers";
-
+// Componenets
 import CreateOrder from "./CreateOrder.js";
 
-import "./CreateOrder.scss";
+// Helpers
+import { items, boxes, isNumeric } from "helpers";
 
 class CreateOrderContainer extends React.Component {
     constructor(props) {

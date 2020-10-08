@@ -1,10 +1,12 @@
+// Libraries & utils
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputGroup, FormControl, Dropdown } from "react-bootstrap";
 
+// SCSS
 import "./Items.scss";
 
-const Items = (props) => {
+function Items(props) {
     let { showAddItem, updateState } = props;
     return (
         <div className="create-order-items">
@@ -12,9 +14,9 @@ const Items = (props) => {
             <ItemsList {...props} />
         </div>
     );
-};
+}
 
-const ItemsHeader = ({ showAddItem, updateState }) => {
+function ItemsHeader({ showAddItem, updateState }) {
     return (
         <div
             className="create-order-header"
@@ -37,9 +39,9 @@ const ItemsHeader = ({ showAddItem, updateState }) => {
             </div>
         </div>
     );
-};
+}
 
-const ItemsList = (props) => {
+function ItemsList(props) {
     let { items, showAddItem, updateState } = props;
     if ((items === undefined || items.length === 0) && showAddItem === false) {
         return (
@@ -62,9 +64,9 @@ const ItemsList = (props) => {
         });
         return ret;
     }
-};
+}
 
-const Item = ({ item, index, removeItem }) => {
+function Item({ item, index, removeItem }) {
     return (
         <div className="item" key={index}>
             <div className="img">
@@ -85,9 +87,9 @@ const Item = ({ item, index, removeItem }) => {
             </div>
         </div>
     );
-};
+}
 
-const AddItem = (props) => {
+function AddItem(props) {
     return (
         <div className="add-item" key="addBox">
             <InputGroup size="sm">
@@ -202,6 +204,6 @@ const AddItem = (props) => {
             </div>
         </div>
     );
-};
+}
 
 export default Items;

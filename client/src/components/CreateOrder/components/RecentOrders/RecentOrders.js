@@ -1,12 +1,12 @@
+// Libraries & utils
 import React from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { Spinner } from "react-bootstrap";
 
+// SCSS
 import "./RecentOrders.scss";
 
-const RecentOrders = (props) => {
+function RecentOrders(props) {
     let { recentOrders, viewOrder, refreshRecentOrders } = props;
     return (
         <div className="create-order-recent-orders">
@@ -14,9 +14,9 @@ const RecentOrders = (props) => {
             <RecentOrderList recentOrders={recentOrders} viewOrder={viewOrder} />
         </div>
     );
-};
+}
 
-const RecentOrdersHeader = ({ refreshRecentOrders }) => {
+function RecentOrdersHeader({ refreshRecentOrders }) {
     return (
         <div className="create-order-header">
             <div className="header-title">
@@ -36,9 +36,9 @@ const RecentOrdersHeader = ({ refreshRecentOrders }) => {
             </div>
         </div>
     );
-};
+}
 
-const RecentOrderList = ({ recentOrders, viewOrder }) => {
+function RecentOrderList({ recentOrders, viewOrder }) {
     if (recentOrders === null) {
         return (
             <div className="empty-orders">
@@ -56,15 +56,15 @@ const RecentOrderList = ({ recentOrders, viewOrder }) => {
         });
         return <div className="orders">{ret}</div>;
     }
-};
+}
 
-const RecentOrder = ({ order, viewOrder }) => {
+function RecentOrder({ order, viewOrder }) {
     return (
         <div className="recent-order" key={order.id} onClick={() => viewOrder(order.id)}>
             <div className="id">{order.id}</div>
             <div className="date">{order.created_at}</div>
         </div>
     );
-};
+}
 
 export default RecentOrders;

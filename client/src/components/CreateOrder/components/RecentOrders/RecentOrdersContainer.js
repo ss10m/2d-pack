@@ -1,6 +1,8 @@
+// Libraries & utils
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+// Components
 import RecentOrders from "./RecentOrders";
 
 class RecentOrdersContainer extends React.Component {

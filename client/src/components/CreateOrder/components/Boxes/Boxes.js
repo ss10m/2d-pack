@@ -1,11 +1,12 @@
+// Libraries & utils
 import React from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InputGroup, FormControl } from "react-bootstrap";
 
+// SCSS
 import "./Boxes.scss";
 
-const Boxes = (props) => {
+function Boxes(props) {
     let { showAddBox, updateState } = props;
     return (
         <div className="create-order-boxes">
@@ -13,9 +14,9 @@ const Boxes = (props) => {
             <BoxList {...props} />
         </div>
     );
-};
+}
 
-const BoxesHeader = ({ showAddBox, updateState }) => {
+function BoxesHeader({ showAddBox, updateState }) {
     return (
         <div
             className="create-order-header"
@@ -38,9 +39,9 @@ const BoxesHeader = ({ showAddBox, updateState }) => {
             </div>
         </div>
     );
-};
+}
 
-const BoxList = (props) => {
+function BoxList(props) {
     let { boxes, showAddBox, updateState } = props;
     if ((boxes === undefined || boxes.length === 0) && showAddBox === false) {
         return (
@@ -62,9 +63,9 @@ const BoxList = (props) => {
 
         return ret;
     }
-};
+}
 
-const Box = ({ box, index, removeBox }) => {
+function Box({ box, index, removeBox }) {
     return (
         <div className="box" key={index}>
             <div className="indicator" style={{ backgroundColor: box.color }} />
@@ -84,9 +85,9 @@ const Box = ({ box, index, removeBox }) => {
             </div>
         </div>
     );
-};
+}
 
-const AddBox = (props) => {
+function AddBox(props) {
     let { boxes } = props;
     if (boxes.length >= 7) return;
     return (
@@ -155,6 +156,6 @@ const AddBox = (props) => {
             </div>
         </div>
     );
-};
+}
 
 export default Boxes;

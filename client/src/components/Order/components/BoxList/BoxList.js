@@ -1,10 +1,6 @@
 // Libraries & utils
 import React from "react";
-
-// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// Components
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
 // SCSS

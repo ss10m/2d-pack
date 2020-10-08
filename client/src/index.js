@@ -1,52 +1,24 @@
+// Libraries & utils
 import React from "react";
 import ReactDOM from "react-dom";
-import thunk from "redux-thunk";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import reducers from "./store/reducers.js";
-import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
+
+// Redux
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import reducers from "./store/reducers.js";
+
+// Icons
+import "./icons";
+
+// CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+import "animate.min.css";
+
+// Componenets
 import App from "./App";
-
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-    faTimes,
-    faChevronRight,
-    faChevronLeft,
-    faImages,
-    faList,
-    faClipboardList,
-    faBox,
-    faCheckSquare,
-    faFileAlt,
-    faPlusCircle,
-    faBars,
-    faSearch,
-    faCubes,
-    faTimesCircle,
-    faCheckCircle,
-    faExclamationCircle,
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-    faTimes,
-    faChevronRight,
-    faChevronLeft,
-    faImages,
-    faList,
-    faClipboardList,
-    faBox,
-    faCheckSquare,
-    faFileAlt,
-    faPlusCircle,
-    faBars,
-    faSearch,
-    faCubes,
-    faTimesCircle,
-    faCheckCircle,
-    faExclamationCircle
-);
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

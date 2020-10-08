@@ -1,15 +1,13 @@
 // Libraries & utils
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-
-// Icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // SCSS
 import "./NavBar.scss";
 
-const NavBar = (props) => {
+function NavBar(props) {
     let searchField = (
         <SearchInput
             value={props.orderId}
@@ -53,9 +51,10 @@ const NavBar = (props) => {
             {props.expanded && <div className="bottom">{searchField}</div>}
         </div>
     );
-};
+}
 
-const SearchInput = ({ handleInputChange, value, onKeyPress, submit }) => {
+function SearchInput(props) {
+    let { handleInputChange, value, onKeyPress, submit } = props;
     return (
         <div className="search-input">
             <div className="icon">
@@ -73,6 +72,6 @@ const SearchInput = ({ handleInputChange, value, onKeyPress, submit }) => {
             <button onClick={submit}>Search</button>
         </div>
     );
-};
+}
 
 export default NavBar;

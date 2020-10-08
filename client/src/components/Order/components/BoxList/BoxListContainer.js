@@ -84,6 +84,10 @@ class BoxListContainer extends React.Component {
     printLabels = () => {
         this.setState({ fetchingLabels: true });
         let carrier = this.state.carrier;
+        if (carrier === "Auto") {
+            let options = ["Purolator", "FedEx", "Canada Post"];
+            carrier = options[Math.floor(Math.random() * options.length)];
+        }
         let url = `/api/order/${this.props.match.params.id}/labels`;
         let options = {
             method: "POST",

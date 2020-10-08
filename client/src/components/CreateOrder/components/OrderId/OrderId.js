@@ -1,10 +1,11 @@
+// Libraries & utils
 import React from "react";
-
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 
+// SCSS
 import "./OrderId.scss";
 
-const OrderId = ({ orderId, updateOrderId, createOrder }) => {
+function OrderId({ orderId, updateOrderId, createOrder }) {
     return (
         <div className="create-order-id">
             <div className="order-id">
@@ -13,9 +14,9 @@ const OrderId = ({ orderId, updateOrderId, createOrder }) => {
             <CreateOrderBtn createOrder={createOrder} />
         </div>
     );
-};
+}
 
-const OrderIdInput = ({ orderId, updateOrderId }) => {
+function OrderIdInput({ orderId, updateOrderId }) {
     return (
         <InputGroup size="lg">
             <InputGroup.Prepend>
@@ -35,9 +36,9 @@ const OrderIdInput = ({ orderId, updateOrderId }) => {
             />
         </InputGroup>
     );
-};
+}
 
-const CreateOrderBtn = ({ createOrder }) => {
+function CreateOrderBtn({ createOrder }) {
     return (
         <div className="order-btn">
             <Button variant="secondary" size="lg" onClick={createOrder} block>
@@ -45,6 +46,6 @@ const CreateOrderBtn = ({ createOrder }) => {
             </Button>
         </div>
     );
-};
+}
 
 export default OrderId;

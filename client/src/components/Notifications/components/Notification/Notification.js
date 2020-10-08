@@ -1,7 +1,5 @@
 // Libraries & utils
 import React from "react";
-
-// Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // SCSS
