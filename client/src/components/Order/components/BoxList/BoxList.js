@@ -1,34 +1,33 @@
+// Libraries & utils
 import React from "react";
+
+// Icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+// Components
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// SCSS
 import "./BoxList.scss";
 
 function BoxList(props) {
-    console.log(props);
     return (
-        <div className="order-list">
-            <div className="order-list-boxes">
-                <OrderId orderId={props.orderId} />
-                <BoxesContainer {...props} />
-                <CarrierOptions
-                    carrier={props.carrier}
-                    fetchingLabels={props.fetchingLabels}
-                    updateState={props.updateState}
-                />
-                <PrintLabelsBtn
-                    fetchingLabels={props.fetchingLabels}
-                    printLabels={props.printLabels}
-                />
-            </div>
+        <div className="box-list">
+            <OrderId orderId={props.orderId} />
+            <BoxesContainer {...props} />
+            <CarrierOptions carrier={props.carrier} updateState={props.updateState} />
+            <PrintLabelsButton
+                fetchingLabels={props.fetchingLabels}
+                printLabels={props.printLabels}
+            />
         </div>
     );
 }
 
 function OrderId({ orderId }) {
     return (
-        <div className="order-list-id-container">
-            <div className="order-list-id-icon">
+        <div className="box-list-id">
+            <div className="icon">
                 <FontAwesomeIcon icon="file-alt" size="sm" />
             </div>
             {"Order #" + orderId}
@@ -38,12 +37,7 @@ function OrderId({ orderId }) {
 
 function BoxesContainer(props) {
     return (
-        <div
-            style={{
-                boxShadow: "0px 0px 2px 1px #80808030",
-                borderRadius: "5px 5px 0 0",
-            }}
-        >
+        <div className="box-list-container">
             <BoxesHeader updateState={props.updateState} />
             <Boxes {...props} />
             {props.showAddBox && <AddBox {...props} />}
@@ -53,12 +47,12 @@ function BoxesContainer(props) {
 
 function BoxesHeader({ updateState }) {
     return (
-        <div className="order-list-boxes-header">
-            <div className="order-list-boxes-header-icon">
+        <div className="box-list-header">
+            <div className="icon">
                 <FontAwesomeIcon icon="box" size="sm" />
             </div>
-            <div className="order-list-boxes-title">Boxes</div>
-            <div className="order-list-box-btn">
+            <div className="title">Boxes</div>
+            <div className="add-box-btn">
                 <button
                     type="button"
                     className="btn btn-secondary btn-sm btn-block"
@@ -88,14 +82,14 @@ function Box(props) {
     return (
         <div
             key={index}
-            className="order-list-box grow"
+            className="box"
             style={{
                 height: props.showDetailsIndex === index ? "120px" : "50px",
             }}
             onClick={() => props.showBoxDetails(index)}
         >
             <div
-                className="order-list-box-bar"
+                className="indicator"
                 style={{
                     backgroundColor: box.color,
                 }}
@@ -103,14 +97,14 @@ function Box(props) {
                 {index + 1}
             </div>
 
-            <div className="order-list-box-rows ">
+            <div className="box-list-rows">
                 <div
-                    className="order-list-box-top-row"
+                    className="top"
                     style={{
                         height: props.showDetailsIndex !== index ? "100%" : "50%",
                     }}
                 >
-                    <div className="order-list-box-info">
+                    <div className="info">
                         {box.name}
                         {box.quantity > 1 && (
                             <span
@@ -124,7 +118,7 @@ function Box(props) {
                             </span>
                         )}
                     </div>
-                    <div className="order-list-box-btn">
+                    <div className="remove-btn">
                         <button
                             type="button"
                             className="btn btn-danger btn-sm"
@@ -142,18 +136,18 @@ function Box(props) {
 
 function BoxExpanded({ box }) {
     return (
-        <div className="order-list-box-details ">
-            <div className="order-list-box-details-info">
-                <div className="order-list-box-details-info-top">Width</div>
-                <div className="order-list-box-details-info-bottom">{box.width + " in"}</div>
+        <div className="expanded">
+            <div className="info">
+                <div className="upper">Width</div>
+                <div className="lower">{box.width + " in"}</div>
             </div>
-            <div className="order-list-box-details-info">
-                <div className="order-list-box-details-info-top">Height</div>
-                <div className="order-list-box-details-info-bottom">{box.height + " in"}</div>
+            <div className="info">
+                <div className="upper">Height</div>
+                <div className="lower">{box.height + " in"}</div>
             </div>
-            <div className="order-list-box-details-info">
-                <div className="order-list-box-details-info-top">Weight</div>
-                <div className="order-list-box-details-info-bottom">{box.weight + " lb"}</div>
+            <div className="info">
+                <div className="upper">Weight</div>
+                <div className="lower">{box.weight + " lb"}</div>
             </div>
         </div>
     );
@@ -162,11 +156,11 @@ function BoxExpanded({ box }) {
 function AddBox(props) {
     let color = props.boxSize ? props.boxSize.color : "#808080";
     return (
-        <div className="order-list-add-new-box">
-            <div className="order-list-box-bar" style={{ backgroundColor: color }}>
+        <div className="box-list-add-box">
+            <div className="indicator" style={{ backgroundColor: color }}>
                 {props.boxes.length + 1}
             </div>
-            <div className="order-list-add-new-box-inside">
+            <div className="details">
                 <BoxSizes
                     choices={props.choices}
                     boxSize={props.boxSize}
@@ -177,7 +171,7 @@ function AddBox(props) {
                     updateState={props.updateState}
                 />
             </div>
-            <div className="order-list-add-new-box-btn">
+            <div className="add-box-btn">
                 <button
                     type="button"
                     className="btn btn-success btn-sm btn-block"
@@ -218,12 +212,7 @@ function BoxSizes(props) {
 function BoxQuantity(props) {
     return (
         <Dropdown>
-            <Dropdown.Toggle
-                variant="secondary"
-                id="dropdown-basic"
-                size="sm"
-                className="test1111"
-            >
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="sm">
                 {props.boxQuantity ? "Quantity " + props.boxQuantity : "Box Quantity"}
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -240,38 +229,18 @@ function BoxQuantity(props) {
     );
 }
 
-function CarrierOptions({ carrier, fetchingLabels, updateState }) {
+function CarrierOptions({ carrier, updateState }) {
     return (
-        <ButtonGroup className="order-group-toggle display-only">
-            <CarrierButton
-                carrier={carrier}
-                name="Auto"
-                fetchingLabels={fetchingLabels}
-                updateState={updateState}
-            />
-            <CarrierButton
-                carrier={carrier}
-                name="Purolator"
-                fetchingLabels={fetchingLabels}
-                updateState={updateState}
-            />
-            <CarrierButton
-                carrier={carrier}
-                name="FedEx"
-                fetchingLabels={fetchingLabels}
-                updateState={updateState}
-            />
-            <CarrierButton
-                carrier={carrier}
-                name="Canada Post"
-                fetchingLabels={fetchingLabels}
-                updateState={updateState}
-            />
+        <ButtonGroup className="box-list-group-toggle">
+            <CarrierButton carrier={carrier} name="Auto" updateState={updateState} />
+            <CarrierButton carrier={carrier} name="Purolator" updateState={updateState} />
+            <CarrierButton carrier={carrier} name="FedEx" updateState={updateState} />
+            <CarrierButton carrier={carrier} name="Canada Post" updateState={updateState} />
         </ButtonGroup>
     );
 }
 
-function CarrierButton({ carrier, name, fetchingLabels, updateState }) {
+function CarrierButton({ carrier, name, updateState }) {
     return (
         <Button
             variant="secondary"
@@ -279,30 +248,27 @@ function CarrierButton({ carrier, name, fetchingLabels, updateState }) {
                 updateState({ carrier: name });
             }}
             active={carrier === name}
-            disabled={fetchingLabels}
         >
             {name}
         </Button>
     );
 }
 
-function PrintLabelsBtn({ fetchingLabels, printLabels }) {
+function PrintLabelsButton({ fetchingLabels, printLabels }) {
     return (
-        <div className="order-list-print-btn">
-            <Button variant="secondary" onClick={printLabels} disabled={fetchingLabels} block>
-                {fetchingLabels && (
-                    <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                        className="order-btn-spinner"
-                    />
-                )}
-                {fetchingLabels ? "Loading" : "Print Labels"}
-            </Button>
-        </div>
+        <Button variant="secondary" onClick={printLabels} disabled={fetchingLabels} block>
+            {fetchingLabels && (
+                <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    className="box-list-submit-spinner"
+                />
+            )}
+            {fetchingLabels ? "Loading" : "Print Labels"}
+        </Button>
     );
 }
 
