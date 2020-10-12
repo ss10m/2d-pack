@@ -64,6 +64,7 @@ function BoxesHeader({ updateState }) {
 function Boxes(props) {
     return props.boxes.map((box, index) => (
         <Box
+            key={index}
             box={box}
             index={index}
             showDetailsIndex={props.showDetailsIndex}

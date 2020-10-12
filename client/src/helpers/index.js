@@ -34,29 +34,53 @@ export const boxes = [
     { width: 25, height: 19, weight: 4, color: "orange" },
     { width: 37, height: 25, weight: 6, color: "blue" },
     { width: 47, height: 34, weight: 8, color: "purple" },
-    { width: 52, height: 42, weight: 10, color: "grey" },
 ];
 
 export function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-export function getRandomImg() {
-    let images = [
-        "https://i.imgur.com/SeyV6fG.png",
-        "https://i.imgur.com/j9HWSmS.jpeg",
-        "https://i.imgur.com/QXhZt0t.jpg",
-        "https://i.imgur.com/1lqBCGK.jpg",
-        "https://i.imgur.com/GDAStfX.jpg",
-        "https://i.imgur.com/qnpBsNw.jpg",
-        "https://i.imgur.com/4PoTjBe.jpg",
-        "https://i.imgur.com/ZWGeI3I.jpg",
-        "https://i.imgur.com/xqWnFok.jpg",
-        "https://i.imgur.com/KfQ1qsK.png",
-        "https://i.imgur.com/FykFLSM.jpeg",
-        "https://i.imgur.com/baPqZXo.jpg",
-    ];
-    return images[Math.floor(Math.random() * images.length)];
+export function getRandomImg(ratio) {
+    let images = {
+        squre: ["https://i.imgur.com/jw9wjnB.jpg"],
+        classic: [
+            "https://i.imgur.com/1ePb80R.jpg",
+            "https://i.imgur.com/ecYnb.jpg",
+            "https://i.imgur.com/z1C9aFR.jpg",
+            "https://i.imgur.com/En8nXpr.png",
+        ],
+        golden: [
+            "https://i.imgur.com/Nv1Wcy4.jpg",
+            "https://i.imgur.com/xe5kCmT.jpg",
+            "https://i.imgur.com/XvXnpPd.jpg",
+        ],
+        wide: [
+            "https://i.imgur.com/6bTyoJf.png",
+            "https://i.imgur.com/diooRWV.png",
+            "https://i.imgur.com/vHIonqW.png",
+            "https://i.imgur.com/LLR5NxX.png",
+            "https://i.imgur.com/HCoBlwC.png",
+            "https://i.imgur.com/zG93bjQ.png",
+            "https://i.imgur.com/XBd4Fd1.png",
+            "https://i.imgur.com/aAYnjwK.png",
+        ],
+        ultrawide: ["https://i.imgur.com/vW2ew7S.jpg"],
+    };
+
+    let ratioName;
+    if (ratio < 1.2) {
+        ratioName = "squre";
+    } else if (ratio < 1.4) {
+        ratioName = "classic";
+    } else if (ratio < 1.8) {
+        ratioName = "golden";
+    } else if (ratio < 2.5) {
+        ratioName = "wide";
+    } else {
+        ratioName = "ultrawide";
+    }
+
+    return images[ratioName][Math.floor(Math.random() * images[ratioName].length)];
 }
 
 export function notificationTypeToIcon(icon) {

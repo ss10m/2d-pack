@@ -39,11 +39,19 @@ class ItemsContainer extends React.Component {
         console.log("ADDING ITEM");
         let { itemUrl, itemWidth, itemHeight, itemId, itemOutlineColor } = this.state;
 
-        if (!itemWidth || !itemHeight || !itemId || !itemOutlineColor) return;
+        if (!itemWidth || !itemHeight || !itemId) return;
         if (!isNumeric(itemWidth)) return;
         if (!isNumeric(itemHeight)) return;
 
-        if (!itemUrl) itemUrl = getRandomImg();
+        if (!itemOutlineColor) {
+            let randomColor = Math.floor(Math.random() * itemOutlineColors.length);
+            itemOutlineColor = itemOutlineColors[randomColor];
+        }
+
+        itemWidth = parseInt(itemWidth);
+        itemHeight = parseInt(itemHeight);
+        let ratio = Math.max(itemHeight, itemWidth) / Math.min(itemHeight, itemWidth);
+        if (!itemUrl) itemUrl = getRandomImg(ratio);
         /*
         if (!itemUrl.match(/(http|https)\:\/\//i))
             itemUrl = "https://" + itemUrl;
@@ -51,8 +59,8 @@ class ItemsContainer extends React.Component {
 
         let item = {
             url: itemUrl,
-            width: parseInt(itemWidth),
-            height: parseInt(itemHeight),
+            width: itemWidth,
+            height: itemHeight,
             id: itemId,
             color: itemOutlineColor.toLowerCase(),
         };
