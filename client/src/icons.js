@@ -17,6 +17,7 @@ import {
     faTimesCircle,
     faCheckCircle,
     faExclamationCircle,
+    faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -35,5 +36,6 @@ library.add(
     faCubes,
     faTimesCircle,
     faCheckCircle,
-    faExclamationCircle
+    faExclamationCircle,
+    faPlusSquare
 );

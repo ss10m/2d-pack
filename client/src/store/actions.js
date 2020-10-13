@@ -4,7 +4,7 @@ export const setOrder = (order) => (dispatch) => {
     let boxes = [];
     order.boxes.forEach((layout) => boxes.push(layout.box));
     batch(() => {
-        dispatch(addBoxes(boxes, order.original));
+        dispatch(addBoxes(boxes, order.original, order.oversized));
         dispatch(addItems(order.boxes));
     });
 };
@@ -35,10 +35,11 @@ export const addBox = (box) => ({
     box,
 });
 
-export const addBoxes = (boxes, choices) => ({
+export const addBoxes = (boxes, choices, oversized) => ({
     type: "ADD_BOXES",
     boxes,
     choices,
+    oversized,
 });
 
 export const removeBox = (id) => ({

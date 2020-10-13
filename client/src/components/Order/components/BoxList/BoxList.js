@@ -16,6 +16,7 @@ function BoxList(props) {
                 fetchingLabels={props.fetchingLabels}
                 printLabels={props.printLabels}
             />
+            {props.oversized.length > 0 && <Oversized oversized={props.oversized} />}
         </div>
     );
 }
@@ -266,6 +267,41 @@ function PrintLabelsButton({ fetchingLabels, printLabels }) {
             )}
             {fetchingLabels ? "Loading" : "Print Labels"}
         </Button>
+    );
+}
+
+function Oversized({ oversized }) {
+    return (
+        <div className="box-list-oversized">
+            <div className="header">
+                <div className="icon">
+                    <FontAwesomeIcon icon="plus-square" size="sm" />
+                </div>
+                <div className="title">Oversized Items</div>
+            </div>
+
+            {oversized.map((item) => (
+                <div className="item" key={item.id}>
+                    <div className="img">
+                        <img src={item.url} alt=""></img>
+                    </div>
+
+                    <div className="details">
+                        <div className="id">{`#${item.id}`}</div>
+                        <div>
+                            <div className="info">
+                                <div className="upper">Width</div>
+                                <div className="lower">{item.width + " in"}</div>
+                            </div>
+                            <div className="info">
+                                <div className="upper">Height</div>
+                                <div className="lower">{item.height + " in"}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
     );
 }
 

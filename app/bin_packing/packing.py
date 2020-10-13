@@ -48,7 +48,7 @@ def packing_algo(order):
             best_count = total_boxes
             best_score = score
 
-    json_output = generate_JSON(order['id'], best_boxes, id_to_product)
+    json_output = generate_JSON(order['id'], best_boxes, id_to_product, oversized_products)
     return json_output
 
 def parse_boxes(boxes):
@@ -172,7 +172,7 @@ def filter_oversized_items(items, boxes):
 
     return fits, oversized
 
-def generate_JSON(order_id, boxes, id_to_item):
+def generate_JSON(order_id, boxes, id_to_item, oversized):
     json_file = {
         'id': order_id,
         'number_of_boxes': len(boxes)
@@ -204,5 +204,6 @@ def generate_JSON(order_id, boxes, id_to_item):
         }
         boxes_json.append(box_json)
 
-    json_file['boxes'] = boxes_json
+    json_file["boxes"] = boxes_json
+    json_file["oversized"] = oversized
     return json_file

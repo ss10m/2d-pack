@@ -28,12 +28,16 @@ const ADD_BOX = "ADD_BOX";
 const ADD_BOXES = "ADD_BOXES";
 const CLEAR_BOXES = "CLEAR_BOXES";
 const REMOVE_BOX = "REMOVE_BOX";
-const boxesReducer = (state = { boxes: [], choices: [] }, action) => {
+const boxesReducer = (state = { boxes: [], choices: [], oversized: [] }, action) => {
     switch (action.type) {
         case ADD_BOX:
             return { ...state, current: [...state.current, action.box] };
         case ADD_BOXES:
-            return { current: action.boxes, choices: action.choices };
+            return {
+                current: action.boxes,
+                choices: action.choices,
+                oversized: action.oversized,
+            };
         case REMOVE_BOX:
             let index = action.id;
             let boxes = state.current;
@@ -41,7 +45,7 @@ const boxesReducer = (state = { boxes: [], choices: [] }, action) => {
             let updatedBoxes = [...boxes.slice(0, index), ...boxes.slice(index + 1)];
             return { ...state, current: updatedBoxes };
         case CLEAR_BOXES:
-            return { current: [], choices: [] };
+            return { current: [], choices: [], oversized: [] };
         default:
             return state;
     }

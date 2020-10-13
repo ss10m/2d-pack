@@ -121,11 +121,13 @@ class BoxListContainer extends React.Component {
     };
 
     render() {
+        let { current, choices, oversized } = this.props.boxes;
         return (
             <BoxList
                 {...this.state}
-                boxes={this.props.boxes.current}
-                choices={this.props.boxes.choices}
+                boxes={current}
+                choices={choices}
+                oversized={oversized}
                 updateState={this.updateState}
                 orderId={this.props.match.params.id}
                 showBoxDetails={this.showBoxDetails}
