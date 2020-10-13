@@ -2,6 +2,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+// Redux
+import { connect } from "react-redux";
+import { addNotification } from "store/actions";
+
 // Componenets
 import CreateOrder from "./CreateOrder.js";
 
@@ -32,10 +36,17 @@ class CreateOrderContainer extends React.Component {
     createOrder = () => {
         const { orderId, items, boxes } = this.state;
 
-        if (!orderId || !items || !boxes) return;
-        if (!isNumeric(orderId)) return;
-        if (!Array.isArray(items) || items.length === 0) return;
-        if (!Array.isArray(boxes) || boxes.length === 0) return;
+        let warningMessage = null;
+        if (!orderId || !isNumeric(orderId)) {
+            warningMessage = "Missing Order ID";
+        }
+        if (!items || !Array.isArray(items) || items.length === 0) {
+            warningMessage = "Add at least one Item";
+        }
+        if (!boxes || !Array.isArray(boxes) || boxes.length === 0) {
+            warningMessage = "Add at least one box";
+        }
+        if (warningMessage) return this.showNotifications(warningMessage);
 
         boxes.forEach((box, i) => {
             box.name = `Box #${i + 1}`;
@@ -60,6 +71,15 @@ class CreateOrderContainer extends React.Component {
             });
     };
 
+    showNotifications(message) {
+        let notification = {
+            type: "error",
+            message,
+            duration: 5000,
+        };
+        this.props.addNotification(notification);
+    }
+
     render() {
         return (
             <CreateOrder
@@ -72,4 +92,10 @@ class CreateOrderContainer extends React.Component {
     }
 }
 
-export default withRouter(CreateOrderContainer);
+const mapDispatchToProps = (dispatch) => ({
+    addNotification: (notification) => {
+        dispatch(addNotification(notification));
+    },
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(CreateOrderContainer));
