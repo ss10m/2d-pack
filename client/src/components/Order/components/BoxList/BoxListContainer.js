@@ -82,6 +82,16 @@ class BoxListContainer extends React.Component {
     };
 
     printLabels = () => {
+        let boxes = this.props.boxes.current;
+        if (!boxes.length) {
+            let toast = {
+                type: "error",
+                message: "There is nothing to print",
+                duration: 5000,
+            };
+            this.props.addNotification(toast);
+            return;
+        }
         this.setState({ fetchingLabels: true });
         let carrier = this.state.carrier;
         if (carrier === "Auto") {
@@ -94,7 +104,7 @@ class BoxListContainer extends React.Component {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ boxes: this.props.boxes.current }),
+            body: JSON.stringify({ boxes }),
         };
         fetch(url, options)
             .then((res) => res.json())

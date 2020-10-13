@@ -70,6 +70,7 @@ class OrderContainer extends React.Component {
                 totalImages++;
             });
         });
+        if (totalImages === 0) this.setState({ isLoaded: true });
 
         let cachedImages = 0;
         boxes.forEach(({ items }) => {
