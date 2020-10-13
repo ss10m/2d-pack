@@ -1,6 +1,5 @@
 import random
 
-
 order192161 = {
     "id": 192161,
     "products": [
@@ -497,19 +496,6 @@ orders = [
     order192171
 ]
 
-images = ["https://i.imgur.com/SeyV6fG.png",
-          "https://i.imgur.com/j9HWSmS.jpeg",
-          "https://i.imgur.com/QXhZt0t.jpg",
-          "https://i.imgur.com/1lqBCGK.jpg",
-          "https://i.imgur.com/GDAStfX.jpg",
-          "https://i.imgur.com/qnpBsNw.jpg",
-          "https://i.imgur.com/4PoTjBe.jpg",
-          "https://i.imgur.com/ZWGeI3I.jpg",
-          "https://i.imgur.com/xqWnFok.jpg",
-          "https://i.imgur.com/KfQ1qsK.png",
-          "https://i.imgur.com/FykFLSM.jpeg",
-          "https://i.imgur.com/baPqZXo.jpg"]
-
 boxes = [{"name": "Box #1", "width": 18, "height": 13, "weight": 2, "color": "red"}, 
          {"name": "Box #2", "width": 25, "height": 19, "weight": 4, "color": "yellow"}, 
          {"name": "Box #3", "width": 37, "height": 25, "weight": 6, "color": "blue"}, 
@@ -518,8 +504,51 @@ boxes = [{"name": "Box #1", "width": 18, "height": 13, "weight": 2, "color": "re
 
 itemColors = ["red", "yellow", "blue", "purple", "green"]
 
+images = {
+    "squre": ["https://i.imgur.com/jw9wjnB.jpg"],
+    "classic": [
+        "https://i.imgur.com/1ePb80R.jpg",
+        "https://i.imgur.com/ecYnb.jpg",
+        "https://i.imgur.com/z1C9aFR.jpg",
+        "https://i.imgur.com/En8nXpr.png",
+    ],
+    "golden": [
+        "https://i.imgur.com/Nv1Wcy4.jpg",
+        "https://i.imgur.com/xe5kCmT.jpg",
+        "https://i.imgur.com/XvXnpPd.jpg",
+    ],
+    "wide": [
+        "https://i.imgur.com/6bTyoJf.png",
+        "https://i.imgur.com/diooRWV.png",
+        "https://i.imgur.com/vHIonqW.png",
+        "https://i.imgur.com/LLR5NxX.png",
+        "https://i.imgur.com/HCoBlwC.png",
+        "https://i.imgur.com/zG93bjQ.png",
+        "https://i.imgur.com/XBd4Fd1.png",
+        "https://i.imgur.com/aAYnjwK.png",
+    ],
+    "ultrawide": ["https://i.imgur.com/vW2ew7S.jpg"],
+};
+
+def getRandomImage(item):
+    itemWidth = item["width"];
+    ratio = max(item["height"], item["width"]) / min(item["height"], item["width"]);
+    
+    if ratio < 1.2:
+        ratioName = "squre";
+    elif ratio < 1.4:
+        ratioName = "classic";
+    elif ratio < 1.8:
+        ratioName = "golden";
+    elif ratio < 2.5:
+        ratioName = "wide";
+    else:
+        ratioName = "ultrawide";
+
+    return random.choice(images[ratioName])
+
 for order in orders:
     order['boxes'] = boxes
     for item in order['products']:
-        item['url'] = random.choice(images)
+        item['url'] = getRandomImage(item)
         item['color'] = random.choice(itemColors)

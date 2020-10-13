@@ -61,7 +61,7 @@ function RecentOrderList({ recentOrders, viewOrder }) {
 function RecentOrder({ order, viewOrder }) {
     return (
         <div className="recent-order" key={order.id} onClick={() => viewOrder(order.id)}>
-            <div className="id">{order.id}</div>
+            <div className="id">{`#${order.id}`}</div>
             <div className="date">{order.created_at}</div>
         </div>
     );
