@@ -64,18 +64,6 @@ def handle_invalid_usage(error):
     response.status_code = error.status_code
     return response
 
-
-@app.route('/api/getallorders')
-def index_order():
-    Orders.remove_all_orders()
-    orders = Orders.get_all_orders()
-    orders_json = {'orders': orders}
-
-    for order in id_to_order:
-        Orders.create_order(id_to_order[order])
-
-    return jsonify(orders_json)
-
 @app.route('/api/order/<id>', methods=['GET'])
 def get_order(id):
     print("/api/order/<id>", flush=True)
@@ -106,7 +94,7 @@ def print_labels(order_id):
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
     print("/api/orders", flush=True)
-
+    #clear_orders()
     orders = {'recent_orders': Orders.get_recent_orders()}
 
     now = datetime.utcnow()
@@ -133,3 +121,10 @@ def create_order():
 def index_orderr(path):
     print("sending static files to " + path, flush=True)
     return render_template('index.html')
+
+def clear_orders():
+    Orders.remove_all_orders()
+    orders = Orders.get_all_orders()
+    orders_json = {'orders': orders}
+    for order in id_to_order:
+        Orders.create_order(id_to_order[order])
