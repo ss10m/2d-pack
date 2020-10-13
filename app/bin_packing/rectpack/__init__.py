@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 from .guillotine import GuillotineBssfSas, GuillotineBssfLas, \
     GuillotineBssfSlas, GuillotineBssfLlas, GuillotineBssfMaxas, \
     GuillotineBssfMinas, GuillotineBlsfSas, GuillotineBlsfLas, \

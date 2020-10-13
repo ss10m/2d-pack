@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 from .geometry import Rectangle
 
 

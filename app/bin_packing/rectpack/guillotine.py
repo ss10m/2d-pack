@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 from .pack_algo import PackingAlgorithm
 from .geometry import Rectangle
 import itertools

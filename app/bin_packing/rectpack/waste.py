@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 from .guillotine import GuillotineBafMinas
 from .geometry import Rectangle
 

@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 import heapq # heapq.heappush, heapq.heappop
 from .packer import newPacker, PackingMode, PackingBin, SORT_LSIDE
 from .skyline import SkylineBlWm

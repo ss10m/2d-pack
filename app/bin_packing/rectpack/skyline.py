@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 import collections
 import itertools
 import operator

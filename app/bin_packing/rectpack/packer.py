@@ -1,3 +1,6 @@
+# Source
+# https://github.com/secnot/rectpack
+
 from .maxrects import MaxRectsBssf
 from .skyline import SkylineMwflWm
 
