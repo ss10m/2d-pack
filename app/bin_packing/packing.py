@@ -13,15 +13,13 @@ from bin_packing.rectpack import newPacker
 from bin_packing.rectpack.maxrects import MaxRectsBssf
 from bin_packing.rectpack.skyline import SkylineMwflWm
 
-from bin_packing.boxes import boxes as pj_boxes, larger_boxes, custom_box
-from bin_packing.index import productToColor
-
 def packing_algo(order):
+    
     id_to_product = {product['id']: product for product in order['products']}
     sorted_boxes = parse_boxes(order['boxes'])
-    oversized_products, large_products, normal_products = parse_order(order, sorted_boxes)
-
-    if(len(large_products) + len(normal_products) > 20):
+    oversized_products, products = parse_order(order, sorted_boxes)
+    
+    if(len(products) > 20):
         iterations = 100
     else:
         iterations = 200
@@ -31,11 +29,10 @@ def packing_algo(order):
     best_score = None
     for i in range(iterations):
         if(i > 0):
-            shuffle(large_products)
-            shuffle(normal_products)
+            shuffle(products)
 
-        products = large_products + normal_products
         boxes = pack(order['id'], products, sorted_boxes)
+        #return {}
         
         score = 0
         total_boxes = 0
@@ -47,7 +44,8 @@ def packing_algo(order):
             best_boxes = boxes
             best_count = total_boxes
             best_score = score
-
+    #print(best_boxes, flush=True)
+    best_boxes.sort(key=lambda box: box["box"]["name"], reverse=True)
     json_output = generate_JSON(order['id'], best_boxes, id_to_product, oversized_products)
     return json_output
 
@@ -64,7 +62,7 @@ def parse_order(order, boxes):
     sorted_products = sorted(order['products'], reverse=True, key=lambda item: item['width'] * item['height'])
     products, oversized = filter_oversized_items(sorted_products, boxes)
 
-    return oversized, [], products 
+    return oversized, products 
 
 def pack(order_id, products, boxes):
     output = []
@@ -146,7 +144,16 @@ def get_first_bins(products, box):
     return bins
 
 def get_initial_box_size(products, boxes):
-    return len(boxes) - 1
+    product = products[0]
+    i = len(boxes) - 1
+    while i >= 0:
+        box = boxes[i]
+        if (product['width'] <= box['width'] and product['height'] <= box['height']):
+            return i
+        if (product['height'] <= box['width'] and product['width'] <= box['height']):
+            return i
+        i -= 1
+    return len(boxes) - 1    
 
 def filter_oversized_items(items, boxes):
     fits = []
@@ -154,9 +161,7 @@ def filter_oversized_items(items, boxes):
     
     for item in items:
         item_filtered = False
-
         for box in boxes:
-
             item_fits = False
             if (item['width'] <= box['width'] and item['height'] <= box['height']):
                 item_fits = True
