@@ -9,12 +9,12 @@ services:
             PORT: 8080
             WEB_CONCURRENCY: 6
             VIRTUAL_PORT: 8080
-            VIRTUAL_HOST: ship.ssprojects.ca
-            LETSENCRYPT_HOST: ship.ssprojects.ca
+            VIRTUAL_HOST: pack.ssprojects.ca
+            LETSENCRYPT_HOST: pack.ssprojects.ca
             LETSENCRYPT_EMAIL: "fastf20@gmail.com"
         networks:
             - service-network
-            - ship-network
+            - pack-network
         depends_on:
             - db
     db:
@@ -26,10 +26,10 @@ services:
             - ~/dbShip:/var/lib/postgresql/data
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
-            - ship-network
+            - pack-network
 
 networks:
     service-network:
         external: true
-    ship-network:
+    pack-network:
         driver: bridge
