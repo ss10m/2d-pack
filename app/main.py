@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response, render_template
+from flask_cors import CORS
 from bin_packing.packing import packing_algo
 
 from time import sleep
@@ -8,6 +9,7 @@ from datetime import datetime
 from helpers import parseInt, id_to_order, date_difference
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pgpw@db:5432/mydb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

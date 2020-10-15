@@ -9,6 +9,8 @@ import { addBox, removeBox, addNotification } from "store/actions";
 // Components
 import BoxList from "./BoxList";
 
+import { API_URL } from "config";
+
 class BoxListContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -98,7 +100,7 @@ class BoxListContainer extends React.Component {
             let options = ["Purolator", "FedEx", "Canada Post"];
             carrier = options[Math.floor(Math.random() * options.length)];
         }
-        let url = `/api/order/${this.props.match.params.id}/labels`;
+        let url = `${API_URL}/api/order/${this.props.match.params.id}/labels`;
         let options = {
             method: "POST",
             headers: {

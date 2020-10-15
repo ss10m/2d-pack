@@ -2,6 +2,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+// Config
+import { API_URL } from "config";
+
 // Components
 import RecentOrders from "./RecentOrders";
 
@@ -15,7 +18,7 @@ class RecentOrdersContainer extends React.Component {
     }
 
     fetchRecentOrders = () => {
-        fetch("/api/orders")
+        fetch(API_URL + "/api/orders")
             .then((res) => res.json())
             .then(
                 (result) => {

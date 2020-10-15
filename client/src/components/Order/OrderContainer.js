@@ -10,6 +10,7 @@ import { setOrder, clearOrder, addNotification } from "store/actions";
 import Order from "./Order";
 
 // Other
+import { API_URL } from "config";
 import preview from "./preview.jpeg";
 
 class OrderContainer extends React.Component {
@@ -36,7 +37,8 @@ class OrderContainer extends React.Component {
 
     fetchOrder = () => {
         let orderId = this.props.match.params.id;
-        fetch("/api/order/" + orderId)
+        let url = `${API_URL}/api/order/${orderId}`;
+        fetch(url)
             .then((response) => {
                 if (!response.ok) {
                     if (response.status === 400) {

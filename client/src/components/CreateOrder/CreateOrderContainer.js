@@ -11,6 +11,7 @@ import CreateOrder from "./CreateOrder.js";
 
 // Helpers
 import { items, boxes, isNumeric } from "helpers";
+import { API_URL } from "config";
 
 class CreateOrderContainer extends React.Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class CreateOrderContainer extends React.Component {
             boxes: boxes,
         };
 
-        fetch("/api/order/create", {
+        fetch(API_URL + "/api/order/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
