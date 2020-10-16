@@ -2,7 +2,7 @@
 
 ## Live
 
-    https://pack.ssprojects.ca/
+View [2d-pack](https://pack.ssprojects.ca/)
 
 ## Overview
 
