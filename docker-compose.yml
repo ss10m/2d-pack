@@ -20,10 +20,11 @@ services:
     db:
         image: postgres:11.2-alpine
         environment:
+            POSTGRES_DB: pack
+            POSTGRES_USER: pack
             POSTGRES_PASSWORD: pgpw
-            POSTGRES_DB: mydb
         volumes:
-            - ~/dbShip:/var/lib/postgresql/data
+            - ~/db_pack:/var/lib/postgresql/data
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
             - pack-network

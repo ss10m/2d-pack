@@ -11,7 +11,7 @@ from helpers import parseInt, id_to_order, date_difference
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:pgpw@db:5432/mydb"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://pack:pgpw@db:5432/pack"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 db = SQLAlchemy(app)

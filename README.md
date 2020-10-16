@@ -32,7 +32,7 @@ And the backend API at:
 
     http://0.0.0.0:8080/api/orders
 
-Finally, to gracefully stop running our local servers, you can run
+To stop running local server:
 
     docker-compose down
 
