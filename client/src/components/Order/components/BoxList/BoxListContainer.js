@@ -12,17 +12,14 @@ import BoxList from "./BoxList";
 import { API_URL } from "config";
 
 class BoxListContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            carrier: "Auto",
-            showAddBox: false,
-            boxSize: null,
-            boxQuantity: null,
-            showDetailsIndex: -1,
-            fetchingLabels: false,
-        };
-    }
+    state = {
+        carrier: "Auto",
+        showAddBox: false,
+        boxSize: null,
+        boxQuantity: null,
+        showDetailsIndex: -1,
+        fetchingLabels: false,
+    };
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {

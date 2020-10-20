@@ -3,7 +3,6 @@ import React from "react";
 
 // Redux
 import { connect } from "react-redux";
-import { showZoom } from "store/actions";
 
 // Components
 import LayoutList from "./LayoutList";
@@ -13,7 +12,7 @@ import { parseBoxInfo } from "helpers";
 
 class LayoutContainer extends React.Component {
     zoomIn = (index) => {
-        this.props.dispatch(showZoom(index));
+        this.props.setZoomIn(index);
     };
 
     render() {

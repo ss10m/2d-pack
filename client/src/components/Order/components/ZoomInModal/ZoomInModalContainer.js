@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 
 // Redux
 import { connect } from "react-redux";
-import { hideZoom, showZoom } from "store/actions";
 
 // Components
 import Layout from "components/Layout/Layout";
@@ -27,7 +26,7 @@ class ZoomModal extends React.Component {
     handleOutsideClick = (event) => {
         const domNode = ReactDOM.findDOMNode(this);
         if (!domNode || !domNode.contains(event.target)) {
-            this.props.hideZoom();
+            this.props.setZoomIn(null);
         }
     };
 
@@ -35,7 +34,7 @@ class ZoomModal extends React.Component {
         event.preventDefault();
         let className = event.target.className;
         if (className === "zoom-in-modal" || className === "layout") {
-            this.props.hideZoom();
+            this.props.setZoomIn(null);
         }
     };
 
@@ -48,7 +47,7 @@ class ZoomModal extends React.Component {
                 this.changeItems(NEXT_BOX);
                 break;
             case ESCAPE_KEY:
-                this.props.hideZoom();
+                this.props.setZoomIn(null);
                 break;
             default:
                 break;
@@ -71,11 +70,11 @@ class ZoomModal extends React.Component {
             default:
                 return;
         }
-        if (nextIndex !== null) this.props.showZoom(nextIndex);
+        if (nextIndex !== null) this.props.setZoomIn(nextIndex);
     };
 
     render() {
-        const { zoomIn, hideZoom } = this.props;
+        const { zoomIn, setZoomIn } = this.props;
         const items = this.props.items[zoomIn];
         let { height, width } = items.box;
 
@@ -86,6 +85,7 @@ class ZoomModal extends React.Component {
             canvasWidth = (width / height) * canvasHeight;
         }
 
+        let hideZoom = () => setZoomIn(null);
         let totalLayouts = this.props.items.length;
         let showArrows = totalLayouts > 1;
 
@@ -110,17 +110,7 @@ class ZoomModal extends React.Component {
 
 const mapStateToProps = (state) => ({
     windowSize: state.windowSize,
-    zoomIn: state.zoomIn,
     items: state.items,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    hideZoom: () => {
-        dispatch(hideZoom());
-    },
-    showZoom: (index) => {
-        dispatch(showZoom(index));
-    },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ZoomModal);
+export default connect(mapStateToProps)(ZoomModal);

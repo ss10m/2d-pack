@@ -14,12 +14,10 @@ import { API_URL } from "config";
 import preview from "./preview.jpeg";
 
 class OrderContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-        };
-    }
+    state = {
+        isLoaded: false,
+        zoomIn: null,
+    };
 
     componentDidMount() {
         this.fetchOrder();
@@ -30,10 +28,15 @@ class OrderContainer extends React.Component {
             this.props.clearOrder();
             this.setState({
                 isLoaded: false,
+                zoomIn: null,
             });
             this.fetchOrder();
         }
     }
+
+    setZoomIn = (id) => {
+        this.setState({ zoomIn: id });
+    };
 
     fetchOrder = () => {
         let orderId = this.props.match.params.id;
@@ -94,13 +97,12 @@ class OrderContainer extends React.Component {
     };
 
     render() {
-        return <Order isLoaded={this.state.isLoaded} />;
+        let { isLoaded, zoomIn } = this.state;
+        return <Order isLoaded={isLoaded} zoomIn={zoomIn} setZoomIn={this.setZoomIn} />;
     }
 }
 
 const mapStateToProps = (state) => ({
-    windowSize: state.windowSize,
-    zoomIn: state.zoomIn,
     items: state.items,
 });
 

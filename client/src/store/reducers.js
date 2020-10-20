@@ -78,24 +78,10 @@ const notificationsReducer = (state = [], action) => {
     }
 };
 
-const SHOW_ZOOM = "SHOW_ZOOM";
-const HIDE_ZOOM = "HIDE_ZOOM";
-const zoomInReducer = (state = null, action) => {
-    switch (action.type) {
-        case SHOW_ZOOM:
-            return action.index;
-        case HIDE_ZOOM:
-            return null;
-        default:
-            return state;
-    }
-};
-
 export default combineReducers({
     windowSize: windowSizeReducer,
     navbarExpanded: navbarReducer,
     boxes: boxesReducer,
     items: itemsReducer,
     notifications: notificationsReducer,
-    zoomIn: zoomInReducer,
 });

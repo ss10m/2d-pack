@@ -8,7 +8,6 @@ import { setNavbar } from "./store/actions";
 
 // Components
 import NavBar from "./components/NavBar/NavBarContainer.js";
-import ZoomInModal from "./components/ZoomInModal/ZoomInModalContainer";
 import Order from "./components/Order/OrderContainer.js";
 import CreateOrder from "./components/CreateOrder/CreateOrderContainer";
 import WindowSize from "./components/WindowSize/WindowSize.js";
@@ -30,7 +29,6 @@ class App extends React.Component {
                 <NavBar />
                 <div className="body" onClick={this.hideNavbar}>
                     <Notificatons />
-                    {this.props.zoomIn != null && <ZoomInModal />}
                     <Switch>
                         <Route exact path="/">
                             <CreateOrder />

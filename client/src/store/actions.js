@@ -79,12 +79,3 @@ export const removeNotification = (id) => ({
     type: "REMOVE_NOTIFICATION",
     id,
 });
-
-export const showZoom = (index) => ({
-    type: "SHOW_ZOOM",
-    index,
-});
-
-export const hideZoom = () => ({
-    type: "HIDE_ZOOM",
-});
