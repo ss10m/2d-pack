@@ -13,18 +13,21 @@ import "./Order.scss";
 function Order(props) {
     if (!props.isLoaded) {
         return <Spinner animation="border" role="status" size="xl" variant="secondary" />;
-    } else if (props.zoomIn != null) {
-        return <ZoomInModal zoomIn={props.zoomIn} setZoomIn={props.setZoomIn} />;
-    } else {
-        return (
+    }
+
+    return (
+        <>
+            {props.zoomIn != null && (
+                <ZoomInModal zoomIn={props.zoomIn} setZoomIn={props.setZoomIn} />
+            )}
             <div className="order-container">
                 <div className="order">
                     <BoxList />
                     <LayoutList setZoomIn={props.setZoomIn} />
                 </div>
             </div>
-        );
-    }
+        </>
+    );
 }
 
 export default Order;
