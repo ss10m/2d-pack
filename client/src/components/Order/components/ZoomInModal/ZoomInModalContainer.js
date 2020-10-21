@@ -1,6 +1,7 @@
 // Libraries & utils
 import React from "react";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom";
 
 // Redux
 import { connect } from "react-redux";
@@ -16,12 +17,22 @@ class ZoomModal extends React.Component {
     componentDidMount() {
         document.addEventListener("click", this.handleOutsideClick, true);
         document.addEventListener("keydown", this.handleKeyDown);
+        this.setupHistoryListener();
     }
 
     componentWillUnmount() {
         document.removeEventListener("click", this.handleOutsideClick, true);
         document.removeEventListener("keydown", this.handleKeyDown);
+        this.historyListener();
     }
+
+    setupHistoryListener = () => {
+        let { history, location } = this.props;
+        history.push(location.pathname);
+        this.historyListener = history.listen(() => {
+            this.props.setZoomIn(null);
+        });
+    };
 
     handleOutsideClick = (event) => {
         const domNode = ReactDOM.findDOMNode(this);
@@ -113,4 +124,4 @@ const mapStateToProps = (state) => ({
     items: state.items,
 });
 
-export default connect(mapStateToProps)(ZoomModal);
+export default withRouter(connect(mapStateToProps)(ZoomModal));
