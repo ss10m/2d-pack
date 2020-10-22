@@ -1,25 +1,52 @@
 .create-order-grid {
     display: grid;
+    justify-content: center;
     padding: 10px;
     grid-gap: 10px;
     margin: 30px 0;
-    grid-template:
-        "id boxes"
-        "items boxes"
-        "items orders";
-    grid-template-columns: minmax(300px, 400px) minmax(300px, 400px);
+    grid-template-columns:
+        minmax(300px, 400px)
+        minmax(300px, 400px);
+
     grid-template-rows:
         50px
         minmax(min-content, 229px)
         minmax(min-content, 290px);
-    justify-content: center;
 
-    @media only screen and (max-width: 630px) {
-        grid-template: "id" "items" "boxes" "orders";
+    .create-order-id {
+        grid-area: 1 / 1 / span 1 / span 1;
+    }
+    .create-order-items {
+        grid-area: 2 / 1 / span 2 / span 1;
+    }
+    .create-order-boxes {
+        grid-area: 1 / 2 / span 2 / span 1;
+    }
+    .create-order-recent-orders {
+        grid-area: 3 / 2 / span 1 / span 1;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .create-order-grid {
         grid-template-columns: minmax(300px, 400px);
         grid-template-rows:
-            50px minmax(min-content, 400px)
+            50px
+            minmax(min-content, 400px)
             minmax(min-content, 200px)
             minmax(min-content, 290px);
+
+        .create-order-id {
+            grid-area: 1 / 1 / span 1 / span 1;
+        }
+        .create-order-items {
+            grid-area: 2 / 1 / span 1 / span 1;
+        }
+        .create-order-boxes {
+            grid-area: 3 / 1 / span 1 / span 1;
+        }
+        .create-order-recent-orders {
+            grid-area: 4 / 1 / span 1 / span 1;
+        }
     }
 }
