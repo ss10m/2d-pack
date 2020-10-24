@@ -63,9 +63,9 @@ function Layout(props) {
 function Preview(props) {
     let { width, height } = props;
     const isRotated = props.rotated;
-    const rotation = isRotated ? 90 : 0;
-    const x = isRotated ? props.x + width : props.x;
-    const y = props.y;
+    const rotation = isRotated ? 270 : 0;
+    const x = props.x;
+    const y = isRotated ? props.y + height : props.y;
     if (isRotated) [width, height] = [height, width];
     return (
         <Image

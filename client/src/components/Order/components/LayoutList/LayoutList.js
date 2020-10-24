@@ -17,9 +17,7 @@ function LayoutList(props) {
         canvasHeight = (items.box.height / items.box.width) * canvasWidth;
         layouts.push(
             <div className="layout" key={i}>
-                <div className="header">
-                    {props.parseBoxInfo(items.box, i + 1, totalLayouts)}
-                </div>
+                <Header box={items.box} currentLayout={i + 1} totalLayouts={totalLayouts} />
                 <div className="stage" onClick={() => zoomIn(i)}>
                     <Stage width={canvasWidth} height={canvasHeight}>
                         <Layer>
@@ -36,6 +34,16 @@ function LayoutList(props) {
         );
     });
     return <div className="order-layouts">{layouts}</div>;
+}
+
+function Header({ box: { name, width, height }, currentLayout, totalLayouts }) {
+    return (
+        <div className="header">
+            <p>{name}</p>
+            <p>{`${width} in x ${height} in`}</p>
+            <p>{`${currentLayout} of ${totalLayouts}`}</p>
+        </div>
+    );
 }
 
 export default LayoutList;

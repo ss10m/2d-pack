@@ -17,7 +17,7 @@ class LayoutContainer extends React.Component {
 
     render() {
         let { items, windowSize } = this.props;
-        let canvasWidth = Math.max(370, Math.min(450, windowSize - 50));
+        let canvasWidth = Math.max(300, Math.min(450, windowSize - 30));
         return (
             <LayoutList
                 items={items}
