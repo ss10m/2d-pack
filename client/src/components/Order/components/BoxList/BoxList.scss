@@ -1,5 +1,7 @@
 .box-list {
-    width: 370px;
+    width: 100%;
+    padding: 0 5px;
+    max-width: 370px;
     margin-bottom: 30px;
     color: #343a40;
 }
@@ -43,12 +45,8 @@
     }
 
     .add-box-btn {
-        display: flex;
-        align-items: flex-end;
-        flex-direction: column;
-        justify-content: center;
-        width: 25%;
-        height: 100%;
+        width: 100px;
+        height: 30px;
         padding-right: 10px;
     }
 }
@@ -99,9 +97,18 @@
         font-size: 20px;
 
         .info {
-            width: 87%;
+            flex: 1;
             padding-left: 15px;
             font-size: 23px;
+        }
+
+        .remove-btn {
+            width: 50px;
+            padding-right: 10px;
+
+            button {
+                float: right;
+            }
         }
     }
 

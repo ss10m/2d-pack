@@ -11,11 +11,6 @@ function ZoomInModal(props) {
     let { items, canvasWidth, canvasHeight, Layout } = props;
     return (
         <div className="zoom-in-modal" onClick={props.onBackgroundClick}>
-            <Header
-                box={items.box}
-                currentLayout={props.currentLayout}
-                totalLayouts={props.totalLayouts}
-            />
             <NavigationButtons
                 showArrows={props.showArrows}
                 changeItems={props.changeItems}
@@ -28,14 +23,11 @@ function ZoomInModal(props) {
                 canvasWidth={canvasWidth}
                 canvasHeight={canvasHeight}
                 Layout={Layout}
+                currentLayout={props.currentLayout}
+                totalLayouts={props.totalLayouts}
             />
         </div>
     );
-}
-
-function Header({ box: { name, width, height }, currentLayout, totalLayouts }) {
-    let header = `${name} [${width} in x ${height} in] - ${currentLayout} of ${totalLayouts}`;
-    return <div className="header">{header}</div>;
 }
 
 function NavigationButtons(props) {
@@ -77,17 +69,34 @@ function LayoutWrapper(props) {
     let { items, canvasWidth, canvasHeight, Layout } = props;
     return (
         <div className="layout">
-            <div className="box">
-                <Stage width={canvasWidth} height={canvasHeight}>
-                    <Layer>
-                        <Layout
-                            items={items}
-                            canvasWidth={canvasWidth}
-                            canvasHeight={canvasHeight}
-                        />
-                    </Layer>
-                </Stage>
+            <div>
+                <Header
+                    box={items.box}
+                    currentLayout={props.currentLayout}
+                    totalLayouts={props.totalLayouts}
+                />
+                <div className="box">
+                    <Stage width={canvasWidth} height={canvasHeight}>
+                        <Layer>
+                            <Layout
+                                items={items}
+                                canvasWidth={canvasWidth}
+                                canvasHeight={canvasHeight}
+                            />
+                        </Layer>
+                    </Stage>
+                </div>
             </div>
+        </div>
+    );
+}
+
+function Header({ box: { name, width, height }, currentLayout, totalLayouts }) {
+    return (
+        <div className="header">
+            <p>{name}</p>
+            <p>{`${width} in x ${height} in`}</p>
+            <p>{`${currentLayout} of ${totalLayouts}`}</p>
         </div>
     );
 }

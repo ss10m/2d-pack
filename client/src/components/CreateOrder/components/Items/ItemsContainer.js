@@ -36,7 +36,6 @@ class ItemsContainer extends React.Component {
     };
 
     addItem = () => {
-        console.log("ADDING ITEM");
         let { itemUrl, itemWidth, itemHeight, itemId, itemOutlineColor } = this.state;
 
         if (!itemWidth || !itemHeight || !itemId) return;

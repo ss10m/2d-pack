@@ -11,8 +11,8 @@ services:
         networks:
             - service-network
             - ship-network
-        #volumes:
-        #    - ./app:/app
+        volumes:
+            - ./app:/app
         depends_on:
             - db
     db:

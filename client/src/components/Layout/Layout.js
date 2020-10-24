@@ -38,6 +38,7 @@ function Layout(props) {
                     y={canvasHeight * (item.y / boxHeight) + offsetY + centerOffset}
                     width={canvasWidth * (item.width / boxWidth) - sizeOffset}
                     height={canvasHeight * (item.height / boxHeight) - sizeOffset}
+                    rotated={item.rotated}
                 />
                 <Label
                     x={canvasWidth * (item.x / boxWidth) + offsetX + centerOffset}
@@ -61,7 +62,7 @@ function Layout(props) {
 
 function Preview(props) {
     let { width, height } = props;
-    const isRotated = height > width ? true : false;
+    const isRotated = props.rotated;
     const rotation = isRotated ? 90 : 0;
     const x = isRotated ? props.x + width : props.x;
     const y = props.y;

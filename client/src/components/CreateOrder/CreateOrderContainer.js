@@ -51,6 +51,8 @@ class CreateOrderContainer extends React.Component {
 
         boxes.forEach((box, i) => {
             box.name = `Box #${i + 1}`;
+            if (box.height > box.width)
+                [box["height"], box["width"]] = [box.width, box.height];
         });
 
         let order = {

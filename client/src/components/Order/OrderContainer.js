@@ -62,13 +62,13 @@ class OrderContainer extends React.Component {
             })
             .then((response) => {
                 if (this.props.match.params.id !== orderId) return;
-                this.props.setOrder(response);
-                this.cacheImages(response.boxes);
+                this.cacheImages(response);
             })
             .catch((error) => console.log(error));
     };
 
-    cacheImages = (boxes) => {
+    cacheImages = (response) => {
+        let boxes = response.boxes;
         let totalImages = 0;
         boxes.forEach(({ items }) => {
             items.forEach(() => {
@@ -85,7 +85,14 @@ class OrderContainer extends React.Component {
                 image.onload = () => {
                     item.img = image;
                     cachedImages++;
+
+                    let validAspectRatio =
+                        image.width >= image.height && item.width >= item.height;
+                    if (!validAspectRatio) {
+                        item.rotated = true;
+                    }
                     if (cachedImages === totalImages) {
+                        this.props.setOrder(response);
                         this.setState({ isLoaded: true });
                     }
                 };

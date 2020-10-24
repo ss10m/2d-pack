@@ -1,6 +1,5 @@
 // Libraries & utils
 import React from "react";
-import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom";
 
 // Redux
@@ -13,40 +12,39 @@ import ZoomInModal from "./ZoomInModal";
 // Constants
 import { PREV_BOX, NEXT_BOX, LEFT_KEY, RIGHT_KEY, ESCAPE_KEY } from "helpers/constants";
 
-class ZoomModal extends React.Component {
+class ZoomInModalContainer extends React.Component {
     componentDidMount() {
-        document.addEventListener("click", this.handleOutsideClick, true);
         document.addEventListener("keydown", this.handleKeyDown);
         this.setupHistoryListener();
     }
 
     componentWillUnmount() {
-        document.removeEventListener("click", this.handleOutsideClick, true);
         document.removeEventListener("keydown", this.handleKeyDown);
         this.historyListener();
     }
 
     setupHistoryListener = () => {
-        let { history, location } = this.props;
+        let { history, location, setZoomIn } = this.props;
         history.push(location.pathname);
-        this.historyListener = history.listen(() => {
-            this.props.setZoomIn(null);
+        this.historyListener = history.listen((newLocation, action) => {
+            if (action === "POP") {
+                setZoomIn(null);
+                history.go(-2);
+            }
         });
-    };
-
-    handleOutsideClick = (event) => {
-        const domNode = ReactDOM.findDOMNode(this);
-        if (!domNode || !domNode.contains(event.target)) {
-            this.props.setZoomIn(null);
-        }
     };
 
     handleBackgroundClick = (event) => {
         event.preventDefault();
         let className = event.target.className;
         if (className === "zoom-in-modal" || className === "layout") {
-            this.props.setZoomIn(null);
+            this.closeZoomIn();
         }
+    };
+
+    closeZoomIn = () => {
+        this.props.setZoomIn(null);
+        this.props.history.go(-1);
     };
 
     handleKeyDown = (event) => {
@@ -58,7 +56,7 @@ class ZoomModal extends React.Component {
                 this.changeItems(NEXT_BOX);
                 break;
             case ESCAPE_KEY:
-                this.props.setZoomIn(null);
+                this.closeZoomIn();
                 break;
             default:
                 break;
@@ -85,18 +83,18 @@ class ZoomModal extends React.Component {
     };
 
     render() {
-        const { zoomIn, setZoomIn } = this.props;
+        const { zoomIn } = this.props;
         const items = this.props.items[zoomIn];
         let { height, width } = items.box;
 
-        let canvasWidth = Math.min(this.props.windowSize - 50, 800);
+        let canvasWidth = Math.max(320, Math.min(this.props.windowSize - 50, 800));
         let canvasHeight = (height / width) * canvasWidth;
+
         if (window.innerHeight - 100 < canvasHeight) {
             canvasHeight = window.innerHeight - 100;
             canvasWidth = (width / height) * canvasHeight;
         }
 
-        let hideZoom = () => setZoomIn(null);
         let totalLayouts = this.props.items.length;
         let showArrows = totalLayouts > 1;
 
@@ -108,7 +106,7 @@ class ZoomModal extends React.Component {
                 showArrows={showArrows}
                 onBackgroundClick={this.handleBackgroundClick}
                 changeItems={this.changeItems}
-                hideZoom={hideZoom}
+                hideZoom={this.closeZoomIn}
                 PREV_BOX={PREV_BOX}
                 NEXT_BOX={NEXT_BOX}
                 Layout={Layout}
@@ -124,4 +122,4 @@ const mapStateToProps = (state) => ({
     items: state.items,
 });
 
-export default withRouter(connect(mapStateToProps)(ZoomModal));
+export default withRouter(connect(mapStateToProps)(ZoomInModalContainer));
