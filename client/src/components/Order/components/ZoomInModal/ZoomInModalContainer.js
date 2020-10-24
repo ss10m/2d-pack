@@ -24,20 +24,19 @@ class ZoomInModalContainer extends React.Component {
     }
 
     setupHistoryListener = () => {
-        let { history, location, setZoomIn } = this.props;
+        let { history, location } = this.props;
         history.push(location.pathname);
         this.historyListener = history.listen((newLocation, action) => {
+            console.log(action);
             if (action === "POP") {
-                setZoomIn(null);
-                history.go(-2);
+                this.props.setZoomIn(null);
             }
         });
     };
 
     handleBackgroundClick = (event) => {
         event.preventDefault();
-        let className = event.target.className;
-        if (className === "zoom-in-modal" || className === "layout") {
+        if (event.target.className === "layout") {
             this.closeZoomIn();
         }
     };

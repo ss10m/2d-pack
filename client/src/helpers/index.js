@@ -64,7 +64,7 @@ export function getRandomImg(ratio) {
             "https://i.imgur.com/XBd4Fd1.png",
             "https://i.imgur.com/aAYnjwK.png",
         ],
-        ultrawide: ["https://i.imgur.com/vW2ew7S.jpg"],
+        ultrawide: ["https://i.imgur.com/vW2ew7S.jpg", "https://i.imgur.com/lKXVXCR.jpg"],
     };
 
     let ratioName;
