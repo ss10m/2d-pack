@@ -18,7 +18,11 @@ function CreateOrder(props) {
                 updateOrderId={props.updateOrderId}
                 createOrder={props.createOrder}
             />
-            <Items items={props.items} updateState={props.updateState} />
+            <Items
+                items={props.items}
+                updateState={props.updateState}
+                addNotification={props.addNotification}
+            />
             <Boxes boxes={props.boxes} updateState={props.updateState} />
             <RecentOrders />
         </div>

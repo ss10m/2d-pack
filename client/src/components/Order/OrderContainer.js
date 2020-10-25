@@ -69,38 +69,51 @@ class OrderContainer extends React.Component {
 
     cacheImages = (response) => {
         let boxes = response.boxes;
-        let totalImages = 0;
+        let oversizedItems = response.oversized;
+        let totalImages = oversizedItems.length;
+
         boxes.forEach(({ items }) => {
             items.forEach(() => {
                 totalImages++;
             });
         });
+
         if (totalImages === 0) this.setState({ isLoaded: true });
-
         let cachedImages = 0;
-        boxes.forEach(({ items }) => {
-            items.forEach((item) => {
-                const image = new window.Image();
-                image.src = item.url;
-                image.onload = () => {
-                    item.img = image;
-                    cachedImages++;
 
-                    let validAspectRatio =
-                        image.width >= image.height && item.width >= item.height;
-                    if (!validAspectRatio) {
-                        item.rotated = true;
-                    }
-                    if (cachedImages === totalImages) {
-                        this.props.setOrder(response);
-                        this.setState({ isLoaded: true });
-                    }
-                };
-                image.onerror = () => {
-                    image.src = preview;
-                };
-            });
-        });
+        const cacheImage = (item) => {
+            const image = new window.Image();
+            image.src = item.url;
+            image.onload = () => {
+                item.img = image;
+                //TODO check oversized caching
+                cachedImages++;
+
+                this.verifyImageAspectRatio(image, item);
+
+                if (cachedImages === totalImages) {
+                    this.props.setOrder(response);
+                    this.setState({ isLoaded: true });
+                }
+            };
+            image.onerror = () => {
+                image.src = preview;
+            };
+        };
+
+        boxes.forEach(({ items }) => items.forEach((item) => cacheImage(item)));
+        oversizedItems.forEach((item) => cacheImage(item));
+    };
+
+    verifyImageAspectRatio = (image, item) => {
+        let isImageVertical = image.height > image.width;
+        let isItemVertical = item.height > item.width;
+        let isImageSqure = image.height === image.width;
+        let isItemSqure = item.height === item.width;
+
+        if (!isImageSqure && !isItemSqure && isImageVertical !== isItemVertical) {
+            item.rotated = true;
+        }
     };
 
     render() {

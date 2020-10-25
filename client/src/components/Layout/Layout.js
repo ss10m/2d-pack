@@ -76,6 +76,7 @@ function Preview(props) {
             image={props.img}
             rotation={rotation}
             preventDefault={false}
+            fill={"white"}
         />
     );
 }

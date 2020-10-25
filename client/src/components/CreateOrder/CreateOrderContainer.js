@@ -90,6 +90,7 @@ class CreateOrderContainer extends React.Component {
                 updateState={this.updateState}
                 updateOrderId={this.updateOrderId}
                 createOrder={this.createOrder}
+                addNotification={this.props.addNotification}
             />
         );
     }

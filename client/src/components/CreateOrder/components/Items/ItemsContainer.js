@@ -56,6 +56,8 @@ class ItemsContainer extends React.Component {
             itemUrl = "https://" + itemUrl;
         */
 
+        //TODO check if id is unique
+
         let item = {
             url: itemUrl,
             width: itemWidth,
@@ -64,9 +66,25 @@ class ItemsContainer extends React.Component {
             color: itemOutlineColor.toLowerCase(),
         };
 
-        const items = [...this.props.items, item];
-        this.props.updateState("items", items);
-        this.hideAddItem();
+        this.checkImage(item);
+    };
+
+    checkImage = (item) => {
+        const image = new window.Image();
+        image.src = item.url;
+        image.onload = () => {
+            const items = [...this.props.items, item];
+            this.props.updateState("items", items);
+            this.hideAddItem();
+        };
+        image.onerror = () => {
+            let notification = {
+                type: "error",
+                message: "Invalid image URL",
+                duration: 5000,
+            };
+            this.props.addNotification(notification);
+        };
     };
 
     hideAddItem = () => {
