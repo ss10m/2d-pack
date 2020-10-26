@@ -83,10 +83,8 @@ class OrderContainer extends React.Component {
 
         const cacheImage = (item) => {
             const image = new window.Image();
-            image.src = item.url;
             image.onload = () => {
                 item.img = image;
-                //TODO check oversized caching
                 cachedImages++;
 
                 this.verifyImageAspectRatio(image, item);
@@ -99,6 +97,7 @@ class OrderContainer extends React.Component {
             image.onerror = () => {
                 image.src = preview;
             };
+            image.src = item.url;
         };
 
         boxes.forEach(({ items }) => items.forEach((item) => cacheImage(item)));

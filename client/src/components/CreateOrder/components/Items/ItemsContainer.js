@@ -51,12 +51,18 @@ class ItemsContainer extends React.Component {
         itemHeight = parseInt(itemHeight);
         let ratio = Math.max(itemHeight, itemWidth) / Math.min(itemHeight, itemWidth);
         if (!itemUrl) itemUrl = getRandomImg(ratio);
-        /*
-        if (!itemUrl.match(/(http|https)\:\/\//i))
-            itemUrl = "https://" + itemUrl;
-        */
 
-        //TODO check if id is unique
+        itemId = String(itemId);
+        for (let item of this.props.items) {
+            if (item.id === itemId) {
+                let notification = {
+                    type: "error",
+                    message: "Item ID must be unique",
+                    duration: 5000,
+                };
+                return this.props.addNotification(notification);
+            }
+        }
 
         let item = {
             url: itemUrl,
@@ -71,7 +77,6 @@ class ItemsContainer extends React.Component {
 
     checkImage = (item) => {
         const image = new window.Image();
-        image.src = item.url;
         image.onload = () => {
             const items = [...this.props.items, item];
             this.props.updateState("items", items);
@@ -85,6 +90,7 @@ class ItemsContainer extends React.Component {
             };
             this.props.addNotification(notification);
         };
+        image.src = item.url;
     };
 
     hideAddItem = () => {
