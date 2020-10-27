@@ -4,28 +4,32 @@ export const itemOutlineColors = ["Red", "Yellow", "Blue", "Purple", "Green"];
 
 export const items = [
     {
-        url: "https://i.imgur.com/j9HWSmS.jpeg",
+        url: "https://i.imgur.com/lKXVXCR.jpg",
+        width: 20,
+        height: 32,
+        id: "200451",
+        color: "red",
+    },
+    {
+        url: "https://i.imgur.com/LLR5NxX.png",
         width: 24,
         height: 16,
-        id: "200458",
-        color: "red",
-        product: "",
-    },
-    {
-        url: "https://i.imgur.com/ZWGeI3I.jpg",
-        width: 36,
-        height: 12,
-        id: "200457",
+        id: "200452",
         color: "blue",
-        product: "",
     },
     {
-        url: "https://i.imgur.com/4PoTjBe.jpg",
-        width: 12,
-        height: 8,
-        id: "200456",
+        url: "https://i.imgur.com/XBd4Fd1.png",
+        width: 24,
+        height: 16,
+        id: "200453",
         color: "yellow",
-        product: "",
+    },
+    {
+        url: "https://i.imgur.com/ecYnb.jpg",
+        width: 35,
+        height: 24,
+        id: "200454",
+        color: "yellow",
     },
 ];
 
