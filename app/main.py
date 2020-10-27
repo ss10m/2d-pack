@@ -37,6 +37,10 @@ class Orders(db.Model):
         orders = Orders.query.order_by((Orders.created_at).desc()).limit(6)    
         return [{"id": order.id, "created_at": order.created_at} for order in orders]
     
+    def remove_order(order_id):
+        Orders.query.filter_by(id=order_id).delete()
+        db.session.commit()
+
     def remove_all_orders():
         Orders.query.delete()
         db.session.commit()
@@ -61,72 +65,72 @@ class InvalidUsage(Exception):
 
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
-    print("handle_invalid_usage", flush=True)
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
 
 @app.route('/api/order/<id>', methods=['GET'])
 def get_order(id):
-    print("/api/order/<id>", flush=True)
-
     order_id = parseInt(id)
     if(not order_id):
-        raise InvalidUsage('{} is not a valid order number'.format(id), status_code=400)
+        raise InvalidUsage('{} is not a valid order number'.format(id), status_code=404)
     
     order = Orders.get_order(order_id)
     if(not order):
-        raise InvalidUsage('Order {} not found'.format(id), status_code=400)
+        raise InvalidUsage('Order {} not found'.format(id), status_code=404)
 
     boxes = packing_algo(order.data)
     boxes["original"] = order.data["boxes"]
-    response = jsonify(boxes)
-    return response
+    return jsonify(boxes)
 
 @app.route('/api/order/<int:order_id>/labels', methods=['POST'])
 def print_labels(order_id):
-    print("/api/order/<int:order_id>/labels", flush=True)
     boxes = request.json
     labels = {'labels': len(boxes['boxes'])}
     response = jsonify(labels)
     sleep(1)
-    
     return response
 
 @app.route('/api/orders', methods=['GET'])
 def get_orders():
-    print("/api/orders", flush=True)
-    #clear_orders()
     orders = {'recent_orders': Orders.get_recent_orders()}
-
     now = datetime.utcnow()
     for order in orders['recent_orders']:
         order['created_at'] = date_difference(order['created_at'], now)
+    sleep(0.5)
+    return jsonify(orders)
 
-    response = jsonify(orders)
-    sleep(1)
-    return response
+@app.route('/api/orders/clear', methods=['GET'])
+def clear_orders():
+    Orders.remove_all_orders()
+    status = {'status': 'ok'}
+    return jsonify(status)
+
+@app.route('/api/orders/generate', methods=['GET'])
+def generate_orders():
+    Orders.remove_all_orders()
+    for order in id_to_order:
+        Orders.create_order(id_to_order[order])
+    status = {'status': 'ok'}
+    return jsonify(status)
+
+@app.route('/api/orders/remove/<int:order_id>', methods=['GET'])
+def clear_order_by_id(order_id):
+    order = Orders.get_order(order_id)
+    if(not order):
+        raise InvalidUsage('Order {} not found'.format(order_id), status_code=404)
+    Orders.remove_order(order_id)
+    status = {'status': 'ok'}
+    return jsonify(status)
 
 @app.route('/api/order/create', methods=['POST'])
 def create_order():
-    print("/api/order/create", flush=True)
-    
     order = request.json
     Orders.create_order(order['order'])
-
     status = {'status': 'ok'}
-    response = jsonify(status)
-    return response
+    return jsonify(status)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def index_orderr(path):
-    print("sending static files to " + path, flush=True)
     return render_template('index.html')
-
-def clear_orders():
-    Orders.remove_all_orders()
-    orders = Orders.get_all_orders()
-    orders_json = {'orders': orders}
-    for order in id_to_order:
-        Orders.create_order(id_to_order[order])
