@@ -44,7 +44,7 @@ class OrderContainer extends React.Component {
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
-                    if (response.status === 400) {
+                    if (response.status === 404) {
                         response.json().then((error) => {
                             let toast = {
                                 type: "error",
