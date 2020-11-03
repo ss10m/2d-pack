@@ -10,7 +10,7 @@ import Layout from "components/Layout/Layout";
 import ZoomInModal from "./ZoomInModal";
 
 // Constants
-import { PREV_BOX, NEXT_BOX, LEFT_KEY, RIGHT_KEY, ESCAPE_KEY } from "helpers/constants";
+import { BOX_NAV, KEY } from "helpers/constants";
 
 class ZoomInModalContainer extends React.Component {
     componentDidMount() {
@@ -27,10 +27,7 @@ class ZoomInModalContainer extends React.Component {
         let { history, location } = this.props;
         history.push(location.pathname);
         this.historyListener = history.listen((newLocation, action) => {
-            console.log(action);
-            if (action === "POP") {
-                this.props.setZoomIn(null);
-            }
+            if (action === "POP") this.props.setZoomIn(null);
         });
     };
 
@@ -48,13 +45,13 @@ class ZoomInModalContainer extends React.Component {
 
     handleKeyDown = (event) => {
         switch (event.keyCode) {
-            case LEFT_KEY:
-                this.changeItems(PREV_BOX);
+            case KEY.LEFT:
+                this.changeItems(BOX_NAV.PREVIOUS);
                 break;
-            case RIGHT_KEY:
-                this.changeItems(NEXT_BOX);
+            case KEY.RIGHT:
+                this.changeItems(BOX_NAV.NEXT);
                 break;
-            case ESCAPE_KEY:
+            case KEY.ESCAPE:
                 this.closeZoomIn();
                 break;
             default:
@@ -67,11 +64,11 @@ class ZoomInModalContainer extends React.Component {
         if (items.length <= 1 || zoomIn === null) return;
         let nextIndex = null;
         switch (direction) {
-            case PREV_BOX:
+            case BOX_NAV.PREVIOUS:
                 if (zoomIn - 1 >= 0) nextIndex = zoomIn - 1;
                 else if (zoomIn === 0) nextIndex = items.length - 1;
                 break;
-            case NEXT_BOX:
+            case BOX_NAV.NEXT:
                 if (zoomIn + 1 < items.length) nextIndex = zoomIn + 1;
                 else if (zoomIn + 1 === items.length) nextIndex = 0;
                 break;
@@ -106,8 +103,7 @@ class ZoomInModalContainer extends React.Component {
                 onBackgroundClick={this.handleBackgroundClick}
                 changeItems={this.changeItems}
                 hideZoom={this.closeZoomIn}
-                PREV_BOX={PREV_BOX}
-                NEXT_BOX={NEXT_BOX}
+                BOX_NAV={BOX_NAV}
                 Layout={Layout}
                 currentLayout={zoomIn + 1}
                 totalLayouts={totalLayouts}

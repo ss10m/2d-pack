@@ -5,7 +5,8 @@ import React from "react";
 import Items from "./Items";
 
 // Helpers
-import { itemOutlineColors, isNumeric, getRandomImg } from "helpers";
+import { isNumeric, getRandomImg } from "helpers";
+import { ITEM_OUTLINE_COLOR } from "helpers/constants";
 
 class ItemsContainer extends React.Component {
     constructor(props) {
@@ -43,8 +44,9 @@ class ItemsContainer extends React.Component {
         if (!isNumeric(itemHeight)) return;
 
         if (!itemOutlineColor) {
-            let randomColor = Math.floor(Math.random() * itemOutlineColors.length);
-            itemOutlineColor = itemOutlineColors[randomColor];
+            let outlineColors = Object.values(ITEM_OUTLINE_COLOR);
+            let randomColor = Math.floor(Math.random() * outlineColors.length);
+            itemOutlineColor = outlineColors[randomColor];
         }
 
         itemWidth = parseInt(itemWidth);
@@ -120,7 +122,7 @@ class ItemsContainer extends React.Component {
                 removeItem={this.removeItem}
                 onInputChange={this.onInputChange}
                 updateState={this.updateState}
-                itemOutlineColors={itemOutlineColors}
+                itemOutlineColors={Object.values(ITEM_OUTLINE_COLOR)}
             />
         );
     }

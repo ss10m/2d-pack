@@ -7,20 +7,20 @@ import { InputGroup, FormControl } from "react-bootstrap";
 import "./Boxes.scss";
 
 function Boxes(props) {
-    let { showAddBox, updateState } = props;
+    let { addBox, showAddBox } = props;
     return (
         <div className="create-order-boxes">
-            <BoxesHeader showAddBox={showAddBox} updateState={updateState} />
+            <BoxesHeader addBox={addBox} showAddBox={showAddBox} />
             <BoxList {...props} />
         </div>
     );
 }
 
-function BoxesHeader({ showAddBox, updateState }) {
+function BoxesHeader({ addBox, showAddBox }) {
     return (
         <div
             className="create-order-header"
-            style={showAddBox ? { borderBottomColor: "#f5f5f5" } : {}}
+            style={addBox ? { borderBottomColor: "#f5f5f5" } : {}}
         >
             <div className="header-title">
                 <div>
@@ -32,7 +32,7 @@ function BoxesHeader({ showAddBox, updateState }) {
                 <button
                     type="button"
                     className="btn btn-secondary btn-sm"
-                    onClick={() => updateState("showAddBox", true)}
+                    onClick={showAddBox}
                 >
                     Add Box
                 </button>
@@ -42,21 +42,21 @@ function BoxesHeader({ showAddBox, updateState }) {
 }
 
 function BoxList(props) {
-    let { boxes, showAddBox, updateState } = props;
-    if ((boxes === undefined || boxes.length === 0) && showAddBox === false) {
+    let { boxes, addBox, showAddBox } = props;
+    if ((boxes === undefined || boxes.length === 0) && addBox === false) {
         return (
             <div className="empty-boxes">
                 <FontAwesomeIcon
                     icon="plus-circle"
                     size="5x"
                     className="icon-color"
-                    onClick={() => updateState("showAddBox", true)}
+                    onClick={showAddBox}
                 />
             </div>
         );
     } else {
         let ret = [];
-        if (showAddBox) ret.push(<AddBox key="addBox" {...props} />);
+        if (addBox) ret.push(<AddBox key="addBox" {...props} />);
         boxes.forEach((box, index) => {
             ret.push(<Box box={box} key={index} index={index} removeBox={props.removeBox} />);
         });
@@ -89,7 +89,6 @@ function Box({ box, index, removeBox }) {
 
 function AddBox(props) {
     let { boxes } = props;
-    if (boxes.length >= 7) return;
     return (
         <div className="add-box" key="addBox">
             <InputGroup size="sm">
@@ -142,7 +141,7 @@ function AddBox(props) {
                 <button
                     type="button"
                     className="btn btn-success btn-sm"
-                    onClick={props.addBox}
+                    onClick={props.confirmAddBox}
                 >
                     Confirm
                 </button>

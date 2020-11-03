@@ -1,7 +1,3 @@
-export const boxColors = ["red", "yellow", "blue", "purple", "green", "orange", "grey"];
-
-export const itemOutlineColors = ["Red", "Yellow", "Blue", "Purple", "Green"];
-
 export const items = [
     {
         url: "https://i.imgur.com/lKXVXCR.jpg",

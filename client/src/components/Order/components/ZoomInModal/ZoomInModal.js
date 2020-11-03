@@ -15,8 +15,7 @@ function ZoomInModal(props) {
                 showArrows={props.showArrows}
                 changeItems={props.changeItems}
                 hideZoom={props.hideZoom}
-                NEXT_BOX={props.NEXT_BOX}
-                PREV_BOX={props.PREV_BOX}
+                BOX_NAV={props.BOX_NAV}
             />
             <LayoutWrapper
                 items={items}
@@ -31,7 +30,7 @@ function ZoomInModal(props) {
 }
 
 function NavigationButtons(props) {
-    let { hideZoom, changeItems, NEXT_BOX, PREV_BOX } = props;
+    let { hideZoom, changeItems, BOX_NAV } = props;
     return (
         <>
             <NavigationIcon className={"exit"} icon={"times"} onClick={hideZoom} />
@@ -40,12 +39,12 @@ function NavigationButtons(props) {
                     <NavigationIcon
                         className={"next"}
                         icon={"chevron-right"}
-                        onClick={() => changeItems(NEXT_BOX)}
+                        onClick={() => changeItems(BOX_NAV.NEXT)}
                     />
                     <NavigationIcon
                         className={"prev"}
                         icon={"chevron-left"}
-                        onClick={() => changeItems(PREV_BOX)}
+                        onClick={() => changeItems(BOX_NAV.PREVIOUS)}
                     />
                 </>
             )}
