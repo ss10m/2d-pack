@@ -25,6 +25,31 @@ function ZoomInModal(props) {
                 currentLayout={props.currentLayout}
                 totalLayouts={props.totalLayouts}
             />
+            {props.totalLayouts > 1 && (
+                <Bullets
+                    changeItems={props.changeItems}
+                    currentLayout={props.currentLayout}
+                    totalLayouts={props.totalLayouts}
+                />
+            )}
+        </div>
+    );
+}
+
+function Bullets(props) {
+    const bullets = [];
+    for (let i = 1; i <= props.totalLayouts; i++) {
+        bullets.push(
+            <div
+                className={classNames("bullet", { active: i === props.currentLayout })}
+                key={`bullet-${i}`}
+                onClick={() => props.changeItems(i)}
+            />
+        );
+    }
+    return (
+        <div className="zoom-in-bullets">
+            <div className="bullets">{bullets}</div>
         </div>
     );
 }

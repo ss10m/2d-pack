@@ -59,21 +59,25 @@ class ZoomInModalContainer extends React.Component {
         }
     };
 
-    changeItems = (direction) => {
+    changeItems = (skipTo) => {
         var { zoomIn, items } = this.props;
         if (items.length <= 1 || zoomIn === null) return;
         let nextIndex = null;
-        switch (direction) {
-            case BOX_NAV.PREVIOUS:
-                if (zoomIn - 1 >= 0) nextIndex = zoomIn - 1;
-                else if (zoomIn === 0) nextIndex = items.length - 1;
-                break;
-            case BOX_NAV.NEXT:
-                if (zoomIn + 1 < items.length) nextIndex = zoomIn + 1;
-                else if (zoomIn + 1 === items.length) nextIndex = 0;
-                break;
-            default:
-                return;
+        if (typeof skipTo === "string") {
+            switch (skipTo) {
+                case BOX_NAV.PREVIOUS:
+                    if (zoomIn - 1 >= 0) nextIndex = zoomIn - 1;
+                    else if (zoomIn === 0) nextIndex = items.length - 1;
+                    break;
+                case BOX_NAV.NEXT:
+                    if (zoomIn + 1 < items.length) nextIndex = zoomIn + 1;
+                    else if (zoomIn + 1 === items.length) nextIndex = 0;
+                    break;
+                default:
+                    return;
+            }
+        } else if (zoomIn !== skipTo - 1) {
+            nextIndex = skipTo - 1;
         }
         if (nextIndex !== null) this.props.setZoomIn(nextIndex);
     };
