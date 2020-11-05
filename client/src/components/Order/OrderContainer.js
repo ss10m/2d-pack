@@ -42,29 +42,28 @@ class OrderContainer extends React.Component {
         let orderId = this.props.match.params.id;
         let url = `${API_URL}/api/order/${orderId}`;
         fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        response.json().then((error) => {
-                            let toast = {
-                                type: "error",
-                                title: "Error",
-                                message: error.message,
-                                duration: 5000,
-                            };
-                            this.props.addNotification(toast);
-                            this.props.history.push("/");
-                        });
-                    }
-                    throw Error(response);
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
                 }
-                return response.json();
+                return res.json().then((err) => {
+                    throw Error(err.message);
+                });
             })
             .then((response) => {
                 if (this.props.match.params.id !== orderId) return;
                 this.cacheImages(response);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                let toast = {
+                    type: "error",
+                    title: "Error",
+                    message: error.message,
+                    duration: 5000,
+                };
+                this.props.addNotification(toast);
+                this.props.history.push("/");
+            });
     };
 
     cacheImages = (response) => {

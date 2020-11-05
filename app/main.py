@@ -125,12 +125,15 @@ def clear_order_by_id(order_id):
 
 @app.route('/api/order/create', methods=['POST'])
 def create_order():
-    order = request.json
-    Orders.create_order(order['order'])
+    order = request.json['order']
+    if(Orders.get_order(order["id"])):
+        raise InvalidUsage('Order {} already exists'.format(order["id"]), status_code=400)
+
+    Orders.create_order(order)
     status = {'status': 'ok'}
     return jsonify(status)
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def index_orderr(path):
+def index_order(path):
     return render_template('index.html')

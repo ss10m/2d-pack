@@ -68,9 +68,19 @@ class CreateOrderContainer extends React.Component {
             },
             body: JSON.stringify({ order }),
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return res.json().then((err) => {
+                    throw Error(err.message);
+                });
+            })
             .then((res) => {
                 this.props.history.push("/order/" + orderId);
+            })
+            .catch((err) => {
+                if (err.message) this.showNotifications(err.message);
             });
     };
 
