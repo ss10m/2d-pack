@@ -56,15 +56,15 @@
     border-radius: 5px 5px 0 0;
 
     .box {
-        display: flex;
-        align-items: center;
+        height: 60px;
         border: solid 1px #dbdbdb;
         border-top: 0;
-        -moz-transition: height 0.5s;
-        -ms-transition: height 0.5s;
-        -o-transition: height 0.5s;
-        -webkit-transition: height 0.5s;
-        transition: height 0.5s;
+        transition: height 0.5s ease;
+        overflow: hidden;
+
+        &.extended {
+            height: 120px;
+        }
 
         &:hover {
             background-color: #f8f8f8;
@@ -72,6 +72,7 @@
         }
 
         .indicator {
+            float: left;
             width: 10%;
             height: 100%;
             display: flex;
@@ -80,73 +81,50 @@
             color: white;
             font-weight: 800;
         }
-    }
-}
-
-.box-list-rows {
-    width: 97%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .top {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        font-size: 20px;
 
         .info {
-            flex: 1;
-            padding-left: 15px;
-            font-size: 23px;
-        }
+            height: 120px;
 
-        .remove-btn {
-            width: 50px;
-            padding-right: 10px;
+            .top {
+                height: 60px;
+                display: flex;
+                align-items: center;
 
-            button {
-                float: right;
-            }
-        }
-    }
+                .name {
+                    flex: 1;
+                    padding-left: 15px;
+                    font-size: 23px;
+                }
 
-    .expanded {
-        height: 50%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        animation: hide 0.5s;
+                .remove-btn {
+                    width: 50px;
+                    padding-right: 10px;
 
-        @keyframes hide {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .info {
-            width: 33%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            text-transform: uppercase;
-
-            .upper {
-                font-size: 10px;
+                    button {
+                        float: right;
+                    }
+                }
             }
 
-            .lower {
-                font-size: 18px;
-                font-weight: bold;
-                color: #3f4964;
+            .expanded {
+                height: 60px;
+
+                .info {
+                    float: left;
+                    width: 30%;
+                    text-align: center;
+                    text-transform: uppercase;
+
+                    .upper {
+                        font-size: 10px;
+                    }
+
+                    .lower {
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: #3f4964;
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 // Libraries & utils
 import React from "react";
+import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, ButtonGroup, Dropdown, Spinner } from "react-bootstrap";
 
@@ -77,13 +78,15 @@ function Boxes(props) {
 
 function Box(props) {
     let { box, index } = props;
+
+    let extended = props.showDetailsIndex === index ? " extended" : "";
+
     return (
         <div
             key={index}
-            className="box"
-            style={{
-                height: props.showDetailsIndex === index ? "120px" : "50px",
-            }}
+            className={classNames("box", {
+                extended: extended,
+            })}
             onClick={() => props.showBoxDetails(index)}
         >
             <div
@@ -94,15 +97,9 @@ function Box(props) {
             >
                 {index + 1}
             </div>
-
-            <div className="box-list-rows">
-                <div
-                    className="top"
-                    style={{
-                        height: props.showDetailsIndex !== index ? "100%" : "50%",
-                    }}
-                >
-                    <div className="info">
+            <div className="info">
+                <div className="top">
+                    <div className="name">
                         {box.name}
                         {box.quantity > 1 && (
                             <span
@@ -126,15 +123,19 @@ function Box(props) {
                         </button>
                     </div>
                 </div>
-                {props.showDetailsIndex === index && <BoxExpanded box={box} />}
+                <BoxDetails box={box} extended={extended} />
             </div>
         </div>
     );
 }
 
-function BoxExpanded({ box }) {
+function BoxDetails({ box, extended }) {
     return (
-        <div className="expanded">
+        <div
+            className={classNames("expanded", {
+                "animate__animated animate__fadeIn": extended,
+            })}
+        >
             <div className="info">
                 <div className="upper">Width</div>
                 <div className="lower">{box.width + " in"}</div>

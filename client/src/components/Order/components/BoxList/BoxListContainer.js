@@ -17,14 +17,14 @@ class BoxListContainer extends React.Component {
         showAddBox: false,
         boxSize: null,
         boxQuantity: null,
-        showDetailsIndex: -1,
+        showDetailsIndex: null,
         fetchingLabels: false,
     };
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id !== this.props.match.params.id) {
             this.hideAddBox();
-            this.setState({ showDetailsIndex: -1 });
+            this.setState({ showDetailsIndex: null });
         }
     }
 
@@ -66,7 +66,7 @@ class BoxListContainer extends React.Component {
                 showDetailsIndex: this.state.showDetailsIndex - 1,
             });
         } else if (id === this.state.showDetailsIndex) {
-            this.setState({ showDetailsIndex: -1 });
+            this.setState({ showDetailsIndex: null });
         }
 
         this.props.removeBox(id);
@@ -74,7 +74,7 @@ class BoxListContainer extends React.Component {
 
     showBoxDetails = (index) => {
         if (this.state.showDetailsIndex === index) {
-            this.setState({ showDetailsIndex: -1 });
+            this.setState({ showDetailsIndex: null });
             return;
         }
         this.setState({ showDetailsIndex: index });
