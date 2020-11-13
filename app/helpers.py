@@ -8,9 +8,6 @@ id_to_order = {
     192164: order192164,
     192165: order192165,
     192166: order192166,
-    192167: order192167,
-    192168: order192168,
-    192171: order192171
 }
 
 MAX_SERIAL_VALUE = 2147483647

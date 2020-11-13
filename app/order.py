@@ -3,10 +3,89 @@ import random
 order192161 = {
     "id": 192161,
     "products": [
-        {   
-            "id": 201237,
-            "width": 36,
-            "height": 24
+        {
+            "url": "https://i.imgur.com/6bTyoJf.png",
+            "width": 32,
+            "height": 16,
+            "id": "200451",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/diooRWV.png",
+            "width": 32,
+            "height": 16,
+            "id": "200452",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/vHIonqW.png",
+            "width": 32,
+            "height": 16,
+            "id": "200453",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
+            "width": 32,
+            "height": 16,
+            "id": "200454",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/HCoBlwC.png",
+            "width": 30,
+            "height": 16,
+            "id": "200455",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/zG93bjQ.png",
+            "width": 30,
+            "height": 16,
+            "id": "200456",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/XBd4Fd1.png",
+            "width": 30,
+            "height": 16,
+            "id": "200457",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/aAYnjwK.png",
+            "width": 30,
+            "height": 16,
+            "id": "200458",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/Nv1Wcy4.jpg",
+            "width": 30,
+            "height": 16,
+            "id": "200459",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/xe5kCmT.jpg",
+            "width": 30,
+            "height": 16,
+            "id": "200460",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/XvXnpPd.jpg",
+            "width": 30,
+            "height": 16,
+            "id": "200461",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/1ePb80R.jpg",
+            "width": 30,
+            "height": 16,
+            "id": "200462",
+            "color": "purple",
         }
     ]
 }
@@ -14,46 +93,235 @@ order192161 = {
 order192162 = {
     "id": 192162,
     "products": [
-        {   
-            "id": 202379,
-            "width": 40,
-            "height": 30
+        {
+            "url": "https://i.imgur.com/6bTyoJf.png",
+            "width": 12,
+            "height": 8,
+            "id": "200451",
+            "color": "red",
         },
-        {   
-            "id": 202380,
-            "width": 40,
-            "height": 30
-        }
+        {
+            "url": "https://i.imgur.com/diooRWV.png",
+            "width": 12,
+            "height": 8,
+            "id": "200452",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/vHIonqW.png",
+            "width": 12,
+            "height": 8,
+            "id": "200453",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
+            "width": 12,
+            "height": 8,
+            "id": "200454",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/HCoBlwC.png",
+            "width": 12,
+            "height": 8,
+            "id": "200455",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/zG93bjQ.png",
+            "width": 12,
+            "height": 8,
+            "id": "200456",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/XBd4Fd1.png",
+            "width": 12,
+            "height": 8,
+            "id": "200457",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/aAYnjwK.png",
+            "width": 12,
+            "height": 8,
+            "id": "200458",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/Nv1Wcy4.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200459",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/xe5kCmT.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200460",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/XvXnpPd.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200461",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/1ePb80R.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200462",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/z1C9aFR.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200463",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/En8nXpr.png",
+            "width": 12,
+            "height": 8,
+            "id": "200464",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/6bTyoJf.png",
+            "width": 12,
+            "height": 8,
+            "id": "200465",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/diooRWV.png",
+            "width": 18,
+            "height": 12,
+            "id": "200466",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/vHIonqW.png",
+            "width": 18,
+            "height": 12,
+            "id": "200467",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
+            "width": 18,
+            "height": 12,
+            "id": "200468",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/HCoBlwC.png",
+            "width": 18,
+            "height": 12,
+            "id": "200469",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/zG93bjQ.png",
+            "width": 18,
+            "height": 12,
+            "id": "200470",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/XBd4Fd1.png",
+            "width": 18,
+            "height": 12,
+            "id": "200471",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/aAYnjwK.png",
+            "width": 18,
+            "height": 12,
+            "id": "200472",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/Nv1Wcy4.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200473",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/xe5kCmT.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200474",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/XvXnpPd.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200475",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/1ePb80R.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200476",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/z1C9aFR.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200477",
+            "color": "purple",
+        },
     ]
 }
 
 order192163 = {
     "id": 192163,
     "products": [
-        {   
-            "id": 202325,
+        {
+            "url": "https://i.imgur.com/6bTyoJf.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200451",
+            "color": "red",
         },
-        {   
-            "id": 202326,
+        {
+            "url": "https://i.imgur.com/diooRWV.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200452",
+            "color": "blue",
         },
-        {   
-            "id": 202327,
+        {
+            "url": "https://i.imgur.com/vHIonqW.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200453",
+            "color": "yellow",
         },
-        {   
-            "id": 202328,
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200454",
+            "color": "yellow",
         },
-        {   
-            "id": 202329,
+        {
+            "url": "https://i.imgur.com/HCoBlwC.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200455",
+            "color": "red",
         }
     ]
 }
@@ -61,25 +329,103 @@ order192163 = {
 order192164 = {
     "id": 192164,
     "products": [
-        {   
-            "id": 202391,
+        {
+            "url": "https://i.imgur.com/6bTyoJf.png",
+            "width": 30,
+            "height": 20,
+            "id": "200451",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/diooRWV.png",
+            "width": 30,
+            "height": 20,
+            "id": "200452",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/jw9wjnB.jpg",
             "width": 24,
-            "height": 8
+            "height": 24,
+            "id": "200453",
+            "color": "yellow",
         },
-        {   
-            "id": 202392,
-            "width": 36,
-            "height": 12
-        },
-        {   
-            "id": 202393,
-            "width": 36,
-            "height": 12
-        },
-        {   
-            "id": 202394,
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
             "width": 24,
-            "height": 8
+            "height": 16,
+            "id": "200454",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/HCoBlwC.png",
+            "width": 24,
+            "height": 16,
+            "id": "200455",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/zG93bjQ.png",
+            "width": 24,
+            "height": 16,
+            "id": "200456",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/XBd4Fd1.png",
+            "width": 24,
+            "height": 16,
+            "id": "200457",
+            "color": "yellow",
+        },
+        {
+            "url": "https://i.imgur.com/aAYnjwK.png",
+            "width": 18,
+            "height": 12,
+            "id": "200458",
+            "color": "green",
+        },
+        {
+            "url": "https://i.imgur.com/Nv1Wcy4.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200459",
+            "color": "blue",
+        },
+        {
+            "url": "https://i.imgur.com/xe5kCmT.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200460",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/lKXVXCR.jpg",
+            "width": 30,
+            "height": 15,
+            "id": "200461",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/1ePb80R.jpg",
+            "width": 18,
+            "height": 12,
+            "id": "200462",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/z1C9aFR.jpg",
+            "width": 12,
+            "height": 8,
+            "id": "200463",
+            "color": "purple",
+        },
+        {
+            "url": "https://i.imgur.com/En8nXpr.png",
+            "width": 12,
+            "height": 8,
+            "id": "200464",
+            "color": "yellow",
         }
     ]
 }
@@ -333,153 +679,33 @@ order192165 = {
 order192166 = {
     "id": 192166,
     "products": [
-        {   
-            "id": 202391,
+        {
+            "url": "https://i.imgur.com/lKXVXCR.jpg",
+            "width": 20,
+            "height": 32,
+            "id": "200451",
+            "color": "red",
+        },
+        {
+            "url": "https://i.imgur.com/LLR5NxX.png",
             "width": 24,
-            "height": 16
+            "height": 16,
+            "id": "200452",
+            "color": "blue",
         },
-        {   
-            "id": 202392,
-            "width": 36,
-            "height": 12
-        },
-        {   
-            "id": 202393,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202394,
-            "width": 36,
-            "height": 24
-        }
-    ]
-}
-
-order192167 = {
-    "id": 192167,
-    "products": [
-        {   
-            "id": 202391,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202392,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202393,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202394,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202395,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202396,
-            "width": 18,
-            "height": 12
-        },
-        {   
-            "id": 202397,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202398,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202399,
-            "width": 12,
-            "height": 8
-        }
-    ]
-}
-
-order192168 = {
-    "id": 192168,
-    "products": [
-        {   
-            "id": 202391,
+        {
+            "url": "https://i.imgur.com/XBd4Fd1.png",
             "width": 24,
-            "height": 24
+            "height": 16,
+            "id": "200453",
+            "color": "yellow",
         },
-        {   
-            "id": 202392,
-            "width": 16,
-            "height": 16
-        },
-        {   
-            "id": 202393,
-            "width": 24,
-            "height": 16
-        },
-        {   
-            "id": 202394,
-            "width": 24,
-            "height": 19
-        },
-        {   
-            "id": 202395,
-            "width": 36,
-            "height": 20
-        },
-        {   
-            "id": 202396,
-            "width": 24,
-            "height": 24
-        },
-        {   
-            "id": 202397,
-            "width": 16,
-            "height": 16
-        },
-        {   
-            "id": 202398,
-            "width": 16,
-            "height": 16
-        },
-        {   
-            "id": 202399,
-            "width": 16,
-            "height": 16
-        }
-    ]
-}
-
-order192171 = {
-    "id": 192171,
-    "products": [
-        {   
-            "id": 202391,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202392,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202393,
-            "width": 12,
-            "height": 8
-        },
-        {   
-            "id": 202394,
-            "width": 12,
-            "height": 8
+        {
+            "url": "https://i.imgur.com/ecYnb.jpg",
+            "width": 35,
+            "height": 24,
+            "id": "200454",
+            "color": "yellow",
         }
     ]
 }
@@ -491,9 +717,6 @@ orders = [
     order192164,
     order192165,
     order192166,
-    order192167,
-    order192168,
-    order192171
 ]
 
 boxes = [{"name": "Box #1", "width": 18, "height": 13, "weight": 2, "color": "red"}, 
@@ -549,5 +772,5 @@ def getRandomImage(item):
 for order in orders:
     order['boxes'] = boxes
     for item in order['products']:
-        item['url'] = getRandomImage(item)
-        item['color'] = random.choice(itemColors)
+        if "url" not in item: item["url"] = getRandomImage(item)
+        if "color" not in item: item["color"] = random.choice(itemColors)
