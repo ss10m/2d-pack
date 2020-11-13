@@ -16,6 +16,7 @@ import preview from "./preview.jpeg";
 class OrderContainer extends React.Component {
     state = {
         isLoaded: false,
+        loadTime: null,
         zoomIn: null,
     };
 
@@ -28,6 +29,7 @@ class OrderContainer extends React.Component {
             this.props.clearOrder();
             this.setState({
                 isLoaded: false,
+                loadTime: null,
                 zoomIn: null,
             });
             this.fetchOrder();
@@ -41,6 +43,7 @@ class OrderContainer extends React.Component {
     fetchOrder = () => {
         let orderId = this.props.match.params.id;
         let url = `${API_URL}/api/order/${orderId}`;
+        let startTime = new Date();
         fetch(url)
             .then((res) => {
                 if (res.ok) {
@@ -52,7 +55,7 @@ class OrderContainer extends React.Component {
             })
             .then((response) => {
                 if (this.props.match.params.id !== orderId) return;
-                this.cacheImages(response);
+                this.cacheImages(response, startTime);
             })
             .catch((error) => {
                 let toast = {
@@ -66,7 +69,7 @@ class OrderContainer extends React.Component {
             });
     };
 
-    cacheImages = (response) => {
+    cacheImages = (response, startTime) => {
         let boxes = response.boxes;
         let oversizedItems = response.oversized;
         let totalImages = oversizedItems.length;
@@ -90,7 +93,10 @@ class OrderContainer extends React.Component {
 
                 if (cachedImages === totalImages) {
                     this.props.setOrder(response);
-                    this.setState({ isLoaded: true });
+                    let elapsedTime = new Date() - startTime;
+                    elapsedTime = (elapsedTime / 1000).toFixed(2);
+                    if (elapsedTime % 1 === 0) elapsedTime = parseInt(elapsedTime);
+                    this.setState({ isLoaded: true, loadTime: elapsedTime });
                 }
             };
             image.onerror = () => {
@@ -115,8 +121,15 @@ class OrderContainer extends React.Component {
     };
 
     render() {
-        let { isLoaded, zoomIn } = this.state;
-        return <Order isLoaded={isLoaded} zoomIn={zoomIn} setZoomIn={this.setZoomIn} />;
+        let { isLoaded, loadTime, zoomIn } = this.state;
+        return (
+            <Order
+                isLoaded={isLoaded}
+                loadTime={loadTime}
+                zoomIn={zoomIn}
+                setZoomIn={this.setZoomIn}
+            />
+        );
     }
 }
 

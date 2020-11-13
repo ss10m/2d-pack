@@ -25,6 +25,9 @@ function Order(props) {
                     <BoxList />
                     <LayoutList setZoomIn={props.setZoomIn} />
                 </div>
+                <div className="order-generated-time">
+                    <p>{`Generated in ${props.loadTime}s`}</p>
+                </div>
             </div>
         </>
     );
